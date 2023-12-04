@@ -5,27 +5,27 @@ public class User {
 	private String name;
 	private String gender;
 	private int age;
-	private String emaile;
+	private String email;
 	private String password;
 	private String location;
 	
 	public User() { }
 	
-	public User(String userID, String name, String gender, int age, String emaile, String password, String location) {
+	public User(String userID, String name, String gender, int age, String email, String password, String location) {
 		this.userId = userID;
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
-		this.emaile = emaile;
+		this.email = email;
 		this.password = password;
 		this.location = location;
 	}
 
-	public String getUserID() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserId(String userID) {
 		userId = userID;
 	}
 
@@ -53,12 +53,12 @@ public class User {
 		this.age = age;
 	}
 
-	public String getEmaile() {
-		return emaile;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEmaile(String emaile) {
-		this.emaile = emaile;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
