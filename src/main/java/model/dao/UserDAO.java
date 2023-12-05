@@ -22,10 +22,10 @@ public class UserDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?, ?, ?, ?)";		
-		Object[] param = new Object[] {user.getUserId(), user.getPassword(), 
-						user.getName(), user.getAge(), user.getGender(),
-						user.getLocation(), user.getEmail()};				
+		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";		
+		Object[] param = new Object[] {user.getUserId(), user.getEmail(), 
+						user.getGender(), user.getAge(), user.getLocation(),
+						user.getPassword(), user.getName(), user.getReportCount()};				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil 에 insert문과 매개 변수 설정
 						
 		try {				
@@ -46,8 +46,8 @@ public class UserDAO {
 	 */
 	public int update(User user) throws SQLException {
 		String sql = "UPDATE USERINFO "
-					+ "SET password=?, name=?, email=?, age=?, gender=?, location=?"
-					+ "WHERE userid=?";
+					+ "SET USER_EMAIL=?, USER_GENDER=?, USER_AGE=?, USER_LOC=?, USER_PASSWORD=?, USER_NAME=?, REPORTS_COUNT=?"
+					+ "WHERE USER_ID=?";
 		Object[] param = new Object[] {user.getPassword(), 
 				user.getName(), user.getEmail(), user.getAge(), user.getGender(), user.getLocation(), 
 					user.getUserId()};				
@@ -71,7 +71,7 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int delete(String userId) throws SQLException {
-		String sql = "DELETE FROM USERINFO WHERE userid=?";		
+		String sql = "DELETE FROM USERINFO WHERE USER_ID=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
@@ -93,9 +93,8 @@ public class UserDAO {
 	 * 저장하여 반환.
 	 */
 	public User findUser(String userId) throws SQLException {
-        String sql = "SELECT password, name, email, phone, commId, cName "
-        			+ "FROM USERINFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
-        			+ "WHERE userid=? ";              
+        String sql = "SELECT USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT "
+        			+ "FROM USERINFO WHERE userid=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
@@ -103,12 +102,13 @@ public class UserDAO {
 			if (rs.next()) {						// 학생 정보 발견
 				User user = new User(		// User 객체를 생성하여 학생 정보를 저장
 					userId,
-					rs.getString("name"),
-					rs.getString("gender"),
-					rs.getInt("age"),
-					rs.getString("email"),
-					rs.getString("password"),
-					rs.getString("location"));
+					rs.getString("USER_EMAIL"),
+					rs.getString("USER_GENDER"),
+					rs.getInt("USER_AGE"),
+					rs.getString("USER_LOC"),
+					rs.getString("USER_PASSWORD"),
+					rs.getString("USER_NAME"),
+					rs.getInt("REPORTS_COUNT"));
 				return user;
 			}
 		} catch (Exception ex) {
@@ -123,9 +123,8 @@ public class UserDAO {
 	 * 전체 사용자 정보를 검색하여 List에 저장 및 반환
 	 */
 	public List<User> findUserList() throws SQLException {
-        String sql = "SELECT userId, name, email, NVL(commId,0) AS commId, cName " 
-        		   + "FROM USERINFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
-        		   + "ORDER BY userId";
+        String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT" 
+        		   + "FROM USERINFO ORDER BY userId";
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
 		try {
@@ -133,13 +132,14 @@ public class UserDAO {
 			List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
 			while (rs.next()) {
 				User user = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
-					rs.getString("userId"),
-					rs.getString("name"),
-					rs.getString("gender"),
-					rs.getInt("age"),
-					rs.getString("email"),
-					rs.getString("password"),
-					rs.getString("location"));
+					rs.getString("USER_ID"),
+					rs.getString("USER_EMAIL"),
+					rs.getString("USER_GENDER"),
+					rs.getInt("USER_AGE"),
+					rs.getString("USER_LOC"),
+					rs.getString("USER_PASSWORD"),
+					rs.getString("USER_NAME"),
+					rs.getInt("REPORTS_COUNT"));
 				userList.add(user);				// List에 User 객체 저장
 			}		
 			return userList;					
@@ -157,8 +157,8 @@ public class UserDAO {
 	 * 해당하는 사용자 정보만을 List에 저장하여 반환.
 	 */
 	public List<User> findUserList(int currentPage, int countPerPage) throws SQLException {
-		String sql = "SELECT userId, name, gender, age, email, password, location" 
-					+ "FROM USERINFO ORDER BY userId";
+		String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT" 
+					+ "FROM USERINFO ORDER BY USER_ID";
 		jdbcUtil.setSqlAndParameters(sql, null,					// JDBCUtil에 query문 설정
 				ResultSet.TYPE_SCROLL_INSENSITIVE,				// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);						
@@ -170,13 +170,14 @@ public class UserDAO {
 				List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
 				do {
 					User user = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
-						rs.getString("userId"),
-						rs.getString("name"),
-						rs.getString("gender"),
-						rs.getInt("age"),
-						rs.getString("email"),
-						rs.getString("password"),
-						rs.getString("location"));
+						rs.getString("USER_ID"),
+						rs.getString("USER_EMAIL"),
+						rs.getString("USER_GENDER"),
+						rs.getInt("USER_AGE"),
+						rs.getString("USER_LOC"),
+						rs.getString("USER_PASSWORD"),
+						rs.getString("USER_NAME"),
+						rs.getInt("REPORTS_COUNT"));
 					userList.add(user);							// 리스트에 User 객체 저장
 				} while ((rs.next()) && (--countPerPage > 0));		
 				return userList;							
@@ -222,8 +223,8 @@ public class UserDAO {
 	 * 특정 커뮤니티에 속한 사용자들의 수를 count하여 반환
 	 */
 	public int getNumberOfUsersInCommunity(int communityId) {
-		String sql = "SELECT COUNT(userId) FROM UserInfo "
-     				+ "WHERE commId = ?";              
+		String sql = "SELECT COUNT(USER_ID) FROM USERINFO "
+     				+ "WHERE USER_ID = ?";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {communityId});	// JDBCUtil에 query문과 매개 변수 설정
 		
 		try {
@@ -239,10 +240,10 @@ public class UserDAO {
 	}
 	
 	/**
-	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 
+	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 !
 	 */
 	public boolean existingUser(String userId) throws SQLException {
-		String sql = "SELECT count(*) FROM USERINFO WHERE userid=?";      
+		String sql = "SELECT count(*) FROM USERINFO WHERE USER_ID=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
