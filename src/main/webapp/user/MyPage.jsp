@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <title>MyPage</title>
   <style>
-    /* 스타일링 */
+    /* ì¤íì¼ë§ */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -56,11 +56,11 @@
   <div class="container">
     <h2>MyPage</h2>
     <div class="button-container">
-      <button class="button">내가 쓴 글 보기</button>
-      <button class="button">내가 쓴 댓글 보기</button>
-      <button class="button">나의 개인정보 확인하기</button>
-      <button class="button calendar-button">캘린더</button>
-      <button class="button">쪽지함</button>
+      <button class="button">ë´ê° ì´ ê¸ ë³´ê¸°</button>
+      <button class="button">ë´ê° ì´ ëê¸ ë³´ê¸°</button>
+      <button class="button">ëì ê°ì¸ì ë³´ íì¸íê¸°</button>
+      <button class="button calendar-button">ìºë¦°ë</button>
+      <button class="button">ìª½ì§í¨</button>
     </div>
   </div>
 </body>

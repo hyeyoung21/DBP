@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>채팅 목록</title>
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <title>ì±í ëª©ë¡</title>
   <style>
-    /* 스타일링 */
+    /* ì¤íì¼ë§ */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -23,7 +23,7 @@
 
     .chat-list {
       border-right: 1px solid #ccc;
-      height: calc(100vh - 80px); /* 상단 추가 버튼 고려한 높이 */
+      height: calc(100vh - 80px); /* ìë¨ ì¶ê° ë²í¼ ê³ ë ¤í ëì´ */
       overflow-y: auto;
     }
 
@@ -46,7 +46,7 @@
       font-weight: bold;
     }
 
-    /* 추가 버튼 스타일 */
+    /* ì¶ê° ë²í¼ ì¤íì¼ */
     .add-button {
       background-color: #4caf50;
       color: #fff;
@@ -67,20 +67,20 @@
 <body>
   <div class="container">
     <div class="chat-list">
-      <button class="add-button" onclick="redirectToMessage()">추가</button>
-      <div class="conversation" onclick="openChat('사람1')">
+      <button class="add-button" onclick="redirectToMessage()">ì¶ê°</button>
+      <div class="conversation" onclick="openChat('ì¬ë1')">
         <div class="info">
-          <span class="name">솜솜이</span>
-          <span class="last-message">그렇다면 같이 마라탕 드실래요?</span>
+          <span class="name">ììì´</span>
+          <span class="last-message">ê·¸ë ë¤ë©´ ê°ì´ ë§ë¼í ëì¤ëì?</span>
         </div>
       </div>
-      <div class="conversation" onclick="openChat('사람2')">
+      <div class="conversation" onclick="openChat('ì¬ë2')">
         <div class="info">
-          <span class="name">컴솜이</span>
-          <span class="last-message">같이 프로젝트 하실래요?</span>
+          <span class="name">ì»´ìì´</span>
+          <span class="last-message">ê°ì´ íë¡ì í¸ íì¤ëì?</span>
         </div>
       </div>
-      <!-- 필요한 만큼 대화창을 추가하세요 -->
+      <!-- íìí ë§í¼ ëíì°½ì ì¶ê°íì¸ì -->
     </div>
   </div>
 
@@ -89,16 +89,16 @@
       window.location.href = 'message.html';
     }
 
-    // 다른 함수들은 그대로 유지합니다.
+    // ë¤ë¥¸ í¨ìë¤ì ê·¸ëë¡ ì ì§í©ëë¤.
     const chatList = {
-      '사람1': ['솜솜님 여전히 마라탕 먹을 사람 찾고 계신가요?', '그렇다면 같이 마라탕 드실래요?'],
-      '사람2': ['웹 프로젝트 할 사람 구합니다'],
-      '사람3': ['같이 프로젝트 하실래요?']
-      // 필요한 만큼 대화 내용을 추가하세요
+      'ì¬ë1': ['ììë ì¬ì í ë§ë¼í ë¨¹ì ì¬ë ì°¾ê³  ê³ì ê°ì?', 'ê·¸ë ë¤ë©´ ê°ì´ ë§ë¼í ëì¤ëì?'],
+      'ì¬ë2': ['ì¹ íë¡ì í¸ í  ì¬ë êµ¬í©ëë¤'],
+      'ì¬ë3': ['ê°ì´ íë¡ì í¸ íì¤ëì?']
+      // íìí ë§í¼ ëí ë´ì©ì ì¶ê°íì¸ì
     };
 
     function openChat(person) {
-      // 선택한 대화 내용을 가져와 화면에 표시
+      // ì íí ëí ë´ì©ì ê°ì ¸ì íë©´ì íì
       const conversation = chatList[person] || [];
       conversation.forEach(message => {
         console.log(message);

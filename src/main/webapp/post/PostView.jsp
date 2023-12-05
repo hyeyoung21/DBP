@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>모집 정보</title>
+  <title>ëª¨ì§ ì ë³´</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@
 
     #blog-content {
       width: 100%;
-      height: 300px; /* 세로 길이 조절 */
+      height: 300px; /* ì¸ë¡ ê¸¸ì´ ì¡°ì  */
     }
 
     #blog-form button {
@@ -80,25 +80,25 @@
 
   <form id="blog-form">
     <div class="form-group">
-      <label for="recruitment-num">모집 인원:</label>
-      <a id="recruitment-num">1</a>명
+      <label for="recruitment-num">ëª¨ì§ ì¸ì:</label>
+      <a id="recruitment-num">1</a>ëª
       <br>
-      <label for="recruitment-gender">모집 성별:</label>
-      <a id="recruitment-gender">여성</a>
+      <label for="recruitment-gender">ëª¨ì§ ì±ë³:</label>
+      <a id="recruitment-gender">ì¬ì±</a>
       <br>
-      <label for="recruitment-age">모집 나이:</label>
-      <a id="recruitment-age">20대</a>
+      <label for="recruitment-age">ëª¨ì§ ëì´:</label>
+      <a id="recruitment-age">20ë</a>
     </div>
 
     <div class="form-group">
-      <label for="category">카테고리:</label>
-      <a id="category">스터디</a>
+      <label for="category">ì¹´íê³ ë¦¬:</label>
+      <a id="category">ì¤í°ë</a>
       <br>
-      <label for="location">모임 위치:</label>
-        <a id="location">서울</a>
+      <label for="location">ëª¨ì ìì¹:</label>
+        <a id="location">ìì¸</a>
       </label>
       <br>
-      <label for="date">모임 날짜:</label>
+      <label for="date">ëª¨ì ë ì§:</label>
       <a id="date">2023-12-03</a>
     </div>
     
@@ -108,14 +108,14 @@
   </form>
 
   <div id="comment-form">
-    <h3>댓글 작성</h3>
+    <h3>ëê¸ ìì±</h3>
     <textarea id="comment-content" rows="4" required></textarea>
 
-    <button onclick="addComment()">댓글 작성</button>
+    <button onclick="addComment()">ëê¸ ìì±</button>
   </div>
 
   <div id="comment-list">
-      <!-- 여기에 추가된 댓글이 표시됩니다. -->
+      <!-- ì¬ê¸°ì ì¶ê°ë ëê¸ì´ íìë©ëë¤. -->
   </div>
 </body>
 </html>
