@@ -37,7 +37,10 @@ public class UserDAO {
 		} finally {		
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
-		}		
+		}	
+		
+		
+		
 		return 0;			
 	}
 
@@ -109,6 +112,9 @@ public class UserDAO {
 					rs.getString("USER_PASSWORD"),
 					rs.getString("USER_NAME"),
 					rs.getInt("REPORTS_COUNT"));
+				
+				System.out.println(user);
+				
 				return user;
 			}
 		} catch (Exception ex) {

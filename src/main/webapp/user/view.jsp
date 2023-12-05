@@ -1,3 +1,10 @@
+<%@page contentType="text/html; charset=utf-8" %>
+<%@page import="model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	// User user = (User)request.getAttribute("user");
+	User user = UserManager.findUser("user1");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
