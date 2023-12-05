@@ -18,13 +18,14 @@ public class RequestMapping {
     	// 기존 폼 입력 처리 개선을 위해 폼 jsp는 컨트롤러에서 redirect함.
         mappings.put("/", new ForwardController("main.jsp"));
       
+        // 로그인 & 회원가입
         mappings.put("/user/login", new LoginController());  
         mappings.put("/user/logout", new LogoutController());
+        mappings.put("/user/register", new RegisterUserController());
+        
+        // 회원 관리 & 검색
         mappings.put("/user/list", new ListUserController());
         mappings.put("/user/view", new ViewUserController());
-        
-        // 회원 관리
-        mappings.put("/user/add", new AddUserController());
         mappings.put("/user/update", new UpdateUserController());
         mappings.put("/user/delete", new DeleteUserController());
         
