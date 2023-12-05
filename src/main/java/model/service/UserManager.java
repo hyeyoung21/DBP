@@ -35,7 +35,7 @@ public class UserManager {
 		if (userDAO.existingUser(user.getUserId()) == true) {
 			throw new ExistingUserException(user.getUserId() + "는 존재하는 아이디입니다.");
 		}
-		return userDAO.create(user);
+		return userDAO.add(user);
 	}
 	
 	public int update(User user) throws SQLException, UserNotFoundException {
