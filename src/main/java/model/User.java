@@ -8,10 +8,11 @@ public class User {
 	private String email;
 	private String password;
 	private String location;
+	private int reportCount;
 	
 	public User() { }
 	
-	public User(String userID, String name, String gender, int age, String email, String password, String location) {
+	public User(String userID, String name, String gender, int age, String email, String password, String location, int report) {
 		this.userId = userID;
 		this.name = name;
 		this.gender = gender;
@@ -19,6 +20,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.location = location;
+		this.reportCount = report;
 	}
 
 	public String getUserId() {
@@ -92,6 +94,14 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", name=" + name + ", gender=" + gender + ", age=" + age + ", email="
 				+ email + ", password=" + password + ", location=" + location + "]";
+	}
+
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
 	}
 
 }
