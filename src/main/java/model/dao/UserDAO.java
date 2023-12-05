@@ -21,7 +21,7 @@ public class UserDAO {
 	/**
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
-	public int create(User user) throws SQLException {
+	public int add(User user) throws SQLException {
 		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {user.getUserId(), user.getEmail(), 
 						user.getGender(), user.getAge(), user.getLocation(),
@@ -37,7 +37,10 @@ public class UserDAO {
 		} finally {		
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
-		}		
+		}	
+		
+		
+		
 		return 0;			
 	}
 
@@ -109,6 +112,9 @@ public class UserDAO {
 					rs.getString("USER_PASSWORD"),
 					rs.getString("USER_NAME"),
 					rs.getInt("REPORTS_COUNT"));
+				
+				System.out.println(user);
+				
 				return user;
 			}
 		} catch (Exception ex) {
