@@ -109,9 +109,12 @@
   	<a href="<c:url value='/user/update'>
 					   <c:param name='userId' value='${user.userId}'/>
 			 		 </c:url>" class="edit">수정</a>
-	<a href="<c:url value='/user/delete'>
-					   <c:param name='userId' value='${user.userId}'/>
+	 <a href="<c:url value='/user/list'>
+					   <c:param name='userId'/>
 			 		 </c:url>" class="delete">삭제</a>
+	<%-- <a href="<c:url value='/user/delete'>
+					   <c:param name='userId' value='${user.userId}'/>
+			 		 </c:url>" class="delete">삭제</a> --%>
   </div>
 </div>
 
