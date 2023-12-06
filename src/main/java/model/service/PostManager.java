@@ -25,6 +25,14 @@ public class PostManager {
         return postMan;
     }
     
+    public void create(Post post) throws SQLException, PostNotFoundException{
+        try {
+            postDAO.createPost(post);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void update(Post post) throws SQLException, PostNotFoundException {
         // post의 모임 정보가 변경된 경우   
         try {

@@ -1,3 +1,4 @@
+<%@page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -49,12 +50,18 @@
     }
 
   </style>
+  <script>
+		function addBlogPost() {
+			form.submit();
+		}
+		
+</script>
 </head>
 <body>
 
   <h1>모집 정보</h1>
 
-  <form id="blog-form">
+  <form id="form">
     <div class="form-group">
       <label for="recruitment-num">모집 인원:</label>
       <input type="number" id="recruitment-num" required>
