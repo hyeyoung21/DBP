@@ -22,7 +22,7 @@ public class UserDAO {
 	 * 사용자 관리 테이블에 새로운 사용자 생성.
 	 */
 	public int add(User user) throws SQLException {
-		String sql = "INSERT INTO USERINFO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO USER_INFO VALUES (?, ?, ?, ?, ?, ?, ?, ?)";		
 		Object[] param = new Object[] {user.getUserId(), user.getEmail(), 
 						user.getGender(), user.getAge(), user.getLocation(),
 						user.getPassword(), user.getName(), user.getReportCount()};				
@@ -48,8 +48,8 @@ public class UserDAO {
 	 * 기존의 사용자 정보를 수정.
 	 */
 	public int update(User user) throws SQLException {
-		String sql = "UPDATE USERINFO "
-					+ "SET USER_EMAIL=?, USER_GENDER=?, USER_AGE=?, USER_LOC=?, USER_PASSWORD=?, USER_NAME=?, REPORTS_COUNT=?"
+		String sql = "UPDATE USER_INFO "
+					+ "SET USER_EMAIL=?, USER_GENDER=?, USER_AGE=?, USER_LOC=?, USER_PASSWORD=?, USER_NAME=?, REPORTS_COUNT=? "
 					+ "WHERE USER_ID=?";
 		Object[] param = new Object[] {user.getPassword(), 
 				user.getName(), user.getEmail(), user.getAge(), user.getGender(), user.getLocation(), 
@@ -74,7 +74,7 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int delete(String userId) throws SQLException {
-		String sql = "DELETE FROM USERINFO WHERE USER_ID=?";		
+		String sql = "DELETE FROM USER_INFO WHERE USER_ID=?";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
@@ -97,7 +97,7 @@ public class UserDAO {
 	 */
 	public User findUser(String userId) throws SQLException {
         String sql = "SELECT USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT "
-        			+ "FROM USERINFO WHERE userid=? ";              
+        			+ "FROM USER_INFO WHERE userid=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
@@ -129,8 +129,8 @@ public class UserDAO {
 	 * 전체 사용자 정보를 검색하여 List에 저장 및 반환
 	 */
 	public List<User> findUserList() throws SQLException {
-        String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT" 
-        		   + "FROM USERINFO ORDER BY userId";
+        String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT " 
+        		   + "FROM USER_INFO ORDER BY USER_ID";
 		jdbcUtil.setSqlAndParameters(sql, null);		// JDBCUtil에 query문 설정
 					
 		try {
@@ -163,8 +163,8 @@ public class UserDAO {
 	 * 해당하는 사용자 정보만을 List에 저장하여 반환.
 	 */
 	public List<User> findUserList(int currentPage, int countPerPage) throws SQLException {
-		String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT" 
-					+ "FROM USERINFO ORDER BY USER_ID";
+		String sql = "SELECT USER_ID, USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT " 
+					+ "FROM USER_INFO ORDER BY USER_ID";
 		jdbcUtil.setSqlAndParameters(sql, null,					// JDBCUtil에 query문 설정
 				ResultSet.TYPE_SCROLL_INSENSITIVE,				// cursor scroll 가능
 				ResultSet.CONCUR_READ_ONLY);						
@@ -229,7 +229,7 @@ public class UserDAO {
 	 * 특정 커뮤니티에 속한 사용자들의 수를 count하여 반환
 	 */
 	public int getNumberOfUsersInCommunity(int communityId) {
-		String sql = "SELECT COUNT(USER_ID) FROM USERINFO "
+		String sql = "SELECT COUNT(USER_ID) FROM USER_INFO "
      				+ "WHERE USER_ID = ?";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {communityId});	// JDBCUtil에 query문과 매개 변수 설정
 		
@@ -249,7 +249,7 @@ public class UserDAO {
 	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 !
 	 */
 	public boolean existingUser(String userId) throws SQLException {
-		String sql = "SELECT count(*) FROM USERINFO WHERE USER_ID=?";      
+		String sql = "SELECT count(*) FROM USER_INFO WHERE USER_ID=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {

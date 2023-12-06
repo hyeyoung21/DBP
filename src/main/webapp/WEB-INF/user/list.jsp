@@ -1,7 +1,15 @@
+<%@page contentType="text/html; charset=utf-8" %>
+<%@page import="java.util.*, model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	@SuppressWarnings("unchecked") 
+	List<User> userList = (List<User>)request.getAttribute("userList");
+	// String curUserId = (String)request.getAttribute("curUserId"); // 현재 아이디
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <title>사용자 목록</title>
   <style>
     ul {
@@ -20,10 +28,9 @@
 <h2>사용자 목록</h2>
 
 <ul id="user-list">
-  <li data-id="1">사용자 1</li>
-  <li data-id="2">사용자 2</li>
-  <li data-id="3">사용자 3</li>
-  <!-- 여기에 더 많은 사용자 추가 가능 -->
+	<c:forEach var="user" items="${userList}">  
+		<li data-id="1">${user.userId}</li>
+	</c:forEach> 
 </ul>
 
 <div id="user-details">
