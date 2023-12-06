@@ -97,7 +97,7 @@ public class UserDAO {
 	 */
 	public User findUser(String userId) throws SQLException {
         String sql = "SELECT USER_EMAIL, USER_GENDER, USER_AGE, USER_LOC, USER_PASSWORD, USER_NAME, REPORTS_COUNT "
-        			+ "FROM USER_INFO WHERE userid=? ";              
+        			+ "FROM USER_INFO WHERE USER_ID=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
