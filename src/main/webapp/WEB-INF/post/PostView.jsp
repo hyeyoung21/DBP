@@ -1,13 +1,16 @@
 <%@page contentType="text/html; charset=utf-8" %>
-<%@page import="java.util.*, model.*" %>
+<%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	Post post = (Post)request.getAttribute("post");
+%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>ëª¨ì§ ì ë³´</title>
+  <title>모집 정보</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -33,7 +36,7 @@
 
     #blog-content {
       width: 100%;
-      height: 300px; /* ì¸ë¡ ê¸¸ì´ ì¡°ì  */
+      height: 300px; /* 세로 길이 조절 */
     }
 
     #blog-form button {
@@ -51,73 +54,64 @@
       margin-bottom: 10px;
     }
 
-    button {
-      display: inline-block;
-      padding: 5px 10px;
-      font-size: 12px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: 2px solid #333;
-      border-radius: 5px;
-      color: #333;
-      background-color: #ffffff83;
+        .button-container {
+      text-align: right;
+      margin-top: 20px;
     }
+
 
     #blog-content {
       display: inline-block;
-      padding: 5px 10px;
-      font-size: 12px;
-      border: 2px solid #333;
-      border-radius: 5px;
+      padding: 1px 10px;
+      font-size: 16px;
       color: #333;
-      background-color: #ffffff83;
+      background-color: #f4f4f4;
     }
 
   </style>
 </head>
 <body>
 
-  <h2 id="blog-title">POST TITLE</h2>
+  <h2 id="blog-title">${post.title}</h2>
 
   <form id="blog-form">
     <div class="form-group">
-      <label for="recruitment-num">ëª¨ì§ ì¸ì:</label>
-      <a id="recruitment-num">1</a>ëª
+      <label for="recruitment-num">모집 인원:</label>
+      <a id="recruitment-num">${post.maxParticipants}</a>명
       <br>
-      <label for="recruitment-gender">ëª¨ì§ ì±ë³:</label>
-      <a id="recruitment-gender">ì¬ì±</a>
+      <label for="recruitment-gender">모집 성별:</label>
+      <a id="recruitment-gender">${post.gender}</a>
       <br>
-      <label for="recruitment-age">ëª¨ì§ ëì´:</label>
-      <a id="recruitment-age">20ë</a>
+      <label for="recruitment-age">모집 나이:</label>
+      <a id="recruitment-age">${post.ageRange}</a>
     </div>
 
     <div class="form-group">
-      <label for="category">ì¹´íê³ ë¦¬:</label>
-      <a id="category">ì¤í°ë</a>
+      <label for="category">카테고리:</label>
+      <a id="category">${post.meetingType}</a>
       <br>
-      <label for="location">ëª¨ì ìì¹:</label>
-        <a id="location">ìì¸</a>
+      <label for="location">모임 위치:</label>
+        <a id="location">${post.location}</a>
       </label>
       <br>
-      <label for="date">ëª¨ì ë ì§:</label>
-      <a id="date">2023-12-03</a>
+      <label for="date">모임 날짜:</label>
+      <a id="date">${post.dateTime}</a>
     </div>
     
     <hr size="10px" />
 
-    <div id="blog-content">Post content</div>
+    <div id="blog-content">${post.description}</div>
   </form>
 
   <div id="comment-form">
-    <h3>ëê¸ ìì±</h3>
+    <h3>댓글 작성</h3>
     <textarea id="comment-content" rows="4" required></textarea>
 
-    <button onclick="addComment()">ëê¸ ìì±</button>
+    <button onclick="addComment()">댓글 작성</button>
   </div>
 
   <div id="comment-list">
+      <!-- 여기에 추가된 댓글이 표시됩니다. -->
   </div>
 </body>
 </html>

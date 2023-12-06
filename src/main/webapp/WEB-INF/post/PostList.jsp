@@ -121,18 +121,17 @@
 
   <h2>Search Results</h2>
   <ul id="blog-list">
-  	<c:forEach var="user" items="${postList}">
+  	<c:forEach var="post" items="${postList}">
 		<li>
 		  <a href="<c:url value='/post/view'>
-		    <c:param name='postId' value='${post.postId}'/>
+		    <c:param name='id' value='${post.id}'/>
 		 	</c:url>">
 		    <h3>${post.title}</h3>
 		    <p><strong>지역:</strong> ${post.location}</p>
-		    <p><strong>모집 인원:</strong> ${post.participants}명</p>
+		    <p><strong>모집 인원:</strong> ${post.maxParticipants}명</p>
 		    <p><strong>모집 성별:</strong> ${post.gender}</p>
 		  </a>
 		</li>
-
 	</c:forEach>
   </ul>
 	
