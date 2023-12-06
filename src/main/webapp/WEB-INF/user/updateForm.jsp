@@ -99,7 +99,7 @@
 		    <option value="Female" ${user.gender eq 'Female' ? 'selected' : ''}>Female</option>
 		</select><br>
 		
-		<label for="age">나이</label>
+		<label for="age">신고 횟수</label>
         <input type="number" id="reportCount" name="reportCount" value="${user.reportCount}" required><br><br>
 
         <table style="width: 100%">
