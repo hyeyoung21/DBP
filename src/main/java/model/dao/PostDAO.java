@@ -120,18 +120,18 @@ public class PostDAO {
 
     private Post mapResultSetToPost(ResultSet resultSet) throws SQLException {
         Post post = new Post();
-        post.setId(resultSet.getInt("id"));
-        post.setTitle(resultSet.getString("title"));
-        post.setDescription(resultSet.getString("description"));
-        post.setLocation(resultSet.getString("location"));
-        post.setDateTime(resultSet.getString("dateTime"));
-        post.setGender(resultSet.getString("gender"));
-        post.setAgeRange(resultSet.getString("ageRange"));
-        post.setMaxParticipants(resultSet.getInt("maxParticipants"));
+        post.setId(resultSet.getInt("post_ID"));
+        post.setTitle(resultSet.getString("post_title"));
+        post.setDescription(resultSet.getString("post_content"));
+        post.setLocation(resultSet.getString("post_loc"));
+//        post.setDateTime(resultSet.getString("dateTime"));
+        post.setGender(resultSet.getString("post_gender"));
+        post.setAgeRange(resultSet.getString("post_age"));
+        post.setMaxParticipants(resultSet.getInt("post_participants"));
 
-        String creatorId = resultSet.getString("creator_id");
-        User creator = getUserById(creatorId);
-        post.setCreator(creator);
+//        String creatorId = resultSet.getString("creator_id");
+//        User creator = getUserById(creatorId);
+//        post.setCreator(creator);
 
 //        String participantsString = resultSet.getString("participants");
 //        List<User> participantsList = new ArrayList<>();
@@ -145,7 +145,7 @@ public class PostDAO {
 //        }
 //        post.setParticipants(participantsList);
 
-        post.setMeetingType(resultSet.getString("meetingType"));
+//        post.setMeetingType(resultSet.getString("meetingType"));
 
         return post;
     }
