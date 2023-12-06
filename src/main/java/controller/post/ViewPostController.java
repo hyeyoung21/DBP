@@ -16,9 +16,9 @@ public class ViewPostController implements Controller {
 		int postId = Integer.parseInt(request.getParameter("postId"));
 		
 		try {
-            post = manager.findPost(postId);    // 사용자 정보 검색
+            post = manager.getPost(postId);    // 사용자 정보 검색
         } catch (Exception e) {             
-            return "redirect:/user/list";
+            return "redirect:/post/PostList";
         }   		
 		
 		request.setAttribute("post", post);				

@@ -18,10 +18,40 @@ public class PostDAO {
         return executeQueryAndMapPosts(sql, null);
     }
     
-    public List<Post> findPost(int postId) {
+    public Post getPost(int postId) {
         String sql = "SELECT * FROM posts WHERE postid = ?";
-        return executeQueryAndMapPosts(sql, new Object[]{postId});
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});   // JDBCUtil에 query문과 매개 변수 설정
+    
+        try {
+            ResultSet resultSet = jdbcUtil.executeQuery();     // query 실행
+            if (resultSet.next()) {         // User 객체를 생성하여 학생 정보를 저장
+                Post post = new Post();
+                post.setId(resultSet.getInt("id"));
+                post.setTitle(resultSet.getString("title"));
+                post.setDescription(resultSet.getString("description"));
+                post.setLocation(resultSet.getString("location"));
+                post.setDateTime(resultSet.getString("dateTime"));
+                post.setGender(resultSet.getString("gender"));
+                post.setAgeRange(resultSet.getString("ageRange"));
+                post.setMaxParticipants(resultSet.getInt("maxParticipants"));
+
+                String creatorId = resultSet.getString("creator_id");
+                User creator = getUserById(creatorId);
+                post.setCreator(creator);
+                
+                System.out.println(post);
+                
+                return post;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();       // resource 반환
+        }
+        return null;
+       
     }
+    
 
     public List<Post> searchPostsByTitle(String searchString) {
         String sql = "SELECT * FROM posts WHERE title LIKE ?";
@@ -101,28 +131,28 @@ public class PostDAO {
         post.setAgeRange(resultSet.getString("ageRange"));
         post.setMaxParticipants(resultSet.getInt("maxParticipants"));
 
-        int creatorId = resultSet.getInt("creator_id");
+        String creatorId = resultSet.getString("creator_id");
         User creator = getUserById(creatorId);
         post.setCreator(creator);
 
-        String participantsString = resultSet.getString("participants");
-        List<User> participantsList = new ArrayList<>();
-        if (participantsString != null && !participantsString.isEmpty()) {
-            String[] participantsArray = participantsString.split(",");
-            for (String participantId : participantsArray) {
-                int userId = Integer.parseInt(participantId.trim());
-                User participant = getUserById(userId);
-                participantsList.add(participant);
-            }
-        }
-        post.setParticipants(participantsList);
+//        String participantsString = resultSet.getString("participants");
+//        List<User> participantsList = new ArrayList<>();
+//        if (participantsString != null && !participantsString.isEmpty()) {
+//            String[] participantsArray = participantsString.split(",");
+//            for (String participantId : participantsArray) {
+//                int userId = Integer.parseInt(participantId.trim());
+//                User participant = getUserById(userId);
+//                participantsList.add(participant);
+//            }
+//        }
+//        post.setParticipants(participantsList);
 
         post.setMeetingType(resultSet.getString("meetingType"));
 
         return post;
     }
 
-    private User getUserById(int userId) {
+    private User getUserById(String userId) {
         String sql = "SELECT * FROM users WHERE id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{userId});
 

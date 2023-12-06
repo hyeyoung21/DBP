@@ -25,21 +25,28 @@ public class PostManager {
         return postMan;
     }
     
-    public int update(int post) throws SQLException, PostNotFoundException {
+    public void update(Post post) throws SQLException, PostNotFoundException {
         // post의 모임 정보가 변경된 경우   
-        return postDAO.updatePost(post);
+        try {
+            postDAO.updatePost(post);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }   
     
-    public int remove(String postId) throws SQLException, PostNotFoundException {
-        
-        // 유저가 참여한 모임 정보도 같이 삭제해야 함. 
-        
-        return postDAO.deletePost(postId);
+    public void remove(int postId) throws SQLException, PostNotFoundException {
+        try {
+            postDAO.deletePost(postId);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     
-    public Post findPost(int postId)
+    public Post getPost(int postId)
         throws SQLException, PostNotFoundException {
-        Post post = postDAO.p(postId);
+        Post post = postDAO.getPost(postId);
   
         return post;
     }
@@ -48,20 +55,11 @@ public class PostManager {
             return postDAO.getAllPosts();
     }
 
-    public List<Post> findPostList(int currentPage, int countPerPage)
+    public List<Post> findPostList(String searchString)
         throws SQLException {
-            return postDAO.findPostList(currentPage, countPerPage);
+            return postDAO.searchPostsByTitle(searchString);
     }
     
-    public boolean login(String postId, String password)
-            throws SQLException, PostNotFoundException, PasswordMismatchException {
-        Post post = findPost(postId);
-
-        if (!post.matchPassword(password)) {
-            throw new PasswordMismatchException("비밀번호가 일치하지 않습니다.");
-        }
-        return true;
-    }
     
     public PostDAO getPostDAO() {
         return this.postDAO;

@@ -16,6 +16,6 @@ public class ListPostController implements Controller {
 		
 		// postList 객체를 request에 저장하여 커뮤니티 리스트 화면으로 이동(forwarding)
 		request.setAttribute("postList", postList);				
-		return "/post/list.jsp";        
+		return "/post/PostList.jsp";        
     }
 }
