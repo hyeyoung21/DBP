@@ -51,9 +51,9 @@ public class UserDAO {
 		String sql = "UPDATE USER_INFO "
 					+ "SET USER_EMAIL=?, USER_GENDER=?, USER_AGE=?, USER_LOC=?, USER_PASSWORD=?, USER_NAME=?, REPORTS_COUNT=? "
 					+ "WHERE USER_ID=?";
-		Object[] param = new Object[] {user.getPassword(), 
-				user.getName(), user.getEmail(), user.getAge(), user.getGender(), user.getLocation(), 
-					user.getUserId()};				
+		Object[] param = new Object[] {user.getEmail(), 
+				user.getGender(), user.getAge(), user.getLocation(), user.getPassword(), user.getName(), 
+					user.getReportCount(),user.getUserId() };				
 		jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
 			
 		try {				
@@ -105,12 +105,12 @@ public class UserDAO {
 			if (rs.next()) {						// 학생 정보 발견
 				User user = new User(		// User 객체를 생성하여 학생 정보를 저장
 					userId,
-					rs.getString("USER_EMAIL"),
+					rs.getString("USER_NAME"),
 					rs.getString("USER_GENDER"),
 					rs.getInt("USER_AGE"),
-					rs.getString("USER_LOC"),
+					rs.getString("USER_EMAIL"),
 					rs.getString("USER_PASSWORD"),
-					rs.getString("USER_NAME"),
+					rs.getString("USER_LOC"),
 					rs.getInt("REPORTS_COUNT"));
 				
 				System.out.println(user);
@@ -139,12 +139,12 @@ public class UserDAO {
 			while (rs.next()) {
 				User user = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
 					rs.getString("USER_ID"),
-					rs.getString("USER_EMAIL"),
+					rs.getString("USER_NAME"),
 					rs.getString("USER_GENDER"),
 					rs.getInt("USER_AGE"),
-					rs.getString("USER_LOC"),
+					rs.getString("USER_EMAIL"),
 					rs.getString("USER_PASSWORD"),
-					rs.getString("USER_NAME"),
+					rs.getString("USER_LOC"),
 					rs.getInt("REPORTS_COUNT"));
 				userList.add(user);				// List에 User 객체 저장
 			}		
