@@ -34,21 +34,18 @@ public class PostManager {
         
         // 유저가 참여한 모임 정보도 같이 삭제해야 함. 
         
-        return postDAO.delete(postId);
+        return postDAO.deletePost(postId);
     }
     
-    public Post findPost(String postId)
+    public Post findPost(int postId)
         throws SQLException, PostNotFoundException {
-        Post post = postDAO.findPost(postId);
-        
-        if (post == null) {
-            throw new PostNotFoundException(postId + "는 존재하지 않는 아이디입니다.");
-        }       
+        Post post = postDAO.p(postId);
+  
         return post;
     }
     
-    public List<Post> findPostList() throws SQLException {
-            return postDAO.findPostList();
+    public List<Post> getAllPosts() throws SQLException {
+            return postDAO.getAllPosts();
     }
 
     public List<Post> findPostList(int currentPage, int countPerPage)

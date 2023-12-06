@@ -2,8 +2,7 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import model.User;
 import model.Post;
 
@@ -17,6 +16,11 @@ public class PostDAO {
     public List<Post> getAllPosts() {
         String sql = "SELECT * FROM posts";
         return executeQueryAndMapPosts(sql, null);
+    }
+    
+    public List<Post> findPost(int postId) {
+        String sql = "SELECT * FROM posts WHERE postid = ?";
+        return executeQueryAndMapPosts(sql, new Object[]{postId});
     }
 
     public List<Post> searchPostsByTitle(String searchString) {

@@ -82,6 +82,6 @@ public class ConnectionManager {
 			System.out.println("NumIdle: " + bds.getNumIdle());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}   
+		}  
 	}
 }
