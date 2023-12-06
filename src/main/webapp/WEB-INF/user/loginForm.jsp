@@ -67,7 +67,7 @@
 </head>
 <body>
 
-    <form action="loginProcess.jsp" method="post">
+    <form action="../main.jsp" method="post">
         <h2>로그인</h2>
         <label for="username">ID</label>
         <input type="text" id="username" name="username" required>
