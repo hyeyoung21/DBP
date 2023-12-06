@@ -36,6 +36,22 @@ public class Post {
         this.participants = participants;
         this.meetingType = meetingType;
     }
+    
+    public Post(String title, String description, String location, String dateTime, String gender,
+            String ageRange, int maxParticipants, String meetingType) {
+        super();
+        this.title = title;
+        this.content = description;
+        this.location = location;
+        this.dateTime = dateTime;
+        this.gender = gender;
+        this.age = ageRange;
+        this.maxParticipants = maxParticipants;
+        this.creator = creator;
+        this.participants = participants;
+        this.meetingType = meetingType;
+    }
+
 
     public int getId() {
         return id;

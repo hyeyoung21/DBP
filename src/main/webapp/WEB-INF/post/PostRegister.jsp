@@ -56,23 +56,23 @@
 
   <form id="blog-form">
     <div class="form-group">
-      <label for="recruitment-num">모집 인원:</label>
-      <input type="number" id="recruitment-num" required>
+      <label for="part">모집 인원:</label>
+      <input type="number" id="part" required>
 
-      <label for="recruitment-gender">모집 성별:</label>
-      <select id="recruitment-gender" required>
+      <label for="gender">모집 성별:</label>
+      <select id="gender" required>
         <option value="male">남성</option>
         <option value="female">여성</option>
         <option value="any">모두</option>
       </select>
 
-      <label for="recruitment-age">모집 나이:</label>
-      <input type="text" id="recruitment-age" required>
+      <label for="age">모집 나이:</label>
+      <input type="text" id="age" required>
     </div>
 
     <div class="form-group">
-      <label for="category">카테고리:</label>
-      <select id="category" required>
+      <label for="meetingType">카테고리:</label>
+      <select id="meetingType" required>
         <option value="study">스터디</option>
         <option value="exercise">운동</option>
         <option value="plant">원예</option>
@@ -110,8 +110,8 @@
     
     <hr size="10px" />
 
-    <input type="text" id="blog-title" placeholder="제목을 입력하세요" required>
-    <textarea id="blog-content" placeholder="내용을 입력하세요" required></textarea>
+    <input type="text" id="title" placeholder="제목을 입력하세요" required>
+    <textarea id="content" placeholder="내용을 입력하세요" required></textarea>
 
     <button type="button" onclick="addBlogPost()">등록하기</button>
   </form>

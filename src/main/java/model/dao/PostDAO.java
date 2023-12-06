@@ -59,7 +59,8 @@ public class PostDAO {
     }
 
     public void createPost(Post post) throws Exception {
-        String sql = "INSERT INTO POST (post_ID, post_title, post_content, post_gender, post_age, post_loc, post_participants, user_id) VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO POST (post_ID, user_id, post_title, post_content, post_gender, post_age, post_loc, post_participants, meetingType, post_date) "
+                + "VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         executeUpdateWithPost(sql, post);
     }
 
@@ -95,18 +96,28 @@ public class PostDAO {
     }
 
     private void executeUpdateWithPost(String sql, Post post) throws Exception {
-        List<String> participantIdsAsString = new ArrayList<>();
-        for (User participant : post.getParticipants()) {
-            participantIdsAsString.add(String.valueOf(participant.getUserId()));
-        }
-
+//        List<String> participantIdsAsString = new ArrayList<>();
+//        for (User participant : post.getParticipants()) {
+//            participantIdsAsString.add(String.valueOf(participant.getUserId()));
+//        }
+        
+//        post_title, post_content, post_gender, post_age, post_loc, post_participants, post_date
+        
+        System.out.println(post);
         jdbcUtil.setSqlAndParameters(sql,
-                new Object[]{post.getTitle(), post.getContent(), post.getLocation(),
-                        post.getGender(), post.getAge(), post.getLocation(), 
-                        post.getMaxParticipants(), post.getCreator().getUserId(),
-                        String.join(",", participantIdsAsString), post.getMeetingType()});
-
-        executeUpdate();
+                new Object[]{"user1", post.getTitle(), post.getContent(), 
+                        post.getGender(), post.getAge(), post.getLocation(),
+                        post.getMaxParticipants(), post.getMeetingType(), post.getDateTime()});
+        
+        try {               
+            int result = jdbcUtil.executeUpdate();  // insert 문 실행
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }   
     }
 
 

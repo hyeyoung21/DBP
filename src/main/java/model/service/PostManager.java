@@ -35,6 +35,15 @@ public class PostManager {
         }
     }   
     
+    public void add(Post post) throws SQLException, PostNotFoundException {
+        try {
+            postDAO.createPost(post);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
     public void remove(int postId) throws SQLException, PostNotFoundException {
         try {
             postDAO.deletePost(postId);
