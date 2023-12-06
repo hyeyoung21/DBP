@@ -1,32 +1,43 @@
+<%@page contentType="text/html; charset=utf-8" %>
+<%@page import="java.util.*, model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Post List</title>
+  <title>ëª¨ì§ ì ë³´</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
     }
 
-    #search-form {
-      margin-bottom: 20px;
+    #blog-form {
+      display: flex;
+      flex-wrap: wrap;
     }
 
-    #search-form input{
-      width: 300px;
-      padding: 5px;
-      margin-right: 10px;
+    .form-group {
+      width: 50%;
+      box-sizing: border-box;
+      padding: 0 10px;
     }
 
-    #location-search,
-    #category-search,
-    #gender-search {
-      width: 150px;
-      padding: 5px;
-      margin-right: 10px;
+    #blog-form label, #blog-form input, #blog-form select, #blog-form textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    #blog-content {
+      width: 100%;
+      height: 300px; /* ì¸ë¡ ê¸¸ì´ ì¡°ì  */
+    }
+
+    #blog-form button {
+      width: 100%;
     }
 
     #blog-list {
@@ -40,112 +51,73 @@
       margin-bottom: 10px;
     }
 
-    
+    button {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 2px solid #333;
+      border-radius: 5px;
+      color: #333;
+      background-color: #ffffff83;
+    }
+
+    #blog-content {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 2px solid #333;
+      border-radius: 5px;
+      color: #333;
+      background-color: #ffffff83;
+    }
+
   </style>
 </head>
 <body>
 
-  <h1>Post List</h1>
+  <h2 id="blog-title">POST TITLE</h2>
 
-  <div id="search-options">
-    <form id="search-form">
-        <label for="search-input">Search:</label>
-        <input type="text" id="search-input">
-      </form>
-    
-      <label>
-        모임 장소:
-        <select id="location-search">
-          <option value="any-location" selected>모두</option>
-          <option value="seoul">서울</option>
-          <option value="gyeonggi">경기</option>
-          <option value="sejong">세종</option>
-          <option value="incheon">인천</option>
-          <option value="chungbuk">충북</option>
-          <option value="chungnam">충남</option>
-          <option value="gangwon">강원</option>
-          <option value="jeonnam">전남</option>
-          <option value="jeonbul">전북</option>
-          <option value="gwangju">광주</option>
-          <option value="geongbuk">경북</option>
-          <option value="geongnam">경남</option>
-          <option value="jeju">제주</option>
-          <option value="ulsam">울산</option>
-          <option value="daegu">대구</option>
-          <option value="daejun">대전</option>
-        </select>
-      </label>
-    
-      <label>
-        카테고리:
-        <select id="category-search">
-          <option value="any-category" selected>모두</option>
-          <option value="study">스터디</option>
-          <option value="exercise">운동</option>
-          <option value="plant">원예</option>
-          <option value="handicraft">수공예</option>
-          <option value="performance">공연</option>
-          <option value="art">미술</option>
-          <option value="game">게임</option>
-        </select>
-      </label>
+  <form id="blog-form">
+    <div class="form-group">
+      <label for="recruitment-num">ëª¨ì§ ì¸ì:</label>
+      <a id="recruitment-num">1</a>ëª
+      <br>
+      <label for="recruitment-gender">ëª¨ì§ ì±ë³:</label>
+      <a id="recruitment-gender">ì¬ì±</a>
+      <br>
+      <label for="recruitment-age">ëª¨ì§ ëì´:</label>
+      <a id="recruitment-age">20ë</a>
+    </div>
 
-      
-      <label>
-        성별:
-        <select id="gender-search">
-          <option value="male">남성</option>
-          <option value="female">여성</option>
-          <option value="any" selected>모두</option>
-        </select>
+    <div class="form-group">
+      <label for="category">ì¹´íê³ ë¦¬:</label>
+      <a id="category">ì¤í°ë</a>
+      <br>
+      <label for="location">ëª¨ì ìì¹:</label>
+        <a id="location">ìì¸</a>
       </label>
+      <br>
+      <label for="date">ëª¨ì ë ì§:</label>
+      <a id="date">2023-12-03</a>
+    </div>
     
+    <hr size="10px" />
+
+    <div id="blog-content">Post content</div>
+  </form>
+
+  <div id="comment-form">
+    <h3>ëê¸ ìì±</h3>
+    <textarea id="comment-content" rows="4" required></textarea>
+
+    <button onclick="addComment()">ëê¸ ìì±</button>
   </div>
 
-  <h2>Search Results</h2>
-  <ul id="blog-list"></ul>
-  
-
-  <script>
-    var blogPosts = [
-      {
-        title: 'Sample Post 1',
-        content: 'This is the content of sample post 1. It may contain some information about a specific topic.',
-        author: 'John Doe',
-        date: '2023-01-01',
-        recruitment: '5',
-        category: 'Technology'
-      },
-      {
-        title: 'Sample Post 2',
-        content: 'This is the content of sample post 2. It may contain some information about a different topic.',
-        author: 'Jane Doe',
-        date: '2023-02-15',
-        recruitment: '10',
-        category: 'Travel'
-      },
-    ];
-
-    function displayBlogPosts(posts) {
-      var blogList = document.getElementById('blog-list');
-      blogList.innerHTML = '';
-
-      posts.forEach(function(post) {
-        var listItem = document.createElement('li');
-        listItem.className = 'blog-item';
-        listItem.innerHTML = `<h3>${post.title}</h3>
-                              <p>${post.content}</p>
-                              <p><strong>Author:</strong> ${post.author}</p>
-                              <p><strong>Date:</strong> ${post.date}</p>
-                              <p><strong>Recruitment:</strong> ${post.recruitment}</p>
-                              <p><strong>Category:</strong> ${post.category}</p>`;
-        blogList.appendChild(listItem);
-      });
-    }
-
-    // Initial display of all blog posts on page load
-    displayBlogPosts(blogPosts);
-  </script>
-
+  <div id="comment-list">
+  </div>
 </body>
 </html>
