@@ -83,7 +83,7 @@
       <a id="recruitment-gender">${post.gender}</a>
       <br>
       <label for="recruitment-age">모집 나이:</label>
-      <a id="recruitment-age">${post.ageRange}</a>
+      <a id="recruitment-age">${post.age}</a>
     </div>
 
     <div class="form-group">
@@ -100,7 +100,7 @@
     
     <hr size="10px" />
 
-    <div id="blog-content">${post.description}</div>
+    <div id="blog-content">${post.content}</div>
   </form>
 
   <div id="comment-form">

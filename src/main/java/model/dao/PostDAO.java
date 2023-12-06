@@ -28,11 +28,13 @@ public class PostDAO {
                 Post post = new Post();
                 post.setId(resultSet.getInt("post_id"));
                 post.setTitle(resultSet.getString("post_title"));
-                post.setDescription(resultSet.getString("post_content"));
+                post.setContent(resultSet.getString("post_content"));
                 post.setLocation(resultSet.getString("post_loc"));
                 post.setGender(resultSet.getString("post_gender"));
-                post.setAgeRange(resultSet.getString("post_age"));
+                post.setAge(resultSet.getString("post_age"));
                 post.setMaxParticipants(resultSet.getInt("post_participants"));
+                post.setMeetingType(resultSet.getString("meetingType"));
+                post.setDateTime(resultSet.getString("Post_date"));
 
 //                String creatorId = resultSet.getString("user_id");
 //                User creator = getUserById(creatorId);
@@ -99,8 +101,8 @@ public class PostDAO {
         }
 
         jdbcUtil.setSqlAndParameters(sql,
-                new Object[]{post.getTitle(), post.getDescription(), post.getLocation(),
-                        post.getGender(), post.getAgeRange(), post.getLocation(), 
+                new Object[]{post.getTitle(), post.getContent(), post.getLocation(),
+                        post.getGender(), post.getAge(), post.getLocation(), 
                         post.getMaxParticipants(), post.getCreator().getUserId(),
                         String.join(",", participantIdsAsString), post.getMeetingType()});
 
@@ -122,12 +124,13 @@ public class PostDAO {
         Post post = new Post();
         post.setId(resultSet.getInt("post_ID"));
         post.setTitle(resultSet.getString("post_title"));
-        post.setDescription(resultSet.getString("post_content"));
+        post.setContent(resultSet.getString("post_content"));
         post.setLocation(resultSet.getString("post_loc"));
 //        post.setDateTime(resultSet.getString("dateTime"));
         post.setGender(resultSet.getString("post_gender"));
-        post.setAgeRange(resultSet.getString("post_age"));
+        post.setAge(resultSet.getString("post_age"));
         post.setMaxParticipants(resultSet.getInt("post_participants"));
+        post.setMeetingType(resultSet.getString("post_participants"));
 
 //        String creatorId = resultSet.getString("creator_id");
 //        User creator = getUserById(creatorId);
@@ -175,6 +178,7 @@ public class PostDAO {
         user.setEmail(resultSet.getString("user_email"));
         user.setPassword(resultSet.getString("user_password"));
         user.setLocation(resultSet.getString("user_loc"));
+        
         return user;
     }
 }

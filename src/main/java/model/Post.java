@@ -5,11 +5,11 @@ import java.util.List;
 public class Post {
     private int id;
     private String title;
-    private String description;
+    private String content;
     private String location;
     private String dateTime;
     private String gender;
-    private String ageRange;
+    private String age;
     private int maxParticipants;
     private User creator;
     private List<User> participants;
@@ -26,11 +26,11 @@ public class Post {
         super();
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.content = description;
         this.location = location;
         this.dateTime = dateTime;
         this.gender = gender;
-        this.ageRange = ageRange;
+        this.age = ageRange;
         this.maxParticipants = maxParticipants;
         this.creator = creator;
         this.participants = participants;
@@ -53,12 +53,12 @@ public class Post {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContent() {
+        return content;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContent(String description) {
+        this.content = description;
     }
 
     public String getLocation() {
@@ -85,12 +85,12 @@ public class Post {
         this.gender = gender;
     }
 
-    public String getAgeRange() {
-        return ageRange;
+    public String getAge() {
+        return age;
     }
 
-    public void setAgeRange(String ageRange) {
-        this.ageRange = ageRange;
+    public void setAge(String ageRange) {
+        this.age = ageRange;
     }
 
     public int getMaxParticipants() {
@@ -127,9 +127,9 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
-                + ", dateTime=" + dateTime + ", gender=" + gender + ", ageRange=" + ageRange + ", maxParticipants="
-                + maxParticipants + ", meetingType=" + meetingType + "]";
+        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", location=" + location
+                + ", dateTime=" + dateTime + ", gender=" + gender + ", age=" + age + ", maxParticipants="
+                + maxParticipants + ", meetingType=" + meetingType + "] \n";
     }
 
     
