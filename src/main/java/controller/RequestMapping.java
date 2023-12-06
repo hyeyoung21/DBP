@@ -5,7 +5,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import controller.post.*;
 import controller.user.*;
+import controller.apply.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -30,13 +32,14 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         // 작성글 관리
-        mappings.put("/post/view", new PostViewontroller()); // 작성글 조회
-        mappings.put("/post/add", new PostAddController()); // 작성글 등록
-        mappings.put("/post/delete", new PostDeleteController()); // 작성글 삭제
-        mappings.put("/post/update", new PostUpdateController()); // 작성글 수정
+        mappings.put("/post/list", new ListPostController()); // 작성글 목록
+        mappings.put("/post/view", new ViewPostController()); // 작성글 조회
+        mappings.put("/post/add", new AddPostController()); // 작성글 등록
+        mappings.put("/post/delete", new DeletePostController()); // 작성글 삭제
+        mappings.put("/post/update", new UpdatePostController()); // 작성글 수정
         
         // 신청글 조회
-        mappings.put("/applyPost/view", new ApplyPostViewController()); // 신청글 등록
+        mappings.put("/applyPost/view", new PostViewApplyController()); // 신청글 등록
         mappings.put("/applyPost", new ApplyPostDeleteController()); // 신청글 삭제
         
         logger.info("Initialized Request Mapping!");

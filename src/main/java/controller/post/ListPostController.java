@@ -7,6 +7,8 @@ import controller.Controller;
 import model.Post;
 import model.service.UserManager;
 
+/*작성글 목록 컨트롤러*/
+
 public class ListPostController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
