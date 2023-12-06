@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@page contentType="text/html; charset=utf-8" %>
+<%@page import="java.util.*, model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	@SuppressWarnings("unchecked") 
+	List<Post> postList = (List<Post>)request.getAttribute("postList");
+%><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -31,15 +37,27 @@
 
     #blog-list {
       list-style-type: none;
-      padding: 0;
-    }
-
-    .blog-item {
+      padding: 5px;
       border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
     }
+    
+    li {
+	  padding: 10px;
+	  border-bottom: 1px solid #ccc;
+	}
 
+	li:last-child {
+	  border-bottom: none;
+	}
+	
+	li a {
+	  text-decoration: none;
+	  color: inherit;
+	}
+	
+	li:hover {
+    	background-color: #f9f9f9; 
+  	}
     
   </style>
 </head>
@@ -99,53 +117,24 @@
           <option value="any" selected>모두</option>
         </select>
       </label>
-    
   </div>
 
   <h2>Search Results</h2>
-  <ul id="blog-list"></ul>
+  <ul id="blog-list">
+  	<c:forEach var="user" items="${postList}">
+		<li>
+		  <a href="<c:url value='/post/view'>
+		    <c:param name='postId' value='${post.postId}'/>
+		 	</c:url>">
+		    <h3>${post.title}</h3>
+		    <p><strong>지역:</strong> ${post.location}</p>
+		    <p><strong>모집 인원:</strong> ${post.participants}명</p>
+		    <p><strong>모집 성별:</strong> ${post.gender}</p>
+		  </a>
+		</li>
 
-  <script>
-    var blogPosts = [
-      {
-        title: 'Sample Post 1',
-        content: 'This is the content of sample post 1. It may contain some information about a specific topic.',
-        author: 'John Doe',
-        date: '2023-01-01',
-        recruitment: '5',
-        category: 'Technology'
-      },
-      {
-        title: 'Sample Post 2',
-        content: 'This is the content of sample post 2. It may contain some information about a different topic.',
-        author: 'Jane Doe',
-        date: '2023-02-15',
-        recruitment: '10',
-        category: 'Travel'
-      },
-      // Add more blog posts as needed
-    ];
-
-    function displayBlogPosts(posts) {
-      var blogList = document.getElementById('blog-list');
-      blogList.innerHTML = '';
-
-      posts.forEach(function(post) {
-        var listItem = document.createElement('li');
-        listItem.className = 'blog-item';
-        listItem.innerHTML = `<h3>${post.title}</h3>
-                              <p>${post.content}</p>
-                              <p><strong>Author:</strong> ${post.author}</p>
-                              <p><strong>Date:</strong> ${post.date}</p>
-                              <p><strong>Recruitment:</strong> ${post.recruitment}</p>
-                              <p><strong>Category:</strong> ${post.category}</p>`;
-        blogList.appendChild(listItem);
-      });
-    }
-
-    // Initial display of all blog posts on page load
-    displayBlogPosts(blogPosts);
-  </script>
-
+	</c:forEach>
+  </ul>
+	
 </body>
 </html>
