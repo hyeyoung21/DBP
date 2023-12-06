@@ -39,8 +39,6 @@ public class UserDAO {
 			jdbcUtil.close();	// resource 반환
 		}	
 		
-		
-		
 		return 0;			
 	}
 

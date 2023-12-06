@@ -12,9 +12,29 @@ public class test {
 		// TODO Auto-generated method stub
 		UserManager userMan = UserManager.getInstance();
 		
-		List<User> users =  userMan.findUserList();
+		User user = new User(
+//	            request.getParameter("userId"),
+//	            request.getParameter("name"),
+//	            request.getParameter("gender"),
+//	            Integer.parseInt(request.getParameter("age")),
+//	            request.getParameter("email"),
+//	            request.getParameter("password"),
+//	            request.getParameter("location"),
+//	            Integer.parseInt(request.getParameter("reportCount"))
+		        "user11", "권혜영", "female", 20, "test11@gmail.com", "password11", "서울", 1
+	        );
 		
-		users.forEach(user -> System.out.println(user));
+		try {
+            int users =  userMan.create(user);
+            System.out.println(user);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ExistingUserException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
 	}
 
 }
