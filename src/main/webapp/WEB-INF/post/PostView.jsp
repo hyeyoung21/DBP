@@ -1,3 +1,6 @@
+<%@page contentType="text/html; charset=utf-8" %>
+<%@page import="java.util.*, model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +118,6 @@
   </div>
 
   <div id="comment-list">
-      <!-- ì¬ê¸°ì ì¶ê°ë ëê¸ì´ íìë©ëë¤. -->
   </div>
 </body>
 </html>
