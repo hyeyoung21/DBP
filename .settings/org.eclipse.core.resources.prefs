@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WEB-INF/post/PostList.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/post/PostRegister.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/post/PostView.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/user/calender.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/user/join.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/user/list.jsp=UTF-8

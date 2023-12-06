@@ -14,30 +14,29 @@ public class PostDAO {
     }
 
     public List<Post> getAllPosts() {
-        String sql = "SELECT * FROM posts";
+        String sql = "SELECT * FROM post";
         return executeQueryAndMapPosts(sql, null);
     }
     
     public Post getPost(int postId) {
-        String sql = "SELECT * FROM posts WHERE postid = ?";
+        String sql = "SELECT * FROM post WHERE post_id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});   // JDBCUtil에 query문과 매개 변수 설정
     
         try {
             ResultSet resultSet = jdbcUtil.executeQuery();     // query 실행
             if (resultSet.next()) {         // User 객체를 생성하여 학생 정보를 저장
                 Post post = new Post();
-                post.setId(resultSet.getInt("id"));
-                post.setTitle(resultSet.getString("title"));
-                post.setDescription(resultSet.getString("description"));
-                post.setLocation(resultSet.getString("location"));
-                post.setDateTime(resultSet.getString("dateTime"));
-                post.setGender(resultSet.getString("gender"));
-                post.setAgeRange(resultSet.getString("ageRange"));
-                post.setMaxParticipants(resultSet.getInt("maxParticipants"));
+                post.setId(resultSet.getInt("post_id"));
+                post.setTitle(resultSet.getString("post_title"));
+                post.setDescription(resultSet.getString("post_content"));
+                post.setLocation(resultSet.getString("post_loc"));
+                post.setGender(resultSet.getString("post_gender"));
+                post.setAgeRange(resultSet.getString("post_age"));
+                post.setMaxParticipants(resultSet.getInt("post_participants"));
 
-                String creatorId = resultSet.getString("creator_id");
-                User creator = getUserById(creatorId);
-                post.setCreator(creator);
+//                String creatorId = resultSet.getString("user_id");
+//                User creator = getUserById(creatorId);
+//                post.setCreator(creator);
                 
                 System.out.println(post);
                 
@@ -49,27 +48,26 @@ public class PostDAO {
             jdbcUtil.close();       // resource 반환
         }
         return null;
-       
     }
     
 
     public List<Post> searchPostsByTitle(String searchString) {
-        String sql = "SELECT * FROM posts WHERE title LIKE ?";
+        String sql = "SELECT * FROM POST WHERE title LIKE ?";
         return executeQueryAndMapPosts(sql, new Object[]{"%" + searchString + "%"});
     }
 
     public void createPost(Post post) throws Exception {
-        String sql = "INSERT INTO posts (title, description, location, dateTime, gender, ageRange, maxParticipants, creator_id, participants, meetingType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO POST (post_ID, post_title, post_content, post_gender, post_age, post_loc, post_participants, user_id) VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         executeUpdateWithPost(sql, post);
     }
 
     public void updatePost(Post post) throws Exception {
-        String sql = "UPDATE posts SET title = ?, description = ?, location = ?, dateTime = ?, gender = ?, ageRange = ?, maxParticipants = ?, creator_id = ?, participants = ?, meetingType = ? WHERE id = ?";
+        String sql = "UPDATE POST SET title = ?, description = ?, location = ?, dateTime = ?, gender = ?, ageRange = ?, maxParticipants = ?, creator_id = ?, participants = ?, meetingType = ? WHERE id = ?";
         executeUpdateWithPost(sql, post);
     }
 
     public void deletePost(int postId) throws Exception {
-        String sql = "DELETE FROM posts WHERE id = ?";
+        String sql = "DELETE FROM POST WHERE id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{postId});
         executeUpdate();
     }
@@ -102,7 +100,7 @@ public class PostDAO {
 
         jdbcUtil.setSqlAndParameters(sql,
                 new Object[]{post.getTitle(), post.getDescription(), post.getLocation(),
-                        post.getDateTime(), post.getGender(), post.getAgeRange(),
+                        post.getGender(), post.getAgeRange(), post.getLocation(), 
                         post.getMaxParticipants(), post.getCreator().getUserId(),
                         String.join(",", participantIdsAsString), post.getMeetingType()});
 

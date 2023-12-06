@@ -44,8 +44,7 @@ public class PostManager {
         }
     }
     
-    public Post getPost(int postId)
-        throws SQLException, PostNotFoundException {
+    public Post getPost(int postId) throws SQLException, PostNotFoundException {
         Post post = postDAO.getPost(postId);
   
         return post;

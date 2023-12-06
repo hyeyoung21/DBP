@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>Post List</title>
@@ -54,49 +54,49 @@
       </form>
     
       <label>
-        ëª¨ì ì¥ì:
+        모임 장소:
         <select id="location-search">
-          <option value="any-location" selected>ëª¨ë</option>
-          <option value="seoul">ìì¸</option>
-          <option value="gyeonggi">ê²½ê¸°</option>
-          <option value="sejong">ì¸ì¢</option>
-          <option value="incheon">ì¸ì²</option>
-          <option value="chungbuk">ì¶©ë¶</option>
-          <option value="chungnam">ì¶©ë¨</option>
-          <option value="gangwon">ê°ì</option>
-          <option value="jeonnam">ì ë¨</option>
-          <option value="jeonbul">ì ë¶</option>
-          <option value="gwangju">ê´ì£¼</option>
-          <option value="geongbuk">ê²½ë¶</option>
-          <option value="geongnam">ê²½ë¨</option>
-          <option value="jeju">ì ì£¼</option>
-          <option value="ulsam">ì¸ì°</option>
-          <option value="daegu">ëêµ¬</option>
-          <option value="daejun">ëì </option>
+          <option value="any-location" selected>모두</option>
+          <option value="seoul">서울</option>
+          <option value="gyeonggi">경기</option>
+          <option value="sejong">세종</option>
+          <option value="incheon">인천</option>
+          <option value="chungbuk">충북</option>
+          <option value="chungnam">충남</option>
+          <option value="gangwon">강원</option>
+          <option value="jeonnam">전남</option>
+          <option value="jeonbul">전북</option>
+          <option value="gwangju">광주</option>
+          <option value="geongbuk">경북</option>
+          <option value="geongnam">경남</option>
+          <option value="jeju">제주</option>
+          <option value="ulsam">울산</option>
+          <option value="daegu">대구</option>
+          <option value="daejun">대전</option>
         </select>
       </label>
     
       <label>
-        ì¹´íê³ ë¦¬:
+        카테고리:
         <select id="category-search">
-          <option value="any-category" selected>ëª¨ë</option>
-          <option value="study">ì¤í°ë</option>
-          <option value="exercise">ì´ë</option>
-          <option value="plant">ìì</option>
-          <option value="handicraft">ìê³µì</option>
-          <option value="performance">ê³µì°</option>
-          <option value="art">ë¯¸ì </option>
-          <option value="game">ê²ì</option>
+          <option value="any-category" selected>모두</option>
+          <option value="study">스터디</option>
+          <option value="exercise">운동</option>
+          <option value="plant">원예</option>
+          <option value="handicraft">수공예</option>
+          <option value="performance">공연</option>
+          <option value="art">미술</option>
+          <option value="game">게임</option>
         </select>
       </label>
 
       
       <label>
-        ì±ë³:
+        성별:
         <select id="gender-search">
-          <option value="male">ë¨ì±</option>
-          <option value="female">ì¬ì±</option>
-          <option value="any" selected>ëª¨ë</option>
+          <option value="male">남성</option>
+          <option value="female">여성</option>
+          <option value="any" selected>모두</option>
         </select>
       </label>
     
