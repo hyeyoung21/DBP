@@ -121,7 +121,7 @@
 <body>
     <header>
         <div class="user-links">
-            <a href="<c:url value='/user/login' />">로그인</a>
+            <a href="<c:url value='/user/loginForm' />">로그인</a>
             <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
         <h2>취미 매칭 프로그램</h2>
