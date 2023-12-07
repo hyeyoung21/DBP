@@ -1,9 +1,10 @@
+<%@page import="model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
   <title>모집 정보</title>
   <style>
     body {
@@ -49,12 +50,20 @@
     }
 
   </style>
+  
+   <script>
+	function postCreate() {
+		blog-form.submit();
+		var message = confirm("등록이 완료되었습니다.");
+	}
+</script>
 </head>
+
 <body>
 
   <h1>모집 정보</h1>
 
-  <form id="blog-form">
+  <form id="blog-form" method="post" action="<c:url value='/post/add' />" >
     <div class="form-group">
       <label for="part">모집 인원:</label>
       <input type="number" id="part" required>
@@ -84,15 +93,15 @@
 
       <label>
         모임 위치:
-        <select id="location" onchange="searchBlog()">
-          <option value="seoul">서울</option>
-          <option value="gyeonggi">경기</option>
-          <option value="sejong">세종</option>
-          <option value="incheon">인천</option>
-          <option value="chungbuk">충북</option>
-          <option value="chungnam">충남</option>
-          <option value="gangwon">강원</option>
-          <option value="jeonnam">전남</option>
+        <select id="location">
+          <option value="서울">서울</option>
+          <option value="경기">경기</option>
+          <option value="세종">세종</option>
+          <option value="인천">인천</option>
+          <option value="충북">충북</option>
+          <option value="충남">충남</option>
+          <option value="강원">강원</option>
+          <option value="전남">전남</option>
           <option value="jeonbul">전북</option>
           <option value="gwangju">광주</option>
           <option value="geongbuk">경북</option>
@@ -104,8 +113,8 @@
         </select>
       </label>
 
-      <label for="date">모임 날짜:</label>
-      <input type="date" id="date" required>
+      <label for="dateTime">모임 날짜:</label>
+      <input type="date" id="dateTime" required>
     </div>
     
     <hr size="10px" />
@@ -113,7 +122,7 @@
     <input type="text" id="title" placeholder="제목을 입력하세요" required>
     <textarea id="content" placeholder="내용을 입력하세요" required></textarea>
 
-    <button type="button" onclick="addBlogPost()">등록하기</button>
+    <button type="submit" onclick="postCreate()">등록하기</button>
   </form>
 </body>
 </html>

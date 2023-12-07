@@ -86,7 +86,7 @@
         <label for="confirmPassword">비밀번호 확인:</label>
         <input type="password" id="confirmPassword" name="confirmPassword" required><br>
         
-        <label for="name">나이:</label>
+        <label for="name">이름:</label>
         <input type="text" id="name" name="name" required>
 
         <label for="email">이메일:</label>

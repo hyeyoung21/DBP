@@ -1,7 +1,9 @@
+<%@page import="model.*" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>취미 매칭 프로그램</title>
     <style>
@@ -119,8 +121,8 @@
 <body>
     <header>
         <div class="user-links">
-            <a href="login.jsp">로그인</a>
-            <a href="join.jsp">회원가입</a>
+            <a href="<c:url value='/user/login' />">로그인</a>
+            <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
         <h2>취미 매칭 프로그램</h2>
         <div class="search-bar">
@@ -130,9 +132,9 @@
     </header>
 
     <nav>
-        <a href="mypage.jsp">마이페이지</a>
-        <a href="recruitment-board.jsp">모집하기</a>
-        <a href="profile.jsp">프로필</a>
+        <a href="<c:url value='/user/view' />">마이페이지</a>
+        <a href="<c:url value='/post/add' />">모집하기</a>
+        <a href="<c:url value='/user/view' />">프로필</a>
     </nav>
 
     <section>
@@ -149,7 +151,7 @@
             </li>
             <!-- 기타 모집글들 -->
         </ul>
-        <a href="recruitment-board.jsp" class="more-link">더보기 ...</a>
+        <a href="<c:url value='/post/view' />" class="more-link">더보기 ...</a>
     </section>
 
     <section>
@@ -166,7 +168,7 @@
             </li>
             <!-- 기타 모집글들 -->
         </ul>
-        <a href="recruitment-board.jsp" class="more-link">더보기 ...</a>
+        <a href="<c:url value='/post/view' />" class="more-link">더보기 ...</a>
     </section>
 </body>
 </html>

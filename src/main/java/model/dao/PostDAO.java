@@ -101,7 +101,6 @@ public class PostDAO {
 //            participantIdsAsString.add(String.valueOf(participant.getUserId()));
 //        }
         
-//        post_title, post_content, post_gender, post_age, post_loc, post_participants, post_date
         
         System.out.println(post);
         jdbcUtil.setSqlAndParameters(sql,

@@ -27,9 +27,9 @@ public class AddPostController implements Controller {
             List<Post> getAllPosts = PostManager.getInstance().getAllPosts(); // 커뮤니티 리스트 검색
             request.setAttribute("getAllPosts", getAllPosts); 
         
-            return "/user/joinForm.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송       
+            return "/post/PostRegister.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송       
         }   
-     // POST request (회원정보가 parameter로 전송됨)      
+     // POST request (회원정보가 parameter로 전송됨) 
         Post post = new Post(
                 request.getParameter("title"),
                 request.getParameter("content"),
@@ -40,13 +40,18 @@ public class AddPostController implements Controller {
                 Integer.parseInt(request.getParameter("part")),
                 request.getParameter("meetingType")
             );
+        
+        System.out.println(post);
 
         try {
             PostManager manager = PostManager.getInstance();
             manager.add(post);
-            return "redirect:/post/list";   // 성공 시 사용자 리스트 화면으로 redirect
+            return "redirect:/post/list"; 
             
         } catch (Exception e) { // 예외 발생 시 회원가입 form으로 forwarding
+            request.setAttribute("registerFailed", true);
+            request.setAttribute("exception", e);
+            request.setAttribute("post", post);
             return "/post/list.jsp";
         }
     

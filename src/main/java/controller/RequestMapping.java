@@ -18,7 +18,7 @@ public class RequestMapping {
     public void initMapping() {
         // 각 uri에 대응되는 controller 객체를 생성 및 저장
         // 기존 폼 입력 처리 개선을 위해 폼 jsp는 컨트롤러에서 redirect함.
-        mappings.put("/", new ForwardController("main.jsp"));
+        mappings.put("/main", new ForwardController("/main.jsp"));
       
         // 로그인 & 회원가입
         mappings.put("/user/loginForm", new LoginController());  
@@ -32,7 +32,7 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         // 작성글 관리
-       // mappings.put("/post/list", new ListPostController()); // 작성글 목록
+        mappings.put("/post/list", new ListPostController()); // 작성글 목록
         mappings.put("/post/view", new ViewPostController()); // 작성글 조회
         mappings.put("/post/add", new AddPostController()); // 작성글 등록
         mappings.put("/post/delete", new DeletePostController()); // 작성글 삭제

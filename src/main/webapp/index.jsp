@@ -1,1 +1,1 @@
-<% response.sendRedirect(request.getContextPath() + "/user/joinForm"); %>
+<% response.sendRedirect(request.getContextPath() + "/main"); %>
