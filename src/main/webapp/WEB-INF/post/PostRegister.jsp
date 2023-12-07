@@ -66,22 +66,22 @@
   <form id="blog-form" method="post" action="<c:url value='/post/add' />" >
     <div class="form-group">
       <label for="part">모집 인원:</label>
-      <input type="number" id="part" required>
+      <input type="number" id="part" name="part" required>
 
       <label for="gender">모집 성별:</label>
-      <select id="gender" required>
+      <select id="gender" name="gender" required>
         <option value="male">남성</option>
         <option value="female">여성</option>
         <option value="any">모두</option>
       </select>
 
       <label for="age">모집 나이:</label>
-      <input type="text" id="age" required>
+      <input type="text" id="age" name="age" required>
     </div>
 
     <div class="form-group">
       <label for="meetingType">카테고리:</label>
-      <select id="meetingType" required>
+      <select id="meetingType" name="meetingType" required>
         <option value="study">스터디</option>
         <option value="exercise">운동</option>
         <option value="plant">원예</option>
@@ -93,7 +93,7 @@
 
       <label>
         모임 위치:
-        <select id="location">
+        <select id="location" name="location">
           <option value="서울">서울</option>
           <option value="경기">경기</option>
           <option value="세종">세종</option>
@@ -114,13 +114,13 @@
       </label>
 
       <label for="dateTime">모임 날짜:</label>
-      <input type="date" id="dateTime" required>
+      <input type="date" id="dateTime" name="dateTime" required>
     </div>
     
     <hr size="10px" />
 
-    <input type="text" id="title" placeholder="제목을 입력하세요" required>
-    <textarea id="content" placeholder="내용을 입력하세요" required></textarea>
+    <input type="text" id="title" name="title" placeholder="제목을 입력하세요" required>
+    <textarea id="content" name="content" placeholder="내용을 입력하세요" required></textarea>
 
     <button type="submit" onclick="postCreate()">등록하기</button>
   </form>

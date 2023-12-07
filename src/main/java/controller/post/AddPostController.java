@@ -21,14 +21,9 @@ public class AddPostController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	
         if (request.getMethod().equals("GET")) {    
-            // GET request: 회원정보 등록 form 요청 
-            log.debug("joinForm Request");
-
-            List<Post> getAllPosts = PostManager.getInstance().getAllPosts(); // 커뮤니티 리스트 검색
-            request.setAttribute("getAllPosts", getAllPosts); 
-        
-            return "/post/PostRegister.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송       
+            return "/post/PostRegister.jsp"; 
         }   
+        
      // POST request (회원정보가 parameter로 전송됨) 
         Post post = new Post(
                 request.getParameter("title"),
