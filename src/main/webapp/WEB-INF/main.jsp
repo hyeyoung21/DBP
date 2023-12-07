@@ -151,7 +151,7 @@
             </li>
             <!-- 기타 모집글들 -->
         </ul>
-        <a href="<c:url value='/post/view' />" class="more-link">더보기 ...</a>
+        <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
     </section>
 
     <section>
@@ -168,7 +168,7 @@
             </li>
             <!-- 기타 모집글들 -->
         </ul>
-        <a href="<c:url value='/post/view' />" class="more-link">더보기 ...</a>
+        <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
     </section>
 </body>
 </html>
