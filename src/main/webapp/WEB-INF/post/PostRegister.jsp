@@ -102,14 +102,14 @@
           <option value="충남">충남</option>
           <option value="강원">강원</option>
           <option value="전남">전남</option>
-          <option value="jeonbul">전북</option>
-          <option value="gwangju">광주</option>
-          <option value="geongbuk">경북</option>
-          <option value="geongnam">경남</option>
-          <option value="jeju">제주</option>
-          <option value="ulsam">울산</option>
-          <option value="daegu">대구</option>
-          <option value="daejun">대전</option>
+          <option value="전북">전북</option>
+          <option value="광주">광주</option>
+          <option value="경북">경북</option>
+          <option value="경남">경남</option>
+          <option value="제주">제주</option>
+          <option value="울산">울산</option>
+          <option value="대구">대구</option>
+          <option value="대전">대전</option>
         </select>
       </label>
 

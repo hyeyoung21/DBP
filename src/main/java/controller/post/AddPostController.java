@@ -23,7 +23,7 @@ public class AddPostController implements Controller {
         if (request.getMethod().equals("GET")) {    
             return "/post/PostRegister.jsp"; 
         }   
-        
+     
      // POST request (회원정보가 parameter로 전송됨) 
         Post post = new Post(
                 request.getParameter("title"),
