@@ -121,7 +121,14 @@
 <body>
     <header>
         <div class="user-links">
-            <a href="<c:url value='/user/loginForm' />">로그인</a>
+			<c:if test="${userId ne null}">
+				<a href="<c:url value='/user/logout'/>">${userId}(로그아웃)</a>
+			</c:if>
+			<c:if test="${userId eq null}">
+				<a href="<c:url value='/user/loginForm'/>">로그인</a>
+			</c:if>
+			
+			
             <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
         <h2>취미 매칭 프로그램</h2>

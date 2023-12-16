@@ -3,6 +3,7 @@
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <title>Login</title>
     <style>
         /* Reset some default styles */
@@ -66,14 +67,19 @@
     </style>
 </head>
 <body>
+    <script>
+		function login() {
+			form.submit();
+		}
+	</script>
 
-    <form action="../main.jsp" method="post">
+    <form id = "login" action="<c:url value='/user/loginForm' />" method="post">
         <h2>로그인</h2>
         <label for="username">ID</label>
         <input type="text" id="username" name="username" required>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-        <input type="submit" value="Login">
+        <input type="submit" onClick="login()" value="Login">
         <div class="links">
             <a href="join.jsp">회원가입</a>
             <a href="#">ID/PW 찾기</a>

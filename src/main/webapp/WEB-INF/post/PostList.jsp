@@ -9,7 +9,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 	<title>Post List</title>
 	<style>
 		body {
@@ -66,7 +66,7 @@
 </head>
 <body>
 	<div id ="write-button">
-		<a href="<c:url value='/post/list' />"> 포스트 등록하기</a>
+		<a href="<c:url value='/post/add' />"> 포스트 등록하기</a>
 	</div>
 	<div id="search-options">
 		<form id="search-form">
@@ -78,22 +78,22 @@
 				모임 장소:
 				<select id="location-search">
 					<option value="any-location" selected>모두</option>
-					<option value="seoul">서울</option>
-					<option value="gyeonggi">경기</option>
-					<option value="sejong">세종</option>
-					<option value="incheon">인천</option>
-					<option value="chungbuk">충북</option>
-					<option value="chungnam">충남</option>
-					<option value="gangwon">강원</option>
-					<option value="jeonnam">전남</option>
-					<option value="jeonbul">전북</option>
-					<option value="gwangju">광주</option>
-					<option value="geongbuk">경북</option>
-					<option value="geongnam">경남</option>
-					<option value="jeju">제주</option>
-					<option value="ulsam">울산</option>
-					<option value="daegu">대구</option>
-					<option value="daejun">대전</option>
+					<option value="서울">서울</option>
+					<option value="경기">경기</option>
+					<option value="세종">세종</option>
+					<option value="인천">인천</option>
+					<option value="충북">충북</option>
+					<option value="충남">충남</option>
+					<option value="강원">강원</option>
+					<option value="전남">전남</option>
+					<option value="전북">전북</option>
+					<option value="광주">광주</option>
+					<option value="경북">경북</option>
+					<option value="경남">경남</option>
+					<option value="제주">제주</option>
+					<option value="울산">울산</option>
+					<option value="대구">대구</option>
+					<option value="대전">대전</option>
 				</select>
 			</label>
 		
@@ -137,6 +137,5 @@
 		</li>
 	</c:forEach>
 	</ul>
-	
 </body>
 </html>

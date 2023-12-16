@@ -48,13 +48,17 @@
       padding: 10px;
       margin-bottom: 10px;
     }
+    
+    textarea {
+		height: 300px;
+		resize: none;
+    }
 
   </style>
   
    <script>
 	function postCreate() {
 		blog-form.submit();
-		var message = confirm("등록이 완료되었습니다.");
 	}
 </script>
 </head>
