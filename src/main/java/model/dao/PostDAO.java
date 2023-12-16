@@ -128,7 +128,7 @@ public class PostDAO {
         post.setTitle(resultSet.getString("post_title"));
         post.setContent(resultSet.getString("post_content"));
         post.setLocation(resultSet.getString("post_loc"));
-        post.setDateTime(resultSet.getString("dateTime"));
+//        post.setDateTime(resultSet.getString("dateTime"));
         post.setGender(resultSet.getString("post_gender"));
         post.setAge(resultSet.getString("post_age"));
         post.setMaxParticipants(resultSet.getInt("post_participants"));

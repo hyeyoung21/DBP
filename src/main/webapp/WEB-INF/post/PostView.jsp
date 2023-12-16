@@ -9,7 +9,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="style.css">
 	<title>모집 정보</title>
 	<style>
 	    body {
@@ -58,9 +57,8 @@
 	      text-align: right;
 	      margin-top: 20px;
 	      background-color: #007bff;
-	      display: inline-block;
-	      padding: 10px 20px;
-	      border-radius: 5px;
+	      padding: 5px 10px;
+	      border-radius: 2px;
 	      text-decoration: none;
 	      color: #fff;
 	      margin-left: 10px;
@@ -68,8 +66,6 @@
 	    button a:hover {
 	      opacity: 0.8;
 	    }
-	
-	
 	    #blog-content {
 	      display: inline-block;
 	      padding: 1px 10px;
@@ -77,7 +73,6 @@
 	      color: #333;
 	      background-color: #f4f4f4;
 	    }
-	    
 	    textarea {
 	      width: 100%;
 	      resize: none;
@@ -85,6 +80,18 @@
 	</style>
 </head>
 <body>
+	<script>
+		function showInput() {
+		    var inputContainer = document.getElementById("inputContainer");
+		    inputContainer.style.display = "block";
+		}
+		function sendApply() {
+			var msg = document.getElementsByClassName('ApplyMessage');
+			msg.value = "";
+			form.submit();
+			
+		}
+	</script>
 
 	<h2 id="blog-title">${post.title}</h2>
 
@@ -118,8 +125,18 @@
 	</form>
 	
 	<div id="buttom-from">
-	<button onclick="sendApply()">신청하기</button>
-	<button onclick="sendMessage()">쪽지 보내기</button>
+		<button onclick="showInput()">신청하기</button>
+		<button onclick="sendMessage()">쪽지 보내기</button>
+		
+		<div id="inputContainer" style="display: none;">
+			<form id="form" method="post" action="<c:url value='/apply/add' />" >
+			    <label for="ApplyMessage">메세지를 입력하세요 :</label>
+			    <input type="hidden" id="userId" name="userId" value="${userId}" >
+			    <input type="hidden" id="postId" name="postId" value="${post.id}" >
+			    <input type="text" id="ApplyMessage" name="ApplyMessage">
+			    <button onclick="sendApply()">신청</button>
+		    </form>
+		</div>
 	</div>
 	
 	<div id="comment-form">

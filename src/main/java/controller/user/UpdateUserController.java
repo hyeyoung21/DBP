@@ -48,7 +48,6 @@ public class UpdateUserController implements Controller {
 //			return "/user/view.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
 	    }	
     	
-    	// POST request (회원정보가 parameter로 전송됨)
     	User updateUser = new User(
 		    request.getParameter("userId"),
 		    request.getParameter("name"),

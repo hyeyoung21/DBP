@@ -6,6 +6,7 @@ public class Apply {
     private String userID;
     private String status;
     private String description;
+    private String postTitle;
     
     public Apply(int applyID, int postID, String userID, String status, String description) {
         super();
@@ -15,7 +16,7 @@ public class Apply {
         this.status = status;
         this.description = description;
     }
-    public int getApplyID() {
+    int getApplyID() {
         return applyID;
     }
     public void setApplyID(int applyID) {
@@ -44,6 +45,17 @@ public class Apply {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getPostTitle() {
+        return postTitle;
+    }
+    public void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+    @Override
+    public String toString() {
+        return "Apply [applyID=" + applyID + ", postID=" + postID + ", userID=" + userID + ", status=" + status
+                + ", description=" + description + ", postTitle=" + postTitle + "]";
     }
     
     

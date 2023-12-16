@@ -1,8 +1,13 @@
 package model.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.User;
+import model.Post;
+import model.Apply;
 
 public class ApplyDAO {
     
@@ -12,10 +17,10 @@ public class ApplyDAO {
         jdbcUtil = new JDBCUtil();
     }
 
-    public void add(String userId, int postId) throws Exception {
-        String sql = "INSERT INTO POST (applyID, userid, postid, status) "
-                + "VALUES (applyid_sequence, ?, ?, '신청중')";
-        Object[] param = new Object[] {userId, postId};             
+    public void add(String userId, int postId, String description) throws Exception {
+        String sql = "INSERT INTO APPLY (applyID, userid, postid, status, description) "
+                + "VALUES (applyid_sequence.NEXTVAL, ?, ?, '신청중', ?)";
+        Object[] param = new Object[] {userId, postId, description};             
         jdbcUtil.setSqlAndParameters(sql, param);
                         
         try {               
@@ -26,7 +31,7 @@ public class ApplyDAO {
         } finally {     
             jdbcUtil.commit();
             jdbcUtil.close();   // resource 반환
-        }   
+        }
         
     }
     
@@ -48,7 +53,7 @@ public class ApplyDAO {
         return 0;
     }
     
-    public int update(User user) throws SQLException {
+    public int update() throws SQLException {
         String sql = "UPDATE APPY "
                     + "SET status= '신청완료' ";       
         jdbcUtil.setSqlAndParameters(sql, new Object[] {}); 
@@ -65,6 +70,62 @@ public class ApplyDAO {
             jdbcUtil.close();   // resource 반환
         }       
         return 0;
+    }
+    
+    public List<Post> findList() throws SQLException {
+        String sql = "SELECT post_Title, post_id"
+                + " FROM post"
+                + " WHERE post_id IN (SELECT DISTINCT postid FROM apply)";              
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {});  
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); 
+            List<Post> postList = new ArrayList<Post>();
+            while (rs.next()) {
+                Post post = new Post();
+                String postTitle = rs.getString("post_Title");
+                int postId = Integer.parseInt(rs.getString("post_id"));
+                post.setTitle(postTitle);
+                post.setId(postId);
+                postList.add(post);
+            }
+            return postList;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();       // resource 반환
+        }
+        return null;
+    }
+    
+    public List<Apply> findApplyListByPost(int postId) throws SQLException {
+        String sql = "SELECT applyid, userId, status, description "
+                    + "FROM apply "
+                    + "WHERE POSTID=? ";              
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
+
+        try {
+            ResultSet rs = jdbcUtil.executeQuery(); 
+            List<Apply> applyList = new ArrayList<Apply>();
+            while (rs.next()) {  
+                Apply apply = new Apply(
+                    rs.getInt("applyid"),
+                    postId,
+                    rs.getString("userid"),
+                    rs.getString("status"),
+                    rs.getString("description")); 
+                applyList.add(apply);
+            }
+            System.out.println(applyList);
+            return applyList;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return null;
     }
 
 }

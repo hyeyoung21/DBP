@@ -39,8 +39,11 @@ public class RequestMapping {
         mappings.put("/post/update", new UpdatePostController()); // 작성글 수정
         
         // 신청글 조회
-        mappings.put("/applyPost/view", new PostViewApplyController()); // 신청글 등록
-        mappings.put("/applyPost", new ApplyPostDeleteController()); // 신청글 삭제
+        mappings.put("/apply/view", new PostViewApplyController()); // 신청글 보기
+        mappings.put("/apply/list", new ApplyListController()); // 신청글 목록
+        mappings.put("/apply/add", new AddApplyController()); // 신청
+        mappings.put("/apply", new ApplyPostDeleteController()); // 신청글 삭제
+        
         
         logger.info("Initialized Request Mapping!");
     }

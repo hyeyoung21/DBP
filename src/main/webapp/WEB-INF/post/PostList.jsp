@@ -4,7 +4,8 @@
 <%
 	@SuppressWarnings("unchecked") 
 	List<Post> postList = (List<Post>)request.getAttribute("postList");
-%><!DOCTYPE html>
+%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -122,7 +123,6 @@
 			</label>
 	</div>
 
-	<h2>Search Results</h2>
 	<ul id="blog-list">
 		<c:forEach var="post" items="${postList}">
 		<li>
