@@ -2,9 +2,7 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import model.Post;
-import model.dao.PostDAO;
 import model.dao.PostDAO;
 
 public class PostManager {
@@ -25,7 +23,7 @@ public class PostManager {
         return postMan;
     }
     
-    public void update(Post post) throws SQLException, PostNotFoundException {
+    public void update(Post post) throws SQLException {
         // post의 모임 정보가 변경된 경우   
         try {
             postDAO.updatePost(post);
@@ -35,7 +33,7 @@ public class PostManager {
         }
     }   
     
-    public void add(Post post) throws SQLException, PostNotFoundException {
+    public void add(Post post) throws SQLException {
         try {
             postDAO.createPost(post);
         } catch (Exception e) {
@@ -44,7 +42,7 @@ public class PostManager {
         }
     }
     
-    public void remove(int postId) throws SQLException, PostNotFoundException {
+    public void remove(int postId) throws SQLException {
         try {
             postDAO.deletePost(postId);
         } catch (Exception e) {
@@ -53,7 +51,7 @@ public class PostManager {
         }
     }
     
-    public Post getPost(int postId) throws SQLException, PostNotFoundException {
+    public Post getPost(int postId) throws SQLException {
         Post post = postDAO.getPost(postId);
   
         return post;

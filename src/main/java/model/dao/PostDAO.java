@@ -24,9 +24,9 @@ public class PostDAO {
     
         try {
             ResultSet resultSet = jdbcUtil.executeQuery();     // query 실행
-            if (resultSet.next()) {         // User 객체를 생성하여 학생 정보를 저장
+            if (resultSet.next()) {   
                 Post post = new Post();
-                post.setId(resultSet.getInt("post_id"));
+                post.setCreator(resultSet.getString("user_id"));                post.setId(resultSet.getInt("post_id"));
                 post.setTitle(resultSet.getString("post_title"));
                 post.setContent(resultSet.getString("post_content"));
                 post.setLocation(resultSet.getString("post_loc"));
@@ -35,8 +35,6 @@ public class PostDAO {
                 post.setMaxParticipants(resultSet.getInt("post_participants"));
                 post.setMeetingType(resultSet.getString("meetingType"));
                 post.setDateTime(resultSet.getString("Post_date"));
-
-//                String creatorId = resultSet.getString("user_id");
 //                User creator = getUserById(creatorId);
 //                post.setCreator(creator);
                 
@@ -95,13 +93,7 @@ public class PostDAO {
         return posts;
     }
 
-    private void executeUpdateWithPost(String sql, Post post) throws Exception {
-//        List<String> participantIdsAsString = new ArrayList<>();
-//        for (User participant : post.getParticipants()) {
-//            participantIdsAsString.add(String.valueOf(participant.getUserId()));
-//        }
-        
-        
+    private void executeUpdateWithPost(String sql, Post post) throws Exception { 
         System.out.println(post);
         jdbcUtil.setSqlAndParameters(sql,
                 new Object[]{post.getCreator(), post.getTitle(), post.getContent(), 
@@ -136,7 +128,7 @@ public class PostDAO {
         post.setTitle(resultSet.getString("post_title"));
         post.setContent(resultSet.getString("post_content"));
         post.setLocation(resultSet.getString("post_loc"));
-//        post.setDateTime(resultSet.getString("dateTime"));
+        post.setDateTime(resultSet.getString("dateTime"));
         post.setGender(resultSet.getString("post_gender"));
         post.setAge(resultSet.getString("post_age"));
         post.setMaxParticipants(resultSet.getInt("post_participants"));
@@ -175,9 +167,9 @@ public class PostDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
+    
     //DB결과 User객체로
     private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
         User user = new User();
