@@ -24,8 +24,9 @@ public class AddPostController implements Controller {
             return "/post/PostRegister.jsp"; 
         }   
      
-     // POST request (회원정보가 parameter로 전송됨) 
+        System.out.println(request.getParameter("creator"));
         Post post = new Post(
+                request.getParameter("creator"),
                 request.getParameter("title"),
                 request.getParameter("content"),
                 request.getParameter("location"),

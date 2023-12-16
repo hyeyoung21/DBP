@@ -11,7 +11,7 @@ public class Post {
     private String gender;
     private String age;
     private int maxParticipants;
-    private User creator;
+    private String creator;
     private List<User> participants;
     private String meetingType;
 
@@ -21,25 +21,10 @@ public class Post {
         // Default constructor
     }
 
-    public Post(int id, String title, String description, String location, String dateTime, String gender,
-            String ageRange, int maxParticipants, User creator, List<User> participants, String meetingType) {
-        super();
-        this.id = id;
-        this.title = title;
-        this.content = description;
-        this.location = location;
-        this.dateTime = dateTime;
-        this.gender = gender;
-        this.age = ageRange;
-        this.maxParticipants = maxParticipants;
-        this.creator = creator;
-        this.participants = participants;
-        this.meetingType = meetingType;
-    }
-    
-    public Post(String title, String description, String location, String dateTime, String gender,
+    public Post(String creator, String title, String description, String location, String dateTime, String gender,
             String ageRange, int maxParticipants, String meetingType) {
         super();
+        this.creator = creator;
         this.title = title;
         this.content = description;
         this.location = location;
@@ -47,8 +32,6 @@ public class Post {
         this.gender = gender;
         this.age = ageRange;
         this.maxParticipants = maxParticipants;
-        this.creator = creator;
-        this.participants = participants;
         this.meetingType = meetingType;
     }
 
@@ -117,11 +100,11 @@ public class Post {
         this.maxParticipants = maxParticipants;
     }
 
-    public User getCreator() {
+    public String getCreator() {
         return creator;
     }
 
-    public void setCreator(User creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 

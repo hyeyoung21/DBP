@@ -104,7 +104,7 @@ public class PostDAO {
         
         System.out.println(post);
         jdbcUtil.setSqlAndParameters(sql,
-                new Object[]{"user1", post.getTitle(), post.getContent(), 
+                new Object[]{post.getCreator(), post.getTitle(), post.getContent(), 
                         post.getGender(), post.getAge(), post.getLocation(),
                         post.getMaxParticipants(), post.getMeetingType(), post.getDateTime()});
         
