@@ -42,7 +42,7 @@ public class RequestMapping {
         mappings.put("/apply/view", new PostViewApplyController()); // 신청글 보기
         mappings.put("/apply/list", new ApplyListController()); // 신청글 목록
         mappings.put("/apply/add", new AddApplyController()); // 신청
-        mappings.put("/apply", new ApplyPostDeleteController()); // 신청글 삭제
+        mappings.put("/apply/modify", new ModifyApplyController()); // 신청글 삭제
         
         
         logger.info("Initialized Request Mapping!");

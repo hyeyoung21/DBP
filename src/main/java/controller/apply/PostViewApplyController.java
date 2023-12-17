@@ -11,13 +11,13 @@ public class PostViewApplyController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
-        List<Apply> apply = null;
+        List<Apply> applyList = null;
         ApplyManager manager = ApplyManager.getInstance();
 
         int postId = Integer.parseInt(request.getParameter("id"));
         
-        apply = manager.findApplyListByPost(postId);
-        request.setAttribute("apply", apply);
+        applyList = manager.findApplyListByPost(postId);
+        request.setAttribute("applyList", applyList);
         return "/apply/ApplyView.jsp";
         
     }

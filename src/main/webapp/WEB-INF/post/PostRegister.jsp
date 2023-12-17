@@ -56,11 +56,11 @@
 
 	</style>
 	
-	 <script>
-	function postCreate() {
-		blog-form.submit();
-	}
-</script>
+	<script>
+		function postCreate() {
+			blog-form.submit();
+		}
+	</script>
 </head>
 
 <body>

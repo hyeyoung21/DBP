@@ -35,7 +35,7 @@ public class ApplyDAO {
         
     }
     
-    public int delete(String applyId) throws SQLException {
+    public int delete(int applyId) throws SQLException {
         String sql = "DELETE FROM apply WHERE ApplyID=?";       
         jdbcUtil.setSqlAndParameters(sql, new Object[] {applyId});   // JDBCUtil에 delete문과 매개 변수 설정
 
@@ -53,10 +53,11 @@ public class ApplyDAO {
         return 0;
     }
     
-    public int update() throws SQLException {
-        String sql = "UPDATE APPY "
-                    + "SET status= '신청완료' ";       
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {}); 
+    public int update(int applyID) throws SQLException {
+        String sql = "UPDATE APPLY "
+                    + "SET status= '신청완료' "
+                    + "WHERE applyId = ?";       
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {applyID}); 
             
         try {               
             int result = jdbcUtil.executeUpdate(); 
@@ -102,7 +103,7 @@ public class ApplyDAO {
     public List<Apply> findApplyListByPost(int postId) throws SQLException {
         String sql = "SELECT applyid, userId, status, description "
                     + "FROM apply "
-                    + "WHERE POSTID=? ";              
+                    + "WHERE POSTID=? "; 
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
 
         try {

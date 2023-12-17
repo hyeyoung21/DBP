@@ -66,6 +66,6 @@ public class UpdateUserController implements Controller {
 		
 		System.out.println(updateResult);
 		
-        return "redirect:/user/list";			
+        return "redirect:/user/list";
     }
 }

@@ -27,12 +27,12 @@ public class ApplyManager {
         applyDAO.add(userId, postId, description);
     }
     
-    public int delete(String applyId) throws SQLException {
+    public int delete(int applyId) throws SQLException {
         return applyDAO.delete(applyId);
     }
     
-    public int update() throws SQLException {
-        return applyDAO.update();
+    public int update(int applyID) throws SQLException {
+        return applyDAO.update(applyID);
     }
     
     public List<Post> findList() throws SQLException {
