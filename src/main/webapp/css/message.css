@@ -1,0 +1,107 @@
+/* styles.css */
+
+/* 전반적인 스타일링 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 대화창 스타일 */
+.messages {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 70%;
+}
+
+.received {
+  background-color: #e5e5ea;
+  align-self: flex-start;
+}
+
+.sent {
+  background-color: #007bff;
+  color: #fff;
+  align-self: flex-end;
+}
+
+.content {
+  display: block;
+}
+
+/* 입력창 스타일 */
+.input-box {
+  display: flex;
+  margin-top: 15px;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.input-box button {
+  padding: 8px 15px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.input-box button:hover {
+  background-color: #0056b3;
+}
+
+/* 수정한 부분 - 카톡처럼 보이도록 */
+.sent {
+  align-self: flex-end;
+  margin-left: auto;
+  background-color: #dcf8c6;
+  color: #000;
+}
+.sent::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #dcf8c6 transparent transparent transparent;
+}
+.received {
+  align-self: flex-start;
+  margin-right: auto;
+  background-color: #fff;
+  color: #000;
+}
+.received::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
