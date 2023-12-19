@@ -89,10 +89,10 @@
             <a href="<c:url value='/post/view'><c:param name='id' value='${post.id}'/></c:url>"
                class="text-decoration-none text-dark">
                 <h3>${post.title}</h3>
-                <p class="btn btn-primary">지역: ${post.location}</p>
-                <p class="btn btn-success">모집 인원: ${post.maxParticipants}명</p>
-                <p class="btn btn-danger">성별: ${post.gender}</p>
-                <p class="btn btn-warning">카테고리: ${post.meetingType}</p>
+                <p class="btn btn-primary">${post.location}</p>
+                <p class="btn btn-success">${post.maxParticipants}명</p>
+                <p class="btn btn-danger">${post.gender}</p>
+                <p class="btn btn-warning">${post.meetingType}</p>
             </a>
         </li>
     </c:forEach>

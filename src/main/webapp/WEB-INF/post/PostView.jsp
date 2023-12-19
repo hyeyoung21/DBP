@@ -97,14 +97,18 @@
 
         <div id="inputContainer" style="display: none;">
             <form id="form" method="post" action="<c:url value='/apply/add' />">
-                <div class="form-group">
-                    <label for="ApplyMessage">메세지를 입력하세요 :</label>
-                    <input type="hidden" id="userId" name="userId" value="${userId}">
-                    <input type="hidden" id="postId" name="postId" value="${post.id}">
-                    <input type="text" class="form-control" id="ApplyMessage" name="ApplyMessage">
-                    <button class="btn btn-success mt-3" onclick="sendApply()">신청</button>
-                </div>
-            </form>
+			    <div class="form-group">
+			        <label for="ApplyMessage">메세지를 입력하세요 :</label>
+			        <div class="input-group">
+	                   <input type="hidden" id="userId" name="userId" value="${userId}">
+	                   <input type="hidden" id="postId" name="postId" value="${post.id}">
+			           <input type="text" class="form-control" id="ApplyMessage" name="ApplyMessage">
+			           <div class="input-group-append">
+			               <button class="btn btn-success" onclick="sendApply()">신청</button>
+			           </div>
+			        </div>
+			    </div>
+			</form>
         </div>
     </div>
 
