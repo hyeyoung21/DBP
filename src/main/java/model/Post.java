@@ -10,10 +10,11 @@ public class Post {
     private String dateTime;
     private String gender;
     private String age;
+    private String meetingType;
     private int maxParticipants;
     private String creator;
     private List<User> participants;
-    private String meetingType;
+    private List<String> comments;
 
     // Constructors, getters, and setters
 
@@ -124,12 +125,21 @@ public class Post {
         this.meetingType = meetingType;
     }
 
-    @Override
-    public String toString() {
-        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", location=" + location
-                + ", dateTime=" + dateTime + ", gender=" + gender + ", age=" + age + ", maxParticipants="
-                + maxParticipants + ", meetingType=" + meetingType + "] \n";
+    public List<String> getComments() {
+        return comments;
     }
 
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Post [id=" + id + ", title=" + title + ", content=" + content + ", location=" + location + ", dateTime="
+                + dateTime + ", gender=" + gender + ", age=" + age + ", meetingType=" + meetingType
+                + ", maxParticipants=" + maxParticipants + ", creator=" + creator + ", participants=" + participants
+                + ", comments=" + comments + "]";
+    }
+    
     
 }

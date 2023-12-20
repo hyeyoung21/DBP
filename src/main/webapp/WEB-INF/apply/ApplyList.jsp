@@ -1,50 +1,59 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@page import="java.util.*, model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    @SuppressWarnings("unchecked") 
-    List<Post> applyList = (List<Post>)request.getAttribute("applyList");
-%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apply Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* 기본적인 스타일 */
-        li {
-            list-style-type: disc; /* 리스트 마커 스타일 */
-            margin: 8px 0; /* 위아래 여백 */
-            padding: 8px; /* 내부 여백 */
-            border: 1px solid #ddd; /* 테두리 스타일 */
-            background-color: #f9f9f9; /* 배경색 */
-            color: #333; 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
 
-        li:hover {
-            background-color: #f0f0f0; 
+        #list {
+            list-style-type: none;
+            padding: 0;
         }
-        a {
+
+        #list li {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #list li a {
             text-decoration: none;
-            color: #333;
+            color: #000;
         }
 
-        a:hover {
-            color: #555; 
+        #list li a:hover {
+            background-color: #f4f4f4;
         }
     </style>
 </head>
 <body>
-    <ul id="list">
-        <c:forEach var="post" items="${applyList}">
-            <li>
-                <a href="<c:url value='/apply/view'>
-                        <c:param name='id' value='${post.id}'/>
-                    </c:url>">
-                    ${post.id} : ${post.title}
-                </a>
-            </li>
-        </c:forEach>
-    </ul>
+    <div class="container">
+        <ul id="list">
+            <c:forEach var="post" items="${applyList}">
+                <li>
+                    <a href="<c:url value='/apply/view'>
+                            <c:param name='id' value='${post.id}'/>
+                        </c:url>">
+                        ${post.id} : ${post.title}
+                    </a>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

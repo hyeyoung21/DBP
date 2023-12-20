@@ -3,6 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 import model.Post;
+import model.Comment;
 import model.dao.PostDAO;
 
 public class PostManager {
@@ -59,6 +60,19 @@ public class PostManager {
     
     public List<Post> getAllPosts() throws SQLException {
             return postDAO.getAllPosts();
+    }
+    
+    public List<Comment> getAllComments(int postId) throws SQLException {
+        return postDAO.getAllComments(postId);
+    }
+    
+    public void createComment(Comment comment) throws SQLException {
+        try {
+            postDAO.createComment(comment);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public List<Post> findPostList(String searchString)

@@ -59,6 +59,9 @@
             form.submit();
 
         }
+        function addComment() {
+        	comment-form.submit();
+        }
     </script>
 
     <h2 id="blog-title">${post.title}</h2>
@@ -111,22 +114,28 @@
 			</form>
         </div>
     </div>
-
-    <div id="comment-form" class="mt-5">
-        <h3>댓글 작성</h3>
-        <textarea class="form-control" id="comment-content" rows="4" required></textarea>
-
-        <button class="btn btn-primary mt-3" onclick="addComment()">댓글 작성</button>
-
-        <ul id="comment-list" class="list-group mt-3">
-            <c:forEach var="comment" items="${commentList}">
-                <li class="list-group-item">
-                    <span class="comment-author">${comment.userID}</span>
-                    <span class="comment-body">${comment.description}</span>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+	<form id="comment-form" method="post" action="<c:url value='/comment/add' />" >
+	    <div class="mt-5">
+	        <h3>댓글 작성</h3>
+		        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+				<input type="hidden" id="userId" name="userId" value="${userId}">
+		        <input type="hidden" id="postId" name="postId" value="${post.id}">
+		        <button class="btn btn-primary mt-3" onclick="addComment()">댓글 작성</button>
+	        
+	        <ul id="comment-list" class="list-group mt-3">
+	            <c:forEach var="comment" items="${commentList}">
+	                <li class="list-group-item">
+	                    <span class="font-weight-bold">${comment.userID}</span>: ${comment.content}
+	                    <input type="hidden" id="commentId" name="commentId" value="${comment.commentID}">
+	                    <div class="float-right">
+	                        <a href="#" class="btn btn-warning btn-sm">수정</a>
+	                        <a href="#" class="btn btn-danger btn-sm">삭제</a>
+	                    </div>
+	               	</li>	
+	            </c:forEach>
+	        </ul>
+	    </div>
+    </form>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

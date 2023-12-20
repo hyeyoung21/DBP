@@ -44,6 +44,9 @@ public class RequestMapping {
         mappings.put("/apply/add", new AddApplyController()); // 신청
         mappings.put("/apply/modify", new ModifyApplyController()); // 신청글 삭제
         
+        //댓글 관리
+        mappings.put("/comment/add", new AddCommentController()); // 신청글 보기
+        
         
         logger.info("Initialized Request Mapping!");
     }

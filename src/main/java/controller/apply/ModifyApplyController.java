@@ -12,6 +12,7 @@ public class ModifyApplyController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
         String action = request.getParameter("action");
         ApplyManager manager = ApplyManager.getInstance();
+        
         int applyID = Integer.parseInt(request.getParameter("applyID"));
         if ("edit".equals(action)) {
             manager.update(applyID);
