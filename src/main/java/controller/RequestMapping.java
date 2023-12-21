@@ -10,7 +10,7 @@ import controller.user.*;
 import controller.apply.*;
 import controller.mypage.*;
 import controller.message.*;
-import controller.mypage.*;
+import controller.report.*;
 
 
 public class RequestMapping {
