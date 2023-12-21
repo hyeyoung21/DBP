@@ -61,6 +61,17 @@
 </head>
 <body>
       <div id='calendar1'></div>
+      
+      <div id="eventModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p><strong>일정명:</strong> <span id="eventTitle"></span></p>
+      <p><strong>내용:</strong> <span id="eventContent"></span></p>
+      <p><strong>장소:</strong> <span id="eventLocation"></span></p>
+      <p><strong>성별:</strong> <span id="eventGender"></span></p>
+      <p><strong>나이:</strong> <span id="eventAge"></span></p>
+      <!-- 여기에 원하는 일정 정보 추가 -->
+    </div>
   <script>
   $(function(){
     var postList = [
@@ -68,6 +79,10 @@
         {
           id: '${post.id}',
           title: '${post.title}',
+          location: '${post.location}',
+          age: '${post.age}',
+          gender: '${post.gender}',
+          content: '${post.content}',
           start: '${post.dateTime}', // 여기서 'dateTime'는 'Post' 객체의 날짜/시간 속성일 것입니다.
         }<c:if test="${!status.last}">,</c:if>
       </c:forEach>
@@ -83,13 +98,34 @@
       initialDate: '2023-12-01',
       locale: 'ko',
       editable: false,
-      eventClick: function(info) {
-        alert('일정 ID: ' + info.event.extendedProps.id + '\n일정명: ' + info.event.title);
-      },
       events: postList // postList를 events로 사용
     });
+    
+    calendar.on('eventClick', function(info) {
+        $('#eventTitle').text(info.event.title);
+        $('#eventLocation').text(info.event.extendedProps.location);
+        $('#eventAge').text(info.event.extendedProps.age);
+        $('#eventGender').text(info.event.extendedProps.gender);
+        $('#eventContent').text(info.event.extendedProps.content);
+        // 모달 표시
+        $('#eventModal').css('display', 'block');
+      });
+
+      // 모달 닫기 버튼 클릭 시 모달 닫기
+      $('.close').click(function() {
+        $('#eventModal').css('display', 'none');
+      });
+
+      // 모달 영역 외 클릭 시 모달 닫기
+      $(window).click(function(event) {
+        if (event.target == $('#eventModal')[0]) {
+          $('#eventModal').css('display', 'none');
+        }
+      });
 
     calendar.render();
+    
+    
   });
 
   </script>
