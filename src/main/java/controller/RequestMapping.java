@@ -36,6 +36,7 @@ public class RequestMapping {
         mappings.put("/mypage/mypage",new MyPageController());
         mappings.put("/mypage/calendar",new CalendarController());
         mappings.put("/mypage/myComment",new ListMyCommentController());
+        mappings.put("/mypage/myPost",new ListMyPostController());
         
         // 작성글 관리
         mappings.put("/post/list", new ListPostController()); // 작성글 목록

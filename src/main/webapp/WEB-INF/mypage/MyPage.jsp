@@ -78,11 +78,11 @@
   <div class="container">
     <h2>MyPage</h2>
     <div class="button-container">
-      <a href="<c:url value='/user/myPost'>
+      <a href="<c:url value='/mypage/myPost'>
 				   <c:param name='userId' value='${userId}'/>
 		 		</c:url>" class="button"> 내가 쓴 글 보기
 	  </a>
-      <a href="<c:url value='/user/myComment'>
+      <a href="<c:url value='/mypage/myComment'>
 				   <c:param name='userId' value='${userId}'/>
 		 		</c:url>" class="button" > 내가 쓴 댓글 보기
       </a>
