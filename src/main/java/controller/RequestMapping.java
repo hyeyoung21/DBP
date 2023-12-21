@@ -31,6 +31,9 @@ public class RequestMapping {
         mappings.put("/user/update", new UpdateUserController());
         mappings.put("/user/delete", new DeleteUserController());
         
+        //마이페이지
+        mappings.put("/user/mypage",new MyPageController());
+        
         // 작성글 관리
         mappings.put("/post/list", new ListPostController()); // 작성글 목록
         mappings.put("/post/view", new ViewPostController()); // 작성글 조회
