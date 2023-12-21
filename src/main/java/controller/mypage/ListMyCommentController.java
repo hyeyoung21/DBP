@@ -1,4 +1,4 @@
-package controller.user;
+package controller.mypage;
 
 import java.util.List;
 
