@@ -64,63 +64,52 @@
 <body>
     <div class="container">
         <h1>모집 정보</h1>
-        <form id="blog-form" method="post" action="<c:url value='/post/add' />" >
+        <c:if test="${post.id == null}">    	
+	        <form id="blog-form" method="post" action="<c:url value='/post/add' />" >
+        </c:if>
+        <c:if test="${post.id != null}">    	
+	        <form id="blog-form" method="post" action="<c:url value='/post/update' />" >
+        </c:if>
             <div class="form-group">
                 <input type="hidden" id="creator" name="creator" value="${userId}" />
+                <input type="hidden" id="postId" name="postId" value="${post.id}" />
                 <label for="part">모집 인원:</label>
-                <input type="number" id="part" name="part" class="form-control" required>
+                <input type="number" id="part" name="part" class="form-control" value="${post.maxParticipants}" required>
 
                 <label for="gender">모집 성별:</label>
                 <select id="gender" name="gender" class="form-control" required>
-                    <option value="male">남성</option>
-                    <option value="female">여성</option>
-                    <option value="any">모두</option>
+                    <c:forEach var="option" items="${['male', 'female', 'any']}">
+				        <option value="${option}" ${option eq user.gender ? 'selected' : ''}>${option}</option>
+				    </c:forEach>
                 </select>
 
                 <label for="age">모집 나이:</label>
-                <input type="text" id="age" name="age" class="form-control" required>
+                <input type="text" id="age" name="age" class="form-control" value="${post.age}" required>
             </div>
 
             <div class="form-group">
                 <label for="meetingType">카테고리:</label>
                 <select id="meetingType" name="meetingType" class="form-control" required>
-                    <option value="study">스터디</option>
-                    <option value="exercise">운동</option>
-                    <option value="plant">원예</option>
-                    <option value="handicraft">수공예</option>
-                    <option value="performance">공연</option>
-                    <option value="art">미술</option>
-                    <option value="game">게임</option>
-                </select>
+				    <c:forEach var="option" items="${['스터디', '운동', '원예', '수공예', '공연', '미술', '게임']}">
+				        <option value="${option}" ${option eq post.meetingType ? 'selected' : ''}>${option}</option>
+				    </c:forEach>
+				</select>
 
                 <label for="location">모임 위치:</label>
                 <select id="location" name="location" class="form-control">
-                    <option value="서울">서울</option>
-					<option value="경기">경기</option>
-					<option value="세종">세종</option>
-					<option value="인천">인천</option>
-					<option value="충북">충북</option>
-					<option value="충남">충남</option>
-					<option value="강원">강원</option>
-					<option value="전남">전남</option>
-					<option value="전북">전북</option>
-					<option value="광주">광주</option>
-					<option value="경북">경북</option>
-					<option value="경남">경남</option>
-					<option value="제주">제주</option>
-					<option value="울산">울산</option>
-					<option value="대구">대구</option>
-					<option value="대전">대전</option>
-                </select>
+				    <c:forEach var="option" items="${['서울', '경기', '세종', '인천', '충북', '충남', '강원', '전남', '전북', '광주', '경북', '경남', '제주', '울산', '대구', '대전']}">
+				        <option value="${option}" ${option eq post.location ? 'selected' : ''}>${option}</option>
+				    </c:forEach>
+				</select>
 
                 <label for="dateTime">모임 날짜:</label>
-                <input type="date" id="dateTime" name="dateTime" class="form-control" required>
+                <input type="datetime-local" id="dateTime" name="dateTime" class="form-control" value="<c:out value='${post.dateTime}' />" required>
             </div>
             
             <hr />
 
-            <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" required>
-            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required></textarea>
+            <input type="text" id="title" name="title" class="form-control" placeholder="제목을 입력하세요" value="${post.title}"required>
+            <textarea id="content" name="content" class="form-control" placeholder="내용을 입력하세요" required>${post.content}</textarea>
 
             <button type="submit" class="btn btn-primary mt-3" onclick="postCreate()">등록하기</button>
         </form>

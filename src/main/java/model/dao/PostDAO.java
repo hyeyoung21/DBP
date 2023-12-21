@@ -15,7 +15,7 @@ public class PostDAO {
     }
 
     public List<Post> getAllPosts() {
-        String sql = "SELECT * FROM post";
+        String sql = "SELECT * FROM post ORDER BY post_ID DESC";
         return executeQueryAndMapPosts(sql, null);
     }
     
@@ -59,8 +59,20 @@ public class PostDAO {
         executeUpdateWithPost(sql, post);
     }
 
-    public void updatePost(Post post) throws Exception {
-        String sql = "UPDATE POST SET title = ?, description = ?, location = ?, dateTime = ?, gender = ?, ageRange = ?, maxParticipants = ?, creator_id = ?, participants = ?, meetingType = ? WHERE id = ?";
+    public void updatePost(Post post, int postId) throws Exception {
+        String formattedDateTime = post.getDateTime().replace("T", " ");
+        post.setDateTime(formattedDateTime);
+        String sql = "UPDATE POST \n"
+                + "SET user_id = ?, "
+                + "    post_title = ?, "
+                + "    post_content = ?, "
+                + "    post_gender = ?, "
+                + "    post_age = ?, "
+                + "    post_loc = ?, "
+                + "    post_participants = ?, "
+                + "    meetingType = ?, "
+                + "    post_date = TO_DATE(?,'YYYY-MM-DD HH24:MI') "
+                + "WHERE post_ID = " + postId;
         executeUpdateWithPost(sql, post);
     }
 
@@ -91,7 +103,7 @@ public class PostDAO {
     }
     
     public List<Comment> getAllComments(int postId) {
-        String sql = "SELECT * FROM post_comment Where postid = ?";
+        String sql = "SELECT * FROM post_comment Where postid = ? ";
         List<Comment> comments = new ArrayList<>();
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
 
@@ -120,6 +132,20 @@ public class PostDAO {
         String sql = "insert INTO post_comment VALUES (commentid_sequence.NEXTVAL, ?, ?, ?, SYSDATE)";
         jdbcUtil.setSqlAndParameters(sql,
                 new Object[]{comment.getPostID(), comment.getUserID(), comment.getContent()});
+        try {               
+            jdbcUtil.executeUpdate();  // insert 문 실행
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }
+    }
+    
+    public void deleteComment(int commentid) throws Exception {
+        String sql = "delete post_comment where comment_id = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{commentid});
         try {               
             jdbcUtil.executeUpdate();  // insert 문 실행
         } catch (Exception ex) {

@@ -24,10 +24,10 @@ public class PostManager {
         return postMan;
     }
     
-    public void update(Post post) throws SQLException {
+    public void update(Post post, int postId) throws SQLException {
         // post의 모임 정보가 변경된 경우   
         try {
-            postDAO.updatePost(post);
+            postDAO.updatePost(post, postId);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -69,6 +69,15 @@ public class PostManager {
     public void createComment(Comment comment) throws SQLException {
         try {
             postDAO.createComment(comment);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteComment(int commentID) throws SQLException {
+        try {
+            postDAO.deleteComment(commentID);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

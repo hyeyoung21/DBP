@@ -24,11 +24,11 @@ public class ViewPostController implements Controller {
             List<Comment> commentList = manager.getAllComments(postId);
             
             request.setAttribute("commentList", commentList);             
-        } catch (Exception e) {             
+        } catch (Exception e) {
             return "redirect:/post/PostList";
         }   
         
-        request.setAttribute("post", post);            
-        return "/post/PostView.jsp";  
+        request.setAttribute("post", post);
+        return "/post/PostView.jsp";
     }
 }

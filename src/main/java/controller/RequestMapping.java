@@ -46,7 +46,7 @@ public class RequestMapping {
         
         //댓글 관리
         mappings.put("/comment/add", new AddCommentController()); // 신청글 보기
-        
+        mappings.put("/comment/delete", new DeleteCommentController()); // 신청글 보기
         
         logger.info("Initialized Request Mapping!");
     }

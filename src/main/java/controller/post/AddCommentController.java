@@ -7,18 +7,19 @@ import model.Comment;
 import model.service.PostManager;
 
 public class AddCommentController implements Controller {
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        PostManager manager = PostManager.getInstance();
+        int postId = Integer.parseInt(request.getParameter("postId"));
+
         Comment comment = new Comment();
         comment.setUserID(request.getParameter("userId"));
         comment.setContent(request.getParameter("content"));
-        comment.setPostID(Integer.parseInt(request.getParameter("postId")));
+        comment.setPostID(postId);
 
         try {
-            PostManager manager = PostManager.getInstance();
-            manager.createComment(comment);;
-            return "redirect:/post/list"; 
+            manager.createComment(comment);
+            return "redirect:/post/view?id=" + postId;
             
         } catch (Exception e) { // 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);
@@ -26,6 +27,5 @@ public class AddCommentController implements Controller {
             request.setAttribute("comment", comment);
             return "/post/list.jsp";
         }
-    
     }
 }
