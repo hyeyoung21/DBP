@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class User {
 	private String userId;
 	private String name;
@@ -9,6 +11,9 @@ public class User {
 	private String password;
 	private String location;
 	private int reportCount;
+	
+	private ArrayList<Post> createdMeetings; // 작성글
+	private ArrayList<Post> applications; // 신청글
 	
 	public User() { }
 	

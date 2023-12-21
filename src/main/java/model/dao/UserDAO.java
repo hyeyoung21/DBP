@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Post;
 import model.User;
 
 /**
@@ -39,6 +41,8 @@ public class UserDAO {
 			jdbcUtil.close();	// resource 반환
 		}	
 		
+		
+		
 		return 0;			
 	}
 
@@ -72,8 +76,11 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int delete(String userId) throws SQLException {
-		String sql = "DELETE FROM USER_INFO WHERE USER_ID=?";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
+		String sql1 = "DELETE FROM USER_INFO WHERE USER_ID=?";	
+		String sql2 = "DELETE FROM APPLY WHERE USERID=?";
+		
+		jdbcUtil.setSqlAndParameters(sql1, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
+		jdbcUtil.setSqlAndParameters(sql2, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 
 		try {				
 			int result = jdbcUtil.executeUpdate();	// delete 문 실행
@@ -194,6 +201,9 @@ public class UserDAO {
 		return null;
 	}
 
+	/**
+	 * 특정 meeting에 속한 사용자들을 검색하여 List에 저장 및 반환
+	 */
 //	public List<User> findUsersInCommunity(int communityId) throws SQLException {
 //        String sql = "SELECT userId, name, email, phone FROM UserInfo "
 //     				+ "WHERE commId = ?";                         
@@ -240,6 +250,9 @@ public class UserDAO {
 		return 0;
 	}
 	
+	/**
+	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 !
+	 */
 	public boolean existingUser(String userId) throws SQLException {
 		String sql = "SELECT count(*) FROM USER_INFO WHERE USER_ID=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
@@ -257,4 +270,37 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	public List<Post> searchForApplication(String userId) throws SQLException{
+		String sql = "SELECT * FROM POST p JOIN APPLY a ON p.post_id = a.postid WHERE a.userid = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[]{userId});
+    	
+    	try { 
+    		ResultSet rs = jdbcUtil.executeQuery();	
+    		List<Post> list = new ArrayList<Post>();
+    		
+    		while (rs.next()) {
+    			Post post = new Post();
+    			post.setId(rs.getInt("post_ID"));
+    	        post.setTitle(rs.getString("post_title"));
+    	        post.setContent(rs.getString("post_content"));
+    	        post.setLocation(rs.getString("post_loc"));
+    	        post.setDateTime(rs.getString("post_date"));
+    	        post.setGender(rs.getString("post_gender"));
+    	        post.setAge(rs.getString("post_age"));
+    	        post.setMaxParticipants(rs.getInt("post_participants"));
+    	        post.setMeetingType(rs.getString("meetingType"));
+    			
+                list.add(post);
+    		}
+    		
+		return list;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally { 
+			jdbcUtil.close();
+		} return null;
+
+    }
 }

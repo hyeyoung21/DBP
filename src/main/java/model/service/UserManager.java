@@ -2,8 +2,10 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
 
 import model.User;
+import model.Post;
 import model.dao.UserDAO;
 
 /**
@@ -44,6 +46,10 @@ public class UserManager {
 	
 	public int remove(String userId) throws SQLException, UserNotFoundException {
 	    return userDAO.delete(userId);
+	}
+	
+	public List<Post> searchForApplication (String userId) throws SQLException{
+		return userDAO.searchForApplication(userId);
 	}
 	
 	public User findUser(String userId)
