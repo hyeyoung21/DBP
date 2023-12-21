@@ -59,9 +59,6 @@
         function addComment() {
         	addComment-form.submit();
         }
-        function deleteComment(commentID) {
-        	addComment-form.submit();
-        }
         
     </script>
 
@@ -165,7 +162,10 @@
 			                </div>
 			                <c:if test="${userId eq comment.userID}">
 				                <div class="col-md-2">
-				                    <button type="button" class="btn btn-danger" onclick="deleteComment(${comment.commentID})" name="action" value="add">삭제</button>
+				                    <a href="<c:url value='/comment/delete'>
+										  		<c:param name='commentID' value='${comment.commentID}'/>
+								 			 </c:url>">수정
+								 	</a>
 				                </div>
 			                </c:if>
 			            </div>
