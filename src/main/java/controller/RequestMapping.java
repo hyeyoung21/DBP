@@ -10,6 +10,8 @@ import controller.user.*;
 import controller.apply.*;
 import controller.mypage.*;
 import controller.message.*;
+import controller.mypage.*;
+
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
