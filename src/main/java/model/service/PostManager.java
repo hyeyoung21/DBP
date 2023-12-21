@@ -2,9 +2,8 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import model.Post;
-import model.dao.PostDAO;
+import model.Comment;
 import model.dao.PostDAO;
 
 public class PostManager {
@@ -25,25 +24,26 @@ public class PostManager {
         return postMan;
     }
     
-    public void create(Post post) throws SQLException, PostNotFoundException{
-        try {
-            postDAO.createPost(post);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void update(Post post) throws SQLException, PostNotFoundException {
+    public void update(Post post, int postId) throws SQLException {
         // post의 모임 정보가 변경된 경우   
         try {
-            postDAO.updatePost(post);
+            postDAO.updatePost(post, postId);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }   
     
-    public void remove(int postId) throws SQLException, PostNotFoundException {
+    public void add(Post post) throws SQLException {
+        try {
+            postDAO.createPost(post);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void remove(int postId) throws SQLException {
         try {
             postDAO.deletePost(postId);
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class PostManager {
         }
     }
     
-    public Post getPost(int postId) throws SQLException, PostNotFoundException {
+    public Post getPost(int postId) throws SQLException {
         Post post = postDAO.getPost(postId);
   
         return post;
@@ -60,6 +60,28 @@ public class PostManager {
     
     public List<Post> getAllPosts() throws SQLException {
             return postDAO.getAllPosts();
+    }
+    
+    public List<Comment> getAllComments(int postId) throws SQLException {
+        return postDAO.getAllComments(postId);
+    }
+    
+    public void createComment(Comment comment) throws SQLException {
+        try {
+            postDAO.createComment(comment);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    
+    public void deleteComment(int commentID) throws SQLException {
+        try {
+            postDAO.deleteComment(commentID);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public List<Post> findPostList(String searchString)

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.*;
 import model.User;
 import model.Post;
+import model.Comment;
 
 public class PostDAO {
     private JDBCUtil jdbcUtil;
@@ -14,7 +15,7 @@ public class PostDAO {
     }
 
     public List<Post> getAllPosts() {
-        String sql = "SELECT * FROM post";
+        String sql = "SELECT * FROM post ORDER BY post_ID DESC";
         return executeQueryAndMapPosts(sql, null);
     }
     
@@ -24,22 +25,18 @@ public class PostDAO {
     
         try {
             ResultSet resultSet = jdbcUtil.executeQuery();     // query 실행
-            if (resultSet.next()) {         // User 객체를 생성하여 학생 정보를 저장
+            if (resultSet.next()) {   
                 Post post = new Post();
+                post.setCreator(resultSet.getString("user_id"));
                 post.setId(resultSet.getInt("post_id"));
                 post.setTitle(resultSet.getString("post_title"));
-                post.setDescription(resultSet.getString("post_content"));
+                post.setContent(resultSet.getString("post_content"));
                 post.setLocation(resultSet.getString("post_loc"));
                 post.setGender(resultSet.getString("post_gender"));
-                post.setAgeRange(resultSet.getString("post_age"));
+                post.setAge(resultSet.getString("post_age"));
                 post.setMaxParticipants(resultSet.getInt("post_participants"));
-
-//                String creatorId = resultSet.getString("user_id");
-//                User creator = getUserById(creatorId);
-//                post.setCreator(creator);
-                
-                System.out.println(post);
-                
+                post.setMeetingType(resultSet.getString("meetingType"));
+                post.setDateTime(resultSet.getString("Post_date"));
                 return post;
             }
         } catch (Exception ex) {
@@ -57,12 +54,25 @@ public class PostDAO {
     }
 
     public void createPost(Post post) throws Exception {
-        String sql = "INSERT INTO POST (post_ID, post_title, post_content, post_gender, post_age, post_loc, post_participants, user_id) VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO POST (post_ID, user_id, post_title, post_content, post_gender, post_age, post_loc, post_participants, meetingType, post_date) "
+                + "VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         executeUpdateWithPost(sql, post);
     }
 
-    public void updatePost(Post post) throws Exception {
-        String sql = "UPDATE POST SET title = ?, description = ?, location = ?, dateTime = ?, gender = ?, ageRange = ?, maxParticipants = ?, creator_id = ?, participants = ?, meetingType = ? WHERE id = ?";
+    public void updatePost(Post post, int postId) throws Exception {
+        String formattedDateTime = post.getDateTime().replace("T", " ");
+        post.setDateTime(formattedDateTime);
+        String sql = "UPDATE POST \n"
+                + "SET user_id = ?, "
+                + "    post_title = ?, "
+                + "    post_content = ?, "
+                + "    post_gender = ?, "
+                + "    post_age = ?, "
+                + "    post_loc = ?, "
+                + "    post_participants = ?, "
+                + "    meetingType = ?, "
+                + "    post_date = TO_DATE(?,'YYYY-MM-DD HH24:MI') "
+                + "WHERE post_ID = " + postId;
         executeUpdateWithPost(sql, post);
     }
 
@@ -91,20 +101,79 @@ public class PostDAO {
 
         return posts;
     }
+    
+    public List<Comment> getAllComments(int postId) {
+        String sql = "SELECT * FROM post_comment Where postid = ? ";
+        List<Comment> comments = new ArrayList<>();
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
 
-    private void executeUpdateWithPost(String sql, Post post) throws Exception {
-        List<String> participantIdsAsString = new ArrayList<>();
-        for (User participant : post.getParticipants()) {
-            participantIdsAsString.add(String.valueOf(participant.getUserId()));
+        try {
+            ResultSet resultSet = jdbcUtil.executeQuery();
+
+            while (resultSet.next()) {
+                Comment comment = new Comment();
+                comment.setCommentID(resultSet.getInt("comment_id"));
+                comment.setUserID(resultSet.getString("userid"));
+                comment.setPostID(resultSet.getInt("postid"));
+                comment.setContent(resultSet.getString("content"));
+                comment.setCommentDate(resultSet.getString("comment_date"));
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.close();
         }
 
+        return comments;
+    }
+    
+    public void createComment(Comment comment) throws Exception {
+        String sql = "insert INTO post_comment VALUES (commentid_sequence.NEXTVAL, ?, ?, ?, SYSDATE)";
         jdbcUtil.setSqlAndParameters(sql,
-                new Object[]{post.getTitle(), post.getDescription(), post.getLocation(),
-                        post.getGender(), post.getAgeRange(), post.getLocation(), 
-                        post.getMaxParticipants(), post.getCreator().getUserId(),
-                        String.join(",", participantIdsAsString), post.getMeetingType()});
+                new Object[]{comment.getPostID(), comment.getUserID(), comment.getContent()});
+        try {               
+            jdbcUtil.executeUpdate();  // insert 문 실행
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }
+    }
+    
+    public void deleteComment(int commentid) throws Exception {
+        String sql = "delete post_comment where comment_id = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[]{commentid});
+        try {               
+            jdbcUtil.executeUpdate();  // insert 문 실행
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }
+    }
 
-        executeUpdate();
+    private void executeUpdateWithPost(String sql, Post post) throws Exception { 
+//        System.out.println(post);
+//        user_id, post_title, post_content, post_gender, post_age, post_loc, post_participants, meetingType, post_date
+        jdbcUtil.setSqlAndParameters(sql,
+                new Object[]{post.getCreator(), post.getTitle(), post.getContent(), 
+                        post.getGender(), post.getAge(), post.getLocation(),
+                        post.getMaxParticipants(), post.getMeetingType(), post.getDateTime()});
+        
+        try {               
+            int result = jdbcUtil.executeUpdate();  // insert 문 실행
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {     
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }   
     }
 
 
@@ -122,49 +191,16 @@ public class PostDAO {
         Post post = new Post();
         post.setId(resultSet.getInt("post_ID"));
         post.setTitle(resultSet.getString("post_title"));
-        post.setDescription(resultSet.getString("post_content"));
+        post.setContent(resultSet.getString("post_content"));
         post.setLocation(resultSet.getString("post_loc"));
-//        post.setDateTime(resultSet.getString("dateTime"));
+        post.setDateTime(resultSet.getString("post_date"));
         post.setGender(resultSet.getString("post_gender"));
-        post.setAgeRange(resultSet.getString("post_age"));
+        post.setAge(resultSet.getString("post_age"));
         post.setMaxParticipants(resultSet.getInt("post_participants"));
-
-//        String creatorId = resultSet.getString("creator_id");
-//        User creator = getUserById(creatorId);
-//        post.setCreator(creator);
-
-//        String participantsString = resultSet.getString("participants");
-//        List<User> participantsList = new ArrayList<>();
-//        if (participantsString != null && !participantsString.isEmpty()) {
-//            String[] participantsArray = participantsString.split(",");
-//            for (String participantId : participantsArray) {
-//                int userId = Integer.parseInt(participantId.trim());
-//                User participant = getUserById(userId);
-//                participantsList.add(participant);
-//            }
-//        }
-//        post.setParticipants(participantsList);
-
-//        post.setMeetingType(resultSet.getString("meetingType"));
-
+        post.setMeetingType(resultSet.getString("meetingType"));
         return post;
     }
-
-    private User getUserById(String userId) {
-        String sql = "SELECT * FROM users WHERE id = ?";
-        jdbcUtil.setSqlAndParameters(sql, new Object[]{userId});
-
-        try {
-            ResultSet resultSet = jdbcUtil.executeQuery();
-            if (resultSet.next()) {
-                return mapResultSetToUser(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+    
     //DB결과 User객체로
     private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
         User user = new User();
@@ -175,6 +211,7 @@ public class PostDAO {
         user.setEmail(resultSet.getString("user_email"));
         user.setPassword(resultSet.getString("user_password"));
         user.setLocation(resultSet.getString("user_loc"));
+        
         return user;
     }
     

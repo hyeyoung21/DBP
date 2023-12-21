@@ -1,117 +1,186 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	Post post = (Post)request.getAttribute("post");
-%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>모집 정보</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모집 정보</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
-    #blog-form {
-      display: flex;
-      flex-wrap: wrap;
-    }
+        .form-group {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
 
-    .form-group {
-      width: 50%;
-      box-sizing: border-box;
-      padding: 0 10px;
-    }
+        #blog-form label, #blog-form input, #blog-form select, #blog-form textarea {
+            width: 100%;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
 
-    #blog-form label, #blog-form input, #blog-form select, #blog-form textarea {
-      width: 100%;
-      margin-bottom: 10px;
-      box-sizing: border-box;
-    }
+        #blog-content {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+        }
 
-    #blog-content {
-      width: 100%;
-      height: 300px; /* 세로 길이 조절 */
-    }
-
-    #blog-form button {
-      width: 100%;
-    }
-
-    #blog-list {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .blog-item {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-
-        .button-container {
-      text-align: right;
-      margin-top: 20px;
-    }
-
-
-    #blog-content {
-      display: inline-block;
-      padding: 1px 10px;
-      font-size: 16px;
-      color: #333;
-      background-color: #f4f4f4;
-    }
-
-  </style>
+        .btn-container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+    <script>
+        function showInput() {
+            var inputContainer = document.getElementById("inputContainer");
+            inputContainer.style.display = "block";
+        }
+        function sendApply() {
+            var msg = document.getElementsByClassName('ApplyMessage');
+            msg.value = "";
+            apply-form.submit();
+        }
+        function updatePost(commentID) {
+        	update-form.submit();
+        }
+        function addComment() {
+        	addComment-form.submit();
+        }
+        function deleteComment(commentID) {
+        	addComment-form.submit();
+        }
+        
+    </script>
 
-  <h2 id="blog-title">${post.title}</h2>
+    <h3 class="display-6 text-left">${post.title}</h3>
+   	<span class="text-muted">작성자: ${post.creator}</span>
+	
+	
+	<hr size="10px"/>
 
-  <form id="blog-form">
-    <div class="form-group">
-      <label for="recruitment-num">모집 인원:</label>
-      <a id="recruitment-num">${post.maxParticipants}</a>명
-      <br>
-      <label for="recruitment-gender">모집 성별:</label>
-      <a id="recruitment-gender">${post.gender}</a>
-      <br>
-      <label for="recruitment-age">모집 나이:</label>
-      <a id="recruitment-age">${post.ageRange}</a>
+    <form id="blog-form">
+	    <div class="row">
+	        <div class="col-md-6">
+	            <div class="form-group">
+	                <h6><strong>모집 인원:</strong></h6>
+	                <span class="text-muted">${post.maxParticipants}명</span>
+	            </div>
+	
+	            <div class="form-group">
+	                <h6><strong>모집 성별:</strong></h6>
+	                <span class="text-muted">${post.gender}</span>
+	            </div>
+	
+	            <div class="form-group">
+	                <h6><strong>모집 나이:</strong></h6>
+	                <span class="text-muted">${post.age}</span>
+	            </div>
+	        </div>
+	
+	        <div class="col-md-6">
+	            <div class="form-group">
+	                <h6><strong>카테고리:</strong></h6>
+	                <span class="text-muted">${post.meetingType}</span>
+	            </div>
+	
+	            <div class="form-group">
+	                <h6><strong>모임 위치:</strong></h6>
+	                <span class="text-muted">${post.location}</span>
+	            </div>
+	
+	            <div class="form-group">
+	                <h6><strong>모임 날짜:</strong></h6>
+	                <span class="text-muted">${post.dateTime}</span>
+	            </div>
+	        </div>
+	    </div>
+
+        <hr size="10px"/>
+
+        <div id="blog-content">${post.content}</div>
+    </form>
+
+	    <input type="hidden" id="postId" name="postId" value="${post.id}">
+	    <div class="btn-container">
+		    <c:if test="${userId ne post.creator }">
+			     <button class="btn btn-primary" onclick="showInput()">신청하기</button>
+			     <button class="btn btn-info" onclick="sendMessage()">쪽지 보내기</button>
+		    </c:if>
+		    <c:if test="${userId eq post.creator }">
+		    	<form id="update-form" method="get" action="<c:url value='/post/update' />">
+			    	<button class="btn btn-danger" onclick="deletePost()">삭제</button>
+			    	<button class="btn btn-warning" onclick="updatePost()">수정</button>
+		    	</form>
+		    </c:if>
+	    </div>
+
+    <div id="inputContainer" style="display: none;">
+        <form id="apply-form" method="post" action="<c:url value='/apply/add' />">
+		    <div class="form-group">
+		        <label for="ApplyMessage">메세지를 입력하세요 :</label>
+		        <div class="input-group">
+		                 <input type="hidden" id="userId" name="userId" value="${userId}">
+		                 <input type="hidden" id="postId" name="postId" value="${post.id}">
+		           <input type="text" class="form-control" id="ApplyMessage" name="ApplyMessage">
+		           <div class="input-group-append">
+		               <button class="btn btn-success" onclick="sendApply()">신청</button>
+		           </div>
+		        </div>
+		    </div>
+		</form>
     </div>
 
-    <div class="form-group">
-      <label for="category">카테고리:</label>
-      <a id="category">${post.meetingType}</a>
-      <br>
-      <label for="location">모임 위치:</label>
-        <a id="location">${post.location}</a>
-      </label>
-      <br>
-      <label for="date">모임 날짜:</label>
-      <a id="date">${post.dateTime}</a>
+    <div class="mt-5">
+    	<form id="addComment-form" method="post" action="<c:url value='/comment/add' />"  >
+	        <h3>댓글 작성</h3>
+	        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+			<input type="hidden" id="userId" name="userId" value="${userId}">
+	        <input type="hidden" id="postId" name="postId" value="${post.id}">
+	        <button class="btn btn-primary mt-3" onclick="addComment()" name="action" value="add">댓글 작성</button>
+        </form>
+        
+        <form id="deleteComment-form" method="post" action="<c:url value='/comment/delete' />" >
+	        <ul id="comment-list" class="list-group mt-3">
+			    <c:forEach var="comment" items="${commentList}">
+			        <li class="list-group-item">
+			            <div class="row">
+			                <div class="col-md-2">
+			                    <span class="text-muted">${comment.userID}</span>
+			                </div>
+			                <div class="col-md-8">
+			                    <span class="text-muted">${comment.commentDate}</span>
+			                </div>
+			                <c:if test="${userId eq comment.userID}">
+				                <div class="col-md-2">
+				                    <button type="button" class="btn btn-danger" onclick="deleteComment(${comment.commentID})" name="action" value="add">삭제</button>
+				                </div>
+			                </c:if>
+			            </div>
+			            <div class="mt-2">
+			                <p>${comment.content}</p>
+			            </div>
+			        </li>
+			    </c:forEach>
+			</ul>
+		</form>
     </div>
-    
-    <hr size="10px" />
 
-    <div id="blog-content">${post.description}</div>
-  </form>
-
-  <div id="comment-form">
-    <h3>댓글 작성</h3>
-    <textarea id="comment-content" rows="4" required></textarea>
-
-    <button onclick="addComment()">댓글 작성</button>
-  </div>
-
-  <div id="comment-list">
-      <!-- 여기에 추가된 댓글이 표시됩니다. -->
-  </div>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

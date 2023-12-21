@@ -40,19 +40,12 @@ public class UserManager {
 		return userDAO.add(user);
 	}
 	
-	public int update(User user) throws SQLException, UserNotFoundException {
-		
-		
-		// user의 모임 정보가 변경된 경우
-		
+	public int update(User user) throws SQLException, UserNotFoundException {		
 		return userDAO.update(user);
 	}	
 	
 	public int remove(String userId) throws SQLException, UserNotFoundException {
-		
-		// 유저가 참여한 모임 정보도 같이 삭제해야 함. 
-		
-		return userDAO.delete(userId);
+	    return userDAO.delete(userId);
 	}
 	
 	public List<Post> searchForApplication (String userId) throws SQLException{
