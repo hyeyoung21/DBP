@@ -81,7 +81,7 @@
       <a href="<c:url value='/post/list' />" class="button">내가 쓴 글 보기</a>
       <a href="<c:url value='/post/list' />" class="button">내가 쓴 댓글 보기</a>
       <button class="button" onclick="loadUserInfo()">나의 개인정보 확인하기</button>
-      <a href="<c:url value='/' />" class="button calendar-button">캘린더</a>
+      <a href="<c:url value='/mypage/calendar' />" class="button calendar-button">캘린더</a>
       <a href="<c:url value='/' />" class="button">쪽지함</a>
     </div>
 

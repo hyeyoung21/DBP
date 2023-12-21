@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import controller.post.*;
 import controller.user.*;
 import controller.apply.*;
+import controller.mypage.*;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -32,8 +33,9 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         //마이페이지
-        mappings.put("/user/mypage",new MyPageController());
-        
+        mappings.put("/mypage/mypage",new MyPageController());
+        mappings.put("/mypage/calendar",new CalendarController());
+
         // 작성글 관리
         mappings.put("/post/list", new ListPostController()); // 작성글 목록
         mappings.put("/post/view", new ViewPostController()); // 작성글 조회
