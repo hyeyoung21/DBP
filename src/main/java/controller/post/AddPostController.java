@@ -10,6 +10,8 @@ import model.service.PostManager;
 public class AddPostController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
+    	Post post = new Post();
+    	PostManager manager = PostManager.getInstance();
     	
         if (request.getMethod().equals("GET")) {    
             return "/post/PostRegister.jsp"; 
