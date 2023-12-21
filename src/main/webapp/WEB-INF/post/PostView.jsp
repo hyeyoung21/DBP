@@ -118,6 +118,8 @@
 		    </c:if>
 		    <c:if test="${userId eq post.creator }">
 		    	<form id="update-form" method="get" action="<c:url value='/post/update' />">
+		    		<input type="hidden" id="userId" name="userId" value="${userId}">
+	               	<input type="hidden" id="postId" name="postId" value="${post.id}">
 			    	<button class="btn btn-danger" onclick="deletePost()">삭제</button>
 			    	<button class="btn btn-warning" onclick="updatePost()">수정</button>
 		    	</form>
@@ -164,7 +166,7 @@
 				                <div class="col-md-2">
 				                    <a href="<c:url value='/comment/delete'>
 										  		<c:param name='commentID' value='${comment.commentID}'/>
-								 			 </c:url>">수정
+								 			 </c:url>">삭제
 								 	</a>
 				                </div>
 			                </c:if>

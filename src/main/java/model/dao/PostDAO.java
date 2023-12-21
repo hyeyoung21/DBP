@@ -214,6 +214,62 @@ public class PostDAO {
         
         return user;
     }
+
+    public List<Post> findListByUser(String userId) throws SQLException {
+        String sql = "SELECT * FROM post WHERE user_Id = ?";
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});  
+        List<Post> posts = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = jdbcUtil.executeQuery();
+            
+            while (resultSet.next()) {
+                Post post = new Post();
+                post.setId(resultSet.getInt("post_ID"));
+                post.setTitle(resultSet.getString("post_title"));
+                post.setContent(resultSet.getString("post_content"));
+                post.setLocation(resultSet.getString("post_loc"));
+                post.setDateTime(resultSet.getString("post_date"));
+                post.setGender(resultSet.getString("post_gender"));
+                post.setAge(resultSet.getString("post_age"));
+                post.setMaxParticipants(resultSet.getInt("post_participants"));
+                post.setMeetingType(resultSet.getString("meetingType"));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+
+        return posts;
+    }
+
+    public List<Comment> findCommentListByUser(String userid) {
+        String sql = "SELECT * FROM post_comment Where userid = ? ";
+        List<Comment> comments = new ArrayList<>();
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {userid});
+
+        try {
+            ResultSet resultSet = jdbcUtil.executeQuery();
+
+            while (resultSet.next()) {
+                Comment comment = new Comment();
+                comment.setCommentID(resultSet.getInt("comment_id"));
+                comment.setUserID(resultSet.getString("userid"));
+                comment.setPostID(resultSet.getInt("postid"));
+                comment.setContent(resultSet.getString("content"));
+                comment.setCommentDate(resultSet.getString("comment_date"));
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+
+        return comments;
+    }
     
     
 }

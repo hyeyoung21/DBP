@@ -93,5 +93,13 @@ public class PostManager {
     public PostDAO getPostDAO() {
         return this.postDAO;
     }
+    
+    public List<Post> findListByUser(String userid) throws SQLException {
+        return postDAO.findListByUser(userid);
+    }
+    
+    public List<Comment> findCommentListByUser(String userid) throws SQLException {
+        return postDAO.findCommentListByUser(userid);
+    }
 
 }
