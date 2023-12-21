@@ -54,8 +54,11 @@ public class PostDAO {
     }
 
     public void createPost(Post post) throws Exception {
+        System.out.println(post);
+        String formattedDateTime = post.getDateTime().replace("T", " ");
+        post.setDateTime(formattedDateTime);
         String sql = "INSERT INTO POST (post_ID, user_id, post_title, post_content, post_gender, post_age, post_loc, post_participants, meetingType, post_date) "
-                + "VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "VALUES (post_id_sequence.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, TO_DATE(?,'YYYY-MM-DD HH24:MI'))";
         executeUpdateWithPost(sql, post);
     }
 

@@ -37,7 +37,7 @@
 		       </li>
 		   </c:forEach>
 		</ul>
-	</form>
+</form>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

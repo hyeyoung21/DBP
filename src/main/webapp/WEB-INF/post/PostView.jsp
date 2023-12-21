@@ -43,6 +43,7 @@
     </style>
 </head>
 <body>
+	<%@include file="/WEB-INF/navi.jsp" %>
     <script>
         function showInput() {
             var inputContainer = document.getElementById("inputContainer");
