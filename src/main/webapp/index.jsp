@@ -1,1 +1,1 @@
-<% response.sendRedirect(request.getContextPath() + "/calender.jsp"); %>
+<% response.sendRedirect(request.getContextPath() + "/user/list"); %>

@@ -177,4 +177,6 @@ public class PostDAO {
         user.setLocation(resultSet.getString("user_loc"));
         return user;
     }
+    
+    
 }

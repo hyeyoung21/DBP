@@ -12,9 +12,9 @@ public class test {
 		// TODO Auto-generated method stub
 		UserManager userMan = UserManager.getInstance();
 		
-		List<User> users =  userMan.findUserList();
+		List<Post> posts = userMan.searchForApplication("user1");
 		
-		users.forEach(user -> System.out.println(user));
+		posts.forEach(post -> System.out.println(post));
 	}
 
 }

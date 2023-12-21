@@ -2,8 +2,10 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
 
 import model.User;
+import model.Post;
 import model.dao.UserDAO;
 
 /**
@@ -51,6 +53,10 @@ public class UserManager {
 		// 유저가 참여한 모임 정보도 같이 삭제해야 함. 
 		
 		return userDAO.delete(userId);
+	}
+	
+	public List<Post> searchForApplication (String userId) throws SQLException{
+		return userDAO.searchForApplication(userId);
 	}
 	
 	public User findUser(String userId)

@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Post;
 import model.User;
 
 /**
@@ -265,4 +267,35 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	public List<Post> searchForApplication(String userId) throws SQLException{
+		String sql = "SELECT * FROM POST p JOIN APPLY a ON p.post_id = a.postid WHERE a.userid = ?";
+		jdbcUtil.setSqlAndParameters(sql, new Object[]{userId});
+    	
+    	try { 
+    		ResultSet rs = jdbcUtil.executeQuery();
+    		List<Post> list = new ArrayList<Post>();
+    		
+    		while (rs.next()) {
+    			Post post = new Post();
+    			post.setId(rs.getInt("post_id"));
+                post.setTitle(rs.getString("post_title"));
+                post.setDescription(rs.getString("post_content"));
+                post.setLocation(rs.getString("post_loc"));
+                post.setGender(rs.getString("post_gender"));
+                post.setAgeRange(rs.getString("post_age"));
+                post.setMaxParticipants(rs.getInt("post_participants"));
+    			
+                list.add(post);
+    		}
+    		
+		return list;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally { 
+			jdbcUtil.close();
+		} return null;
+
+    }
 }
