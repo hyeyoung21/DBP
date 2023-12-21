@@ -40,14 +40,14 @@
       background-color: #f9f9f9;
     }
 	a {
-    text-decoration: none; /* 밑줄 제거 */
-    color: #0366d6; /* 링크 색상 지정 */
-    transition: color 0.3s; /* 색상 변화 효과 */
-  }
-
-  a:hover {
-    color: #0645ad; /* 호버 시 색상 변경 */
-  }
+	    text-decoration: none; 
+	    color: #0366d6;
+	    transition: color 0.3s; 
+	}
+	
+	a:hover {
+    	color: #0645ad;
+	}
   </style>
 </head>
 <body>
@@ -74,7 +74,7 @@
 		      <a href="<c:url value='/user/view'>
 					   <c:param name='userId' value='${user.userId}'/>
 			 		 </c:url>">수정
-			 		 	</a>
+			  </a>
 		  </td>
 	    </tr>
 	    

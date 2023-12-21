@@ -16,14 +16,14 @@ public class RequestMapping {
     private Map<String, Controller> mappings = new HashMap<String, Controller>();
 
     public void initMapping() {
-    	// 각 uri에 대응되는 controller 객체를 생성 및 저장
-    	// 기존 폼 입력 처리 개선을 위해 폼 jsp는 컨트롤러에서 redirect함.
-        mappings.put("/", new ForwardController("main.jsp"));
+        // 각 uri에 대응되는 controller 객체를 생성 및 저장
+        // 기존 폼 입력 처리 개선을 위해 폼 jsp는 컨트롤러에서 redirect함.
+        mappings.put("/main", new ForwardController("/main.jsp"));
       
         // 로그인 & 회원가입
-        mappings.put("/user/login", new LoginController());  
+        mappings.put("/user/loginForm", new LoginController());  
         mappings.put("/user/logout", new LogoutController());
-        mappings.put("/user/register", new RegisterUserController());
+        mappings.put("/user/joinForm", new RegisterUserController());
         
         // 회원 관리 & 검색
         mappings.put("/user/list", new ListUserController());
@@ -39,14 +39,20 @@ public class RequestMapping {
         mappings.put("/post/update", new UpdatePostController()); // 작성글 수정
         
         // 신청글 조회
-        mappings.put("/applyPost/view", new PostViewApplyController()); // 신청글 등록
-        mappings.put("/applyPost", new ApplyPostDeleteController()); // 신청글 삭제
+        mappings.put("/apply/view", new PostViewApplyController()); // 신청글 보기
+        mappings.put("/apply/list", new ApplyListController()); // 신청글 목록
+        mappings.put("/apply/add", new AddApplyController()); // 신청
+        mappings.put("/apply/modify", new ModifyApplyController()); // 신청글 삭제
+        
+        //댓글 관리
+        mappings.put("/comment/add", new AddCommentController()); // 신청글 보기
+        mappings.put("/comment/delete", new DeleteCommentController()); // 신청글 보기
         
         logger.info("Initialized Request Mapping!");
     }
 
-    public Controller findController(String uri) {	
-    	// 주어진 uri에 대응되는 controller 객체를 찾아 반환
+    public Controller findController(String uri) {  
+        // 주어진 uri에 대응되는 controller 객체를 찾아 반환
         return mappings.get(uri);
     }
 }

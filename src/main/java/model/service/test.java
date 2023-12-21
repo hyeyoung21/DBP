@@ -1,6 +1,5 @@
 package model.service;
 
-import java.sql.SQLException;
 import java.util.List;
 import model.*;
 
@@ -8,13 +7,14 @@ import model.*;
 
 public class test {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		UserManager userMan = UserManager.getInstance();
-		
-		List<User> users =  userMan.findUserList();
-		
-		users.forEach(user -> System.out.println(user));
+		Comment comm = null;
+	    PostManager pm = PostManager.getInstance();
+
+	    //String userId, int postId, String description
+        System.out.println(pm.getAllComments(1));
+
 	}
 
 }

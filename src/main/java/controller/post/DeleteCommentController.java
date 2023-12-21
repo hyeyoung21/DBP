@@ -1,19 +1,20 @@
 package controller.post;
 
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import controller.Controller;
-import model.Post;
 import model.service.PostManager;
 
-public class ListPostController implements Controller {
+public class DeleteCommentController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        System.out.println("delete");
         PostManager manager = PostManager.getInstance();
-        List<Post> postList = manager.getAllPosts();
+        int postId = Integer.parseInt(request.getParameter("postId"));
         
-        request.setAttribute("postList", postList);             
-        return "/post/PostList.jsp";
+        int commentID = Integer.parseInt(request.getParameter("commentID"));
+        manager.deleteComment(commentID);
+        return "redirect:/post/view?id=" + postId;  
     }
 }
