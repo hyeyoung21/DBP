@@ -139,7 +139,7 @@
     </header>
 
     <nav>
-        <a href="<c:url value='/user/view' />">마이페이지</a>
+        <a href="<c:url value='/user/mypage' />">마이페이지</a>
         <a href="<c:url value='/post/add' />">모집하기</a>
         <a href="<c:url value='/user/view' />">프로필</a>
     </nav>

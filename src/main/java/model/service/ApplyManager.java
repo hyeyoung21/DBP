@@ -42,4 +42,5 @@ public class ApplyManager {
     public List<Apply> findApplyListByPost(int postId) throws SQLException {
         return applyDAO.findApplyListByPost(postId);
     }
+
 }

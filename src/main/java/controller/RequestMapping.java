@@ -33,6 +33,8 @@ public class RequestMapping {
         
         //마이페이지
         mappings.put("/user/mypage",new MyPageController());
+        mappings.put("/user/myPost",new ListMyPostController());
+        mappings.put("/user/myComment",new ListMyCommentController());
         
         // 작성글 관리
         mappings.put("/post/list", new ListPostController()); // 작성글 목록
