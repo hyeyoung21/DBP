@@ -59,6 +59,9 @@ public class RequestMapping {
         mappings.put("/msg/list", new ListMessageController()); // 신청글 보기
         mappings.put("/msg/view", new ViewMessageController()); // 신청글 목록
         mappings.put("/msg/add", new AddMessageController()); // 신청
+                
+        //신고
+        mappings.put("/report/report", new ReportController());
         
         logger.info("Initialized Request Mapping!");
     }
