@@ -11,37 +11,47 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <form id="deleteComment-form" method="post" action="<c:url value='/comment/delete' />" >
-		<ul id="comment-list" class="list-group mt-3">
-		   <c:forEach var="comment" items="${commentList}">
-		       <li class="list-group-item">
-		           <div class="row">
-		               <div class="col-md-2">
-		                   <span class="text-muted">${comment.userID}</span>
-		               </div>
-		               <div class="col-md-8">
-		                   <span class="text-muted">${comment.commentDate}</span>
-		               </div>
-		               <c:if test="${userId eq comment.userID}">
-		                <div class="col-md-2">
-		                    <a href="<c:url value='/comment/delete'>
-								  		<c:param name='commentID' value='${comment.commentID}'/>
-						 			 </c:url>">삭제
-						 	</a>
-		                </div>
-		               </c:if>
-		           </div>
-		           <div class="mt-2">
-		               <p>${comment.content}</p>
-		           </div>
-		       </li>
-		   </c:forEach>
-		</ul>
+
+<form id="deleteComment-form" method="post" action="<c:url value='/comment/delete' />">
+    <c:choose>
+        <c:when test="${empty commentList}">
+            <div class="alert alert-info" role="alert">
+                작성한 댓글이 없습니다.
+            </div>
+        </c:when>
+        <c:otherwise>
+            <ul id="comment-list" class="list-group mt-3">
+                <c:forEach var="comment" items="${commentList}">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <span class="text-muted">${comment.userID}</span>
+                            </div>
+                            <div class="col-md-8">
+                                <span class="text-muted">${comment.commentDate}</span>
+                            </div>
+                            <c:if test="${userId eq comment.userID}">
+                                <div class="col-md-2">
+                                    <a href="<c:url value='/comment/delete'>
+                                            <c:param name='commentID' value='${comment.commentID}'/>
+                                        </c:url>">삭제
+                                    </a>
+                                </div>
+                            </c:if>
+                        </div>
+                        <div class="mt-2">
+                            <p>${comment.content}</p>
+                        </div>
+                    </li>
+                </c:forEach>
+            </ul>
+        </c:otherwise>
+    </c:choose>
 </form>
 
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
