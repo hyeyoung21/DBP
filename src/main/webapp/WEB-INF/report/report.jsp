@@ -62,18 +62,18 @@
         </div>
         <div class="form-group">
             <label for="reportedContent">신고 대상 내용:</label>
-            <textarea class="form-control" id="reportedContent" name="reportedContent" readonly>
-                ${report.reportContenet}
-            </textarea>
+            <textarea class="form-control" id="reportedContent" name="reportedContent" readonly>${report.reportContenet}</textarea>
         </div>
 
         <div class="form-group">
             <label for="reportReason">신고 사유:</label>
             <textarea class="form-control" id="reportReason" name="reportReason" rows="4" required></textarea>
         </div>
-
-        <button type="submit" class="btn btn-danger">신고하기</button>
     </form>
+	<form action="<c:url value='/report/submit' />" method="post">
+   		<input type="hidden" name="reportUserName" value="${report.reportUserName}" />
+   		<button type="submit" class="btn btn-danger">신고하기</button>
+	</form>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
