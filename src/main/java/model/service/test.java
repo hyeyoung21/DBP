@@ -1,5 +1,6 @@
 package model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import model.*;
 
@@ -8,13 +9,13 @@ import model.*;
 public class test {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		Comment comm = null;
-	    PostManager pm = PostManager.getInstance();
+		
+		CommentManager manager = CommentManager.getInstance();
+		List<Comment> comments = manager.getAllComments(22);
 
-	    //String userId, int postId, String description
-        System.out.println(pm.getAllComments(1));
-
+		for(Comment cmt : comments) {
+			System.out.println(cmt);
+		}
 	}
 
 }

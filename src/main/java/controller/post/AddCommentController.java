@@ -4,12 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import model.Comment;
+import model.service.CommentManager;
 import model.service.PostManager;
 
 public class AddCommentController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        PostManager manager = PostManager.getInstance();
+    	CommentManager manager = CommentManager.getInstance();
         int postId = Integer.parseInt(request.getParameter("postId"));
 
         Comment comment = new Comment();

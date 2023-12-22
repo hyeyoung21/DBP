@@ -191,6 +191,7 @@
                         <c:if test="${userId eq comment.userID}">
                             <form id='deleteComment-form-${comment.commentID}' method='post' action="<c:url value='/comment/delete'/>">
                                 <input type="hidden" name="commentID" value="${comment.commentID}">
+                                <input type="hidden" name="postID" value="${comment.postID}">
                                 <button class="btn btn-warning" onclick="deleteComment()">삭제</button>
                             </form>
                         </c:if>
