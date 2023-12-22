@@ -49,7 +49,7 @@ public class PostDAO {
     
 
     public List<Post> searchPostsByTitle(String searchString) {
-        String sql = "SELECT * FROM POST WHERE title LIKE ?";
+        String sql = "SELECT * FROM POST WHERE post_title LIKE ?";
         return executeQueryAndMapPosts(sql, new Object[]{"%" + searchString + "%"});
     }
 

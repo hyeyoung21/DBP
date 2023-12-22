@@ -88,7 +88,10 @@
       </a>
       <button class="button" onclick="loadUserInfo()">나의 개인정보 확인하기</button>
       <a href="<c:url value='/mypage/calendar' />" class="button calendar-button">캘린더</a>
-      <a href="<c:url value='/' />" class="button">쪽지함</a>
+      <a href="<c:url value='/msg/list'>
+				   <c:param name='userId' value='${userId}'/>
+		 		</c:url>" class="button" > 쪽지함
+	  </a>
     </div>
 
     <div id="userInfoContainer">

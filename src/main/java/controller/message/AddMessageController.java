@@ -13,12 +13,13 @@ public class AddMessageController implements Controller{
         try {
             MessageManager manager = MessageManager.getInstance();
             Message msg = new Message();
-            String recv = request.getParameter("recvId");
-            msg.setRevID(request.getParameter("recvId"));
-            msg.setSenderID(request.getParameter("sendId"));
+            String you = request.getParameter("yourId");
+            String me = request.getParameter("myId");
+            msg.setRevID(request.getParameter("yourId"));
+            msg.setSenderID(request.getParameter("myId"));
             msg.setContent(request.getParameter("content"));
             manager.add(msg);
-            return "redirect:/msg/view?userId=" + recv;
+            return "redirect:/msg/view?yourId=" + you + "&myId=" + me;
             
         } catch (Exception e) { // 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);

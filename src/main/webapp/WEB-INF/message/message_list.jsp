@@ -42,7 +42,8 @@
             <c:forEach var="user" items="${userList}">
                 <li>
                     <a href="<c:url value='/msg/view'>
-                            <c:param name='userId' value='${user}'/>
+                            <c:param name='yourId' value='${user}'/>
+                            <c:param name='myId' value='${userId}'/>
                         </c:url>">
                         ${user}와의 대화
                     </a>

@@ -43,6 +43,7 @@ public class RequestMapping {
         
         // 작성글 관리
         mappings.put("/post/list", new ListPostController()); // 작성글 목록
+        mappings.put("/post/search", new SearchPostController()); // 작성글 검색
         mappings.put("/post/view", new ViewPostController()); // 작성글 조회
         mappings.put("/post/add", new AddPostController()); // 작성글 등록
         mappings.put("/post/delete", new DeletePostController()); // 작성글 삭제

@@ -27,8 +27,8 @@
 	        <div class="card-footer">
 	          <div class="input-group">
 	            <input type="text" class="form-control" placeholder="메시지를 입력하세요" name="content">
-	            <input type="hidden" name="recvId" value="${senderId}" >
-	            <input type="hidden" name="sendId" value="${userId}">
+	            <input type="hidden" name="yourId" value="${yourId}" >
+	            <input type="hidden" name="myId" value="${myId}">
 	            <button class="btn btn-primary" onclick="sendMessage()">전송</button>
 	          </div>
 	        </div>

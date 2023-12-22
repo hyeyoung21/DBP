@@ -9,11 +9,8 @@ public class test {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		Comment comm = null;
-	    PostManager pm = PostManager.getInstance();
-
-	    //String userId, int postId, String description
-        System.out.println(pm.getAllComments(1));
+		MessageManager mm = new MessageManager();
+		System.out.println(mm.findList("user1"));
 
 	}
 

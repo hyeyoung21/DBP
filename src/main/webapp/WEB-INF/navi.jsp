@@ -84,10 +84,12 @@
             <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
         <h1>Hobby Friends</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="검색어를 입력하세요">
-            <button type="button">검색</button>
-        </div>
+        <form id="form" method="post" action="<c:url value='/post/search' />" >
+	      <div class="search-bar">
+	          <input type="text" placeholder="검색어를 입력하세요" name="keyword">
+	          <button type="button" onclick="search()">검색</button>
+	      </div>
+        </form>
     </header>
 
     <!-- Bootstrap Navbar -->
@@ -119,5 +121,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   	<script>
+   		function search() {
+   			form.submit();
+   		}
+	</script>
 </body>
 </html>

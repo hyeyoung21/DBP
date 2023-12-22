@@ -14,11 +14,14 @@ public class ViewMessageController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         MessageManager manager = MessageManager.getInstance();
 
-        String userId = request.getParameter("userId");
+        String yourId = request.getParameter("yourId");
+        String myId = request.getParameter("myId");
         
-        List<Message> msgList = manager.findMessageListByUser(userId);
+        List<Message> msgList = manager.findMessageListByUser(myId, yourId);
         request.setAttribute("msgList", msgList);
-        request.setAttribute("senderId", userId);
+        request.setAttribute("myId", myId);
+        request.setAttribute("yourId", yourId);
+        
         return "/message/message.jsp";
         
     }

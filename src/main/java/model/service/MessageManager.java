@@ -12,7 +12,7 @@ public class MessageManager {
     private static MessageManager messageMan = new MessageManager();
     private MessageDAO messageDAO;
     
-    private MessageManager() {
+    MessageManager() {
         try {
             messageDAO = new MessageDAO();
             
@@ -36,7 +36,7 @@ public class MessageManager {
         return messageDAO.findList(userId);
     }
     
-    public List<Message> findMessageListByUser(String userID) throws SQLException {
-        return messageDAO.findMessageListByUser(userID);
+    public List<Message> findMessageListByUser(String myId, String yourId) throws SQLException {
+        return messageDAO.findMessageListByUser(myId, yourId);
     }
 }

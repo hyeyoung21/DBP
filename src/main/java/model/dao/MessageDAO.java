@@ -53,16 +53,18 @@ public class MessageDAO {
     
     
     public List<String> findList(String userId) throws SQLException {
-        String sql = "SELECT DISTINCT sender_id AS user_id FROM message\r\n"
-                + "UNION "
-                + "SELECT DISTINCT recv_id AS user_id FROM message";              
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {/*userId 들어가는곳 */});  
+        String sql = "SELECT DISTINCT partner_id "
+                + "FROM ("
+                + " SELECT sender_id AS partner_id FROM message WHERE recv_id = ?"
+                + " UNION"
+                + " SELECT recv_id AS partner_id FROM message WHERE sender_id = ?) ";
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, userId});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery(); 
             List<String> userList = new ArrayList<String>();
             while (rs.next()) {
-                userList.add(rs.getString("user_id"));
+                userList.add(rs.getString("partner_id"));
             }
             return userList;
         } catch (Exception ex) {
@@ -73,9 +75,9 @@ public class MessageDAO {
         return null;
     }
     
-    public List<Message> findMessageListByUser(String userId) throws SQLException {
-        String sql = "SELECT * FROM message WHERE sender_id = ? OR recv_id = ?"; 
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, userId});
+    public List<Message> findMessageListByUser(String myId, String yourId) throws SQLException {
+        String sql = "SELECT * FROM message WHERE (sender_id = ? AND recv_id = ?) OR (sender_id = ? AND recv_id = ?)"; 
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {myId, yourId, yourId, myId});
 
         try {
             ResultSet rs = jdbcUtil.executeQuery(); 
