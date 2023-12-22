@@ -58,6 +58,7 @@ public class CommentDAO {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
 			int result = sqlSession.getMapper(CommentMapper.class).deleteComment(commentNo);
+			System.out.println("delete result : " + result + "commentNo :" + commentNo);
 			if (result > 0) {
 				sqlSession.commit();
 			} 
