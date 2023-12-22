@@ -13,10 +13,11 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import model.Comment;
 import repository.mybatis.mapper.CommentMapper;
 
-public class CommentMapperRepository {
+public class CommentDAO {
 	private SqlSessionFactory sqlSessionFactory;
 	
-	public CommentMapperRepository() {
+	public CommentDAO() {
+		System.out.println("생성?");
 		String resource = "mybatis-config.xml";
 		InputStream inputStream;
 		try {
@@ -25,24 +26,6 @@ public class CommentMapperRepository {
 			throw new IllegalArgumentException(e);
 		}
 		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-	}
-	
-	public Comment findCommentByCommentNo(long commentNo) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(CommentMapper.class).selectCommentByPrimaryKey(commentNo);			
-		} finally {
-			sqlSession.close();
-		}
-	}
-
-	public List<Comment> findCommentByCondition(Map<String, Object> condition) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(CommentMapper.class).selectCommentByCondition(condition);			
-		} finally {
-			sqlSession.close();
-		}
 	}
 	
 	public int insertComment(Comment comment) {
@@ -84,14 +67,11 @@ public class CommentMapperRepository {
 		}
 	}
 	
-	public int deleteAllComments() {
+	public List<Comment> getAllComments(long postNo){
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		try {
-			int result = sqlSession.getMapper(CommentMapper.class).deleteAllComments();
-			if (result > 0) {
-				sqlSession.commit();
-			} 
-			return result;		
+			return sqlSession.getMapper(CommentMapper.class).getAllComments(postNo);
+				
 		} finally {
 			sqlSession.close();
 		}

@@ -166,6 +166,7 @@
 				                <div class="col-md-2">
 				                    <a href="<c:url value='/comment/delete'>
 										  		<c:param name='commentID' value='${comment.commentID}'/>
+										  		<c:param name='postID' value='${comment.postID}'/>
 								 			 </c:url>">삭제
 								 	</a>
 				                </div>

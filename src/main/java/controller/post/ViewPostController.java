@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
+import model.service.CommentManager;
 import model.service.PostManager;
 import model.service.UserNotFoundException;
 import model.Comment;
@@ -17,11 +18,13 @@ public class ViewPostController implements Controller {
     	
     	Post post = null;
 		PostManager manager = PostManager.getInstance();
+		CommentManager commengManager = CommentManager.getInstance();
+		
 		int postId = Integer.parseInt(request.getParameter("id"));
 		
 		try {
             post = manager.getPost(postId);
-            List<Comment> commentList = manager.getAllComments(postId);
+            List<Comment> commentList = commengManager.getAllComments(postId);
             
             request.setAttribute("commentList", commentList);             
         } catch (Exception e) {

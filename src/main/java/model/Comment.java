@@ -1,10 +1,12 @@
 package model;
 
+import java.util.Date;
+
 public class Comment {
     private int commentID;
     private String userID;
     private int postID;
-    private String commentDate;
+    private Date commentDate;
     private String content;
     
     public int getCommentID() {
@@ -25,10 +27,10 @@ public class Comment {
     public void setPostID(int postID) {
         this.postID = postID;
     }
-    public String getCommentDate() {
+    public Date getCommentDate() {
         return commentDate;
     }
-    public void setCommentDate(String commentDate) {
+    public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
     }
     public String getContent() {
