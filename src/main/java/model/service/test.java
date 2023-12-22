@@ -1,5 +1,6 @@
 package model.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import model.*;
 
@@ -12,6 +13,9 @@ public class test {
 		MessageManager mm = new MessageManager();
 		System.out.println(mm.findList("user1"));
 
+		for(Comment cmt : comments) {
+			System.out.println(cmt);
+		}
 	}
 
 }

@@ -2,6 +2,8 @@ package model.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import model.User;
 import model.Post;
@@ -109,6 +111,13 @@ public class PostDAO {
         String sql = "SELECT * FROM post_comment Where postid = ? ";
         List<Comment> comments = new ArrayList<>();
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
+        
+		java.sql.Date sqlDate = null;
+		
+		// 문자열을 java.sql.Date로 변환
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
+
+		
 
         try {
             ResultSet resultSet = jdbcUtil.executeQuery();
@@ -119,7 +128,18 @@ public class PostDAO {
                 comment.setUserID(resultSet.getString("userid"));
                 comment.setPostID(resultSet.getInt("postid"));
                 comment.setContent(resultSet.getString("content"));
-                comment.setCommentDate(resultSet.getString("comment_date"));
+
+				String commentDateString = resultSet.getString("comment_date");
+				java.sql.Date sqlDate1 = null;
+				
+				// 문자열을 java.sql.Date로 변환
+				SimpleDateFormat dateFormat1 = new SimpleDateFormat("yy-MM-dd");
+				try {
+				    java.util.Date parsedDate = dateFormat1.parse(commentDateString);
+				    sqlDate1 = new java.sql.Date(parsedDate.getTime());
+				} catch (ParseException e) {
+				    e.printStackTrace();
+				}
                 comments.add(comment);
             }
         } catch (SQLException e) {
@@ -262,7 +282,17 @@ public class PostDAO {
                 comment.setUserID(resultSet.getString("userid"));
                 comment.setPostID(resultSet.getInt("postid"));
                 comment.setContent(resultSet.getString("content"));
-                comment.setCommentDate(resultSet.getString("comment_date"));
+                String commentDateString = resultSet.getString("comment_date");
+				java.sql.Date sqlDate1 = null;
+				
+				// 문자열을 java.sql.Date로 변환
+				SimpleDateFormat dateFormat1 = new SimpleDateFormat("yy-MM-dd");
+				try {
+				    java.util.Date parsedDate = dateFormat1.parse(commentDateString);
+				    sqlDate1 = new java.sql.Date(parsedDate.getTime());
+				} catch (ParseException e) {
+				    e.printStackTrace();
+				}
                 comments.add(comment);
             }
         } catch (SQLException e) {
