@@ -3,7 +3,6 @@ package repository.mybatis;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -14,67 +13,51 @@ import model.Comment;
 import repository.mybatis.mapper.CommentMapper;
 
 public class CommentDAO {
-	private SqlSessionFactory sqlSessionFactory;
-	
-	public CommentDAO() {
-		System.out.println("생성?");
-		String resource = "mybatis-config.xml";
-		InputStream inputStream;
-		try {
-			inputStream = Resources.getResourceAsStream(resource);
-		} catch (IOException e) {
-			throw new IllegalArgumentException(e);
-		}
-		sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-	}
-	
-	public int insertComment(Comment comment) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			int result = sqlSession.getMapper(CommentMapper.class).insertComment(comment);
-			if (result > 0) {
-				sqlSession.commit();
-			} 
-			return result;
-		} finally {
-			sqlSession.close();
-		}
-	}
+    private SqlSessionFactory sqlSessionFactory;
 
-	public int updateComment(Comment comment) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			int result = sqlSession.getMapper(CommentMapper.class).updateComment(comment);
-			if (result > 0) {
-				sqlSession.commit();
-			} 
-			return result;
-		} finally {
-			sqlSession.close();
-		}
-	}
+    public CommentDAO() {
+        String resource = "mybatis-config.xml";
+        try (InputStream inputStream = Resources.getResourceAsStream(resource)) {
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
 
-	public int deleteComment(long commentNo) {
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			int result = sqlSession.getMapper(CommentMapper.class).deleteComment(commentNo);
-			System.out.println("delete result : " + result + "commentNo :" + commentNo);
-			if (result > 0) {
-				sqlSession.commit();
-			} 
-			return result;	
-		} finally {
-			sqlSession.close();
-		}
-	}
-	
-	public List<Comment> getAllComments(long postNo){
-		SqlSession sqlSession = sqlSessionFactory.openSession();
-		try {
-			return sqlSession.getMapper(CommentMapper.class).getAllComments(postNo);
-				
-		} finally {
-			sqlSession.close();
-		}
-	}
+    public int insertComment(Comment comment) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            int result = sqlSession.getMapper(CommentMapper.class).insertComment(comment);
+            if (result > 0) {
+                sqlSession.commit();
+            }
+            return result;
+        }
+    }
+
+    public int updateComment(Comment comment) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            int result = sqlSession.getMapper(CommentMapper.class).updateComment(comment);
+            if (result > 0) {
+                sqlSession.commit();
+            }
+            return result;
+        }
+    }
+
+    public int deleteComment(long commentNo) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            int result = sqlSession.getMapper(CommentMapper.class).deleteComment(commentNo);
+            System.out.println("delete result : " + result + "commentNo :" + commentNo);
+            if (result > 0) {
+                sqlSession.commit();
+            }
+            return result;
+        }
+    }
+
+    public List<Comment> getAllComments(long postNo) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            return sqlSession.getMapper(CommentMapper.class).getAllComments(postNo);
+        }
+    }
 }

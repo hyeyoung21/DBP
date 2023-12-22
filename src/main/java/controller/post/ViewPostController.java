@@ -26,6 +26,10 @@ public class ViewPostController implements Controller {
             post = manager.getPost(postId);
             List<Comment> commentList = commengManager.getAllComments(postId);
             
+            for (Comment comment : commentList) {
+                System.out.println(comment); // 댓글 정보를 출력
+            }
+            
             request.setAttribute("commentList", commentList);             
         } catch (Exception e) {
             return "redirect:/post/PostList";

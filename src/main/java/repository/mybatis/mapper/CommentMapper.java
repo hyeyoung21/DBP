@@ -10,7 +10,7 @@ import java.util.Map;
 import model.Comment;
 
 public interface CommentMapper {
-	@Select("SELECT * FROM post_comment WHERE POSTID = #{postNo}")
+	@Select("SELECT COMMENT_ID as COMMENTID, POSTID, USERID, CONTENT, COMMENT_DATE FROM post_comment WHERE POSTID = #{postNo}")
 	List<Comment> getAllComments(long postNo);
 	
 	@Insert("INSERT INTO POST_COMMENT (COMMENT_ID, POSTID, USERID, CONTENT, COMMENT_DATE) " +

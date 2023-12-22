@@ -109,14 +109,11 @@ public class PostDAO {
         List<Comment> comments = new ArrayList<>();
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});
         
-
-		
 		java.sql.Date sqlDate = null;
 		
 		// 문자열을 java.sql.Date로 변환
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 
-		
 		
 
         try {
