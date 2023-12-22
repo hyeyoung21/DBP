@@ -64,6 +64,7 @@ public class RequestMapping {
                 
         //신고
         mappings.put("/report/report", new ReportController());
+        mappings.put("/report/submit", new ReportSubmitController());
         
         logger.info("Initialized Request Mapping!");
     }
