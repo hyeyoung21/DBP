@@ -74,37 +74,67 @@
 	</script>
 </head>
 <body>
-    <h2>회원가입</h2>
-	<form id="form" method="post" action="<c:url value='/user/joinForm' />">
-        <label for="userId">아이디:</label>
-        <input type="text" id="userId" name="userId" required>
-        <button type="button" onclick="checkDuplicate()">중복확인</button><br>
+    <div class="container mt-5">
+        <h2 class="mb-4">회원가입</h2>
+        <form id="form" method="post" action="<c:url value='/user/joinForm' />">
+            <div class="form-row">
+                <div class="col-md-8 mb-3">
+                    <label for="userId">아이디:</label>
+                    <div class="input-group">
+                        <input type="text" id="userId" name="userId" class="form-control" required>
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-secondary" onclick="checkDuplicate()">중복확인</button>
+                        </div>
+                    </div>
+                </div>
 
-        <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password" required><br>
-        
-        <label for="confirmPassword">비밀번호 확인:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required><br>
-        
-        <label for="name">이름:</label>
-        <input type="text" id="name" name="name" required>
+                <div class="col-md-4 mb-3">
+                    <label for="password">비밀번호:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+            </div>
 
-        <label for="email">이메일:</label>
-        <input type="email" id="email" name="email" required><br>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="confirmPassword">비밀번호 확인:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                </div>
 
-        <label for="gender">성별:</label>
-        <select id="gender" name="gender">
-            <option value="male">남성</option>
-            <option value="female">여성</option>
-        </select><br>
-        
-        <label for="userId">나이:</label>
-        <input type="number" id="age" name="age" required>
-        
-        <label for="location">지역:</label>
-        <input type="text" id="location" name="location" required>
+                <div class="col-md-6 mb-3">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" class="form-control" required>
+                </div>
+            </div>
 
-        <input type="submit" value="가입하기"  onClick="userCreate()">
-    </form>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="email">이메일:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="gender">성별:</label>
+                    <select id="gender" name="gender" class="form-control">
+                        <option value="male">남성</option>
+                        <option value="female">여성</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="age">나이:</label>
+                    <input type="number" id="age" name="age" class="form-control" required>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="location">지역:</label>
+                    <input type="text" id="location" name="location" class="form-control" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" onclick="userCreate()">가입하기</button>
+        </form>
+    </div>
 </body>
 </html>

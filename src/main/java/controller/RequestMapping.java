@@ -9,6 +9,9 @@ import controller.post.*;
 import controller.user.*;
 import controller.apply.*;
 import controller.mypage.*;
+import controller.message.*;
+import controller.report.*;
+
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -54,6 +57,14 @@ public class RequestMapping {
         //댓글 관리
         mappings.put("/comment/add", new AddCommentController()); // 신청글 보기
         mappings.put("/comment/delete", new DeleteCommentController()); // 신청글 보기
+        
+        mappings.put("/msg/list", new ListMessageController()); // 신청글 보기
+        mappings.put("/msg/view", new ViewMessageController()); // 신청글 목록
+        mappings.put("/msg/add", new AddMessageController()); // 신청
+                
+        //신고
+        mappings.put("/report/report", new ReportController());
+        mappings.put("/report/submit", new ReportSubmitController());
         
         logger.info("Initialized Request Mapping!");
     }

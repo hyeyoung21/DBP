@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=utf-8" %>
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="model.Report" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -59,11 +60,20 @@
         function addComment() {
         	addComment-form.submit();
         }
-        
+        function reportPost() {
+        	reportPost-form.submit();
+        }
+
+        function reportComment() {
+            var form = document.getElementById("reportComment-form");
+            form.action = "<c:url value='/report/report'/>";
+            form.submit();
+        }
+
     </script>
 
     <h3 class="display-6 text-left">${post.title}</h3>
-   	<span class="text-muted">작성자: ${post.creator}</span>
+    <span class="text-muted">작성자: ${post.creator}</span>
 	
 	
 	<hr size="10px"/>
@@ -112,10 +122,17 @@
 
 	    <input type="hidden" id="postId" name="postId" value="${post.id}">
 	    <div class="btn-container">
-		    <c:if test="${userId ne post.creator }">
-			     <button class="btn btn-primary" onclick="showInput()">신청하기</button>
-			     <button class="btn btn-info" onclick="sendMessage()">쪽지 보내기</button>
-		    </c:if>
+			<c:if test="${userId ne post.creator }">
+    			<button class="btn btn-primary" onclick="showInput()">신청하기</button>
+    			<button class="btn btn-info" onclick="sendMessage()">쪽지 보내기</button>
+    			<form id='reportPost-form' method='post' action="<c:url value='/report/report'/>" style="display: inline;">
+        			<input type="hidden" id="type" name="type" value="게시글">
+        			<input type="hidden" id="postId" name="postTitle" value="${post.title}">
+        			<input type="hidden" id="userId" name="userId" value="${post.creator}">
+        			<input type="hidden" id="content" name="content" value="${post.content}">
+        			<button class="btn btn-danger" onclick="reportPost()">신고하기</button>
+    			</form>
+			</c:if>
 		    <c:if test="${userId eq post.creator }">
 		    	<form id="update-form" method="get" action="<c:url value='/post/update' />">
 		    		<input type="hidden" id="userId" name="userId" value="${userId}">
@@ -142,43 +159,50 @@
 		</form>
     </div>
 
-    <div class="mt-5">
-    	<form id="addComment-form" method="post" action="<c:url value='/comment/add' />"  >
-	        <h3>댓글 작성</h3>
-	        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
-			<input type="hidden" id="userId" name="userId" value="${userId}">
-	        <input type="hidden" id="postId" name="postId" value="${post.id}">
-	        <button class="btn btn-primary mt-3" onclick="addComment()" name="action" value="add">댓글 작성</button>
-        </form>
-        
-        <form id="deleteComment-form" method="post" action="<c:url value='/comment/delete' />" >
-	        <ul id="comment-list" class="list-group mt-3">
-			    <c:forEach var="comment" items="${commentList}">
-			        <li class="list-group-item">
-			            <div class="row">
-			                <div class="col-md-2">
-			                    <span class="text-muted">${comment.userID}</span>
-			                </div>
-			                <div class="col-md-8">
-			                    <span class="text-muted">${comment.commentDate}</span>
-			                </div>
-			                <c:if test="${userId eq comment.userID}">
-				                <div class="col-md-2">
-				                    <a href="<c:url value='/comment/delete'>
-										  		<c:param name='commentID' value='${comment.commentID}'/>
-								 			 </c:url>">삭제
-								 	</a>
-				                </div>
-			                </c:if>
-			            </div>
-			            <div class="mt-2">
-			                <p>${comment.content}</p>
-			            </div>
-			        </li>
-			    </c:forEach>
-			</ul>
-		</form>
-    </div>
+<div class="mt-5">
+    <form id="addComment-form" method="post" action="<c:url value='/comment/add' />">
+        <h3>댓글 작성</h3>
+        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+        <input type="hidden" id="userId" name="userId" value="${userId}">
+        <input type="hidden" id="postId" name="postId" value="${post.id}">
+        <button class="btn btn-primary mt-3" onclick="addComment()" name="action" value="add">댓글 작성</button>
+    </form>
+
+    <ul id="comment-list" class="list-group mt-3">
+        <c:forEach var="comment" items="${commentList}">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-md-2">
+                        <span class="text-muted">${comment.userID}</span>
+                    </div>
+                    <div class="col-md-8">
+                        <span class="text-muted">${comment.commentDate}</span>
+                    </div>
+                    <div class="col-md-2">
+                        <c:if test="${userId ne comment.userID}">
+                            <form id='reportComment-form-${comment.commentID}' method='post' action="<c:url value='/report/report'/>">
+                                <input type="hidden" id="type" name="type" value="댓글">
+                                <input type="hidden" id="postId" name="postTitle" value="${post.title}">
+                                <input type="hidden" id="userId" name="userId" value="${comment.userID}">
+                                <input type="hidden" id="content" name="content" value="${comment.content}">
+                                <button class="btn btn-danger" onclick="reportComment()" name="action" value="reportComment">신고하기</button>
+                            </form>
+                        </c:if>
+                        <c:if test="${userId eq comment.userID}">
+                            <form id='deleteComment-form-${comment.commentID}' method='post' action="<c:url value='/comment/delete'/>">
+                                <input type="hidden" name="commentID" value="${comment.commentID}">
+                                <button class="btn btn-warning" onclick="deleteComment()">삭제</button>
+                            </form>
+                        </c:if>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <p>${comment.content}</p>
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

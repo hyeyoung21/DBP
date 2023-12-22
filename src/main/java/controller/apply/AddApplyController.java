@@ -20,6 +20,7 @@ public class AddApplyController implements Controller{
             String userId = request.getParameter("userId");
             int postId = Integer.parseInt(request.getParameter("postId"));
             String description = request.getParameter("ApplyMessage");
+            
             manager.add(userId, postId, description);
             return "redirect:/main"; 
             

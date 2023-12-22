@@ -1,6 +1,6 @@
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,21 +15,7 @@
             max-width: 1200px; /* 전체 화면 크기 고정 */
             margin: 0 auto; /* 가운데 정렬 */
         }
-
-        header {
-            background-color: #fff;
-            color: black;
-            padding: 10px;
-            text-align: center; /* 중앙 정렬로 변경 */
-        }
-
-        nav {
-            background-color: #c0eb75; /* 연한 연두색 */
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-        }
-
+        
         section {
             padding: 20px;
         }
@@ -119,30 +105,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="user-links">
-			<c:if test="${userId ne null}">
-				<a href="<c:url value='/user/logout'/>">${userId}(로그아웃)</a>
-			</c:if>
-			<c:if test="${userId eq null}">
-				<a href="<c:url value='/user/loginForm'/>">로그인</a>
-			</c:if>
-			
-			
-            <a href="<c:url value='/user/joinForm' />">회원가입</a>
-        </div>
-        <h2>취미 매칭 프로그램</h2>
-        <div class="search-bar">
-            <input type="text" placeholder="검색어를 입력하세요">
-            <button type="button">검색</button>
-        </div>
-    </header>
-
-    <nav>
-        <a href="<c:url value='/mypage/mypage' />">마이페이지</a>
-        <a href="<c:url value='/post/add' />">모집하기</a>
-        <a href="<c:url value='/user/view' />">프로필</a>
-    </nav>
+    <%@include file="/WEB-INF/navi.jsp" %>
 
     <section>
         <h2>인기 모집글</h2>
@@ -166,11 +129,11 @@
         <ul class="recruitment-list" id="localRecruitments">
             <!-- 여기에 지역 최신글 보여주기 -->
             <li class="recruitment-item">
-                <h3>모집글 제목 3</h3>
+                <h4>모집글 제목 3</h4>
                 <p>모집글 내용 3</p>
             </li>
             <li class="recruitment-item">
-                <h3>모집글 제목 4</h3>
+                <h4>모집글 제목 4</h4>
                 <p>모집글 내용 4</p>
             </li>
             <!-- 기타 모집글들 -->
