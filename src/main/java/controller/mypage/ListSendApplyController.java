@@ -1,4 +1,4 @@
-package controller.apply;
+package controller.mypage;
 
 import java.util.List;
 
@@ -6,18 +6,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
-import model.Post;
+import model.Apply;
 import model.service.ApplyManager;
 
-public class ApplyListController implements Controller {
-    @Override
+public class ListSendApplyController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        // TODO Auto-generated method stub
         ApplyManager manager = ApplyManager.getInstance();
-        List<Post> postList = manager.findAllList();
+        String userId = request.getParameter("userId");
+        List<Apply> applyList = manager.findSendedApply(userId);
         
-        request.setAttribute("postList", postList);
-        return "/apply/ApplyList.jsp";
+        request.setAttribute("applyList", applyList);
+        return "/apply/sendedApply.jsp";
     }
-    
 }

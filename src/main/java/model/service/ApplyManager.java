@@ -11,7 +11,7 @@ public class ApplyManager {
     private static ApplyManager applyMan = new ApplyManager();
     private ApplyDAO applyDAO;
     
-    private ApplyManager() {
+    ApplyManager() {
         try {
             applyDAO = new ApplyDAO();
             
@@ -35,12 +35,20 @@ public class ApplyManager {
         return applyDAO.update(applyID);
     }
     
-    public List<Post> findList() throws SQLException {
-        return applyDAO.findList();
+    public List<Post> findAllList() throws SQLException {
+        return applyDAO.findAllList();
     }
     
-    public List<Apply> findApplyListByPost(int postId) throws SQLException {
-        return applyDAO.findApplyListByPost(postId);
+    public List<Post> findListByPost(int postId) throws SQLException {
+        return applyDAO.findListByPost(postId);
+    }
+    
+    public List<Apply> findRecvApply(String userId) throws SQLException {
+        return applyDAO.findRecvApply(userId);
+    }
+    
+    public List<Apply> findSendedApply(String userId) throws SQLException {
+        return applyDAO.findSendedApply(userId);
     }
 
 }

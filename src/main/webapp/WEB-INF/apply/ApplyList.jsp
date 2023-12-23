@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <ul id="list">
-            <c:forEach var="post" items="${applyList}">
+            <c:forEach var="post" items="${postList}">
                 <li>
                     <a href="<c:url value='/apply/view'>
                             <c:param name='id' value='${post.id}'/>

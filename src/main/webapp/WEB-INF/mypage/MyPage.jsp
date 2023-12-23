@@ -82,6 +82,14 @@
 				   <c:param name='userId' value='${userId}'/>
 		 		</c:url>" class="button"> 내가 쓴 글 보기
 	  </a>
+	  <a href="<c:url value='/mypage/sendApply'>
+				   <c:param name='userId' value='${userId}'/>
+		 		</c:url>" class="button" > 보낸 신청 보기
+      </a>
+      <a href="<c:url value='/mypage/recvApply'>
+				   <c:param name='userId' value='${userId}'/>
+		 		</c:url>" class="button" > 받은 신청 보기
+      </a>
       <a href="<c:url value='/mypage/myComment'>
 				   <c:param name='userId' value='${userId}'/>
 		 		</c:url>" class="button" > 내가 쓴 댓글 보기

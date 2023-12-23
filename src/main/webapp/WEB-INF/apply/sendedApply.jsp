@@ -15,7 +15,7 @@
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
-                        <th>사용자</th>
+                        <th>포스트</th>
                         <th>신청 상태</th>
                         <th>메세지</th>
                         <th>수정</th>
@@ -24,13 +24,12 @@
                 <tbody>
                     <c:forEach var="apply" items="${applyList}">
                         <tr>
-                            <td>${apply.userID}</td>
+                            <td>${apply.postTitle}</td>
                             <td>${apply.status}</td>
                             <td>${apply.description}</td>
                             <td>
                                 <input type="hidden" name="applyID" value="${apply.getStringID()}">
-                                <button type="submit" class="btn btn-primary" name="action" value="edit">수락</button>
-                                <button type="submit" class="btn btn-danger" name="action" value="delete">거부</button>
+                                <button type="submit" class="btn btn-danger" name="action" value="delete">삭제</button>
                             </td>
                         </tr>
                     </c:forEach>

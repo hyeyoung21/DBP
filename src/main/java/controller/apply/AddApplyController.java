@@ -8,11 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import controller.Controller;
 import controller.user.RegisterUserController;
-import model.Apply;
 import model.service.ApplyManager;
 
 public class AddApplyController implements Controller{
-    private static final Logger log = LoggerFactory.getLogger(RegisterUserController.class);
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {

@@ -82,7 +82,7 @@ public class PostDAO {
     }
 
     public void deletePost(int postId) throws Exception {
-        String sql = "DELETE FROM POST WHERE id = ?";
+        String sql = "DELETE POST WHERE post_id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{postId});
         executeUpdate();
     }

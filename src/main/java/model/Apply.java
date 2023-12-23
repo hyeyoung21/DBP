@@ -16,6 +16,11 @@ public class Apply {
         this.status = status;
         this.description = description;
     }
+    
+    public Apply() {
+        // TODO Auto-generated constructor stub
+    }
+    
     public String getStringID() {
         return String.valueOf(aID);
     }

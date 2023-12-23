@@ -63,11 +63,13 @@
         function reportPost() {
         	reportPost-form.submit();
         }
-
         function reportComment() {
             var form = document.getElementById("reportComment-form");
             form.action = "<c:url value='/report/report'/>";
             form.submit();
+        } 
+        function deletePost() {
+        	alert("삭제 됐습니다");
         }
 
     </script>
@@ -134,12 +136,13 @@
     			</form>
 			</c:if>
 		    <c:if test="${userId eq post.creator }">
-		    	<form id="update-form" method="get" action="<c:url value='/post/update' />">
-		    		<input type="hidden" id="userId" name="userId" value="${userId}">
-	               	<input type="hidden" id="postId" name="postId" value="${post.id}">
-			    	<button class="btn btn-danger" onclick="deletePost()">삭제</button>
-			    	<button class="btn btn-warning" onclick="updatePost()">수정</button>
-		    	</form>
+	    		<input type="hidden" id="userId" name="userId" value="${userId}">
+               	<input type="hidden" id="postId" name="postId" value="${post.id}">
+		    	<a class="btn btn-danger" href='<c:url value='/post/delete'>
+		    		<c:param name="postId" value="${post.id}"/> </c:url>'> 삭제</a>
+		    	<a class="btn btn-warning" href='<c:url value='/post/update'> 
+		    		<c:param name="postId" value="${post.id}"/> </c:url>' onclick="deletePost()"> 수정</a>
+      </a>
 		    </c:if>
 	    </div>
 

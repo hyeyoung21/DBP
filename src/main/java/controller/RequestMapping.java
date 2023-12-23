@@ -37,6 +37,8 @@ public class RequestMapping {
         
         //마이페이지
         mappings.put("/mypage/mypage",new MyPageController());
+        mappings.put("/mypage/sendApply",new ListSendApplyController());
+        mappings.put("/mypage/recvApply",new ListRecvApplyController());
         mappings.put("/mypage/calendar",new CalendarController());
         mappings.put("/mypage/myComment",new ListMyCommentController());
         mappings.put("/mypage/myPost",new ListMyPostController());

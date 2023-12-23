@@ -10,12 +10,8 @@ public class test {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		MessageManager mm = new MessageManager();
-		System.out.println(mm.findList("user1"));
-
-		for(Comment cmt : comments) {
-			System.out.println(cmt);
-		}
+		ApplyManager am = new ApplyManager();
+		System.out.println(am.findListByUser("user1"));
 	}
 
 }
