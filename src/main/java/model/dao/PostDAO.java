@@ -92,10 +92,24 @@ public class PostDAO {
         executeUpdateWithPost(sql, post);
     }
 
-    public void deletePost(int postId) throws Exception {
+    public int deletePost(int postId) throws Exception {
         String sql = "DELETE POST WHERE post_id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{postId});
-        executeUpdate();
+        
+        try {	
+			int result = jdbcUtil.executeUpdate();
+			
+			return result;
+		} catch (Exception e) {
+	        // SQLException이 발생했을 때의 예외 처리
+			jdbcUtil.rollback();
+	        e.printStackTrace(); // 혹은 로그를 출력하거나, 필요한 조치를 취합니다.
+	    }
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
     }
 
     private List<Post> executeQueryAndMapPosts(String sql, Object[] params) {
