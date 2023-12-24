@@ -76,19 +76,21 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int delete(String userId) throws SQLException {
-		String sql = "delete user_info where user_id = ?";	
+		
+		String sql = "delete from user_info where user_id = ?";	
 		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 		
-		try {				
+		try {	
+			System.out.println("result:" + 0);
 			int result = jdbcUtil.executeUpdate();	// delete 문 실행
-			System.out.println("result:" + "delete");
+			System.out.println("result:" + result);
 			return result;
-		} catch (Exception ex) {
-			
+		} catch (Exception e) {
+	        // SQLException이 발생했을 때의 예외 처리
 			jdbcUtil.rollback();
-			ex.printStackTrace();
-		}
+	        e.printStackTrace(); // 혹은 로그를 출력하거나, 필요한 조치를 취합니다.
+	    }
 		finally {
 			jdbcUtil.commit();
 			jdbcUtil.close();	// resource 반환
