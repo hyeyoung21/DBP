@@ -16,10 +16,10 @@ public class ModifyApplyController implements Controller {
         int applyID = Integer.parseInt(request.getParameter("applyID"));
         if ("edit".equals(action)) {
             manager.update(applyID);
-            return "redirect:/apply/list"; 
+            return "redirect:/mypage/mypage"; 
         } else  {
             manager.delete(applyID);
-            return "redirect:/apply/list"; 
+            return "redirect:/mypage/mypage"; 
         }
          //redirect / forwarding
     }

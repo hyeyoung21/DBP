@@ -95,7 +95,13 @@ public class PostDAO {
     public void deletePost(int postId) throws Exception {
         String sql = "DELETE POST WHERE post_id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[]{postId});
-        executeUpdate();
+        try {
+            jdbcUtil.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
     }
 
     private List<Post> executeQueryAndMapPosts(String sql, Object[] params) {
@@ -211,15 +217,6 @@ public class PostDAO {
     }
 
 
-    private void executeUpdate() throws Exception {
-        try {
-            jdbcUtil.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-    }
 
     private Post mapResultSetToPost(ResultSet resultSet) throws SQLException {
         Post post = new Post();

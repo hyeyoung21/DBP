@@ -132,7 +132,12 @@
 	    <div class="btn-container">
 			<c:if test="${userId ne post.creator }">
     			<button class="btn btn-primary" onclick="showInput()">신청하기</button>
-    			<button class="btn btn-info" onclick="sendMessage()">쪽지 보내기</button>
+    			<a class="btn btn-primary" href="<c:url value='/msg/view'>
+                            <c:param name='yourId' value='${post.creator}'/>
+                            <c:param name='myId' value='${userId}'/>
+                        </c:url>">
+                        쪽지 보내기
+                </a>
     			<form id='reportPost-form' method='post' action="<c:url value='/report/report'/>" style="display: inline;">
         			<input type="hidden" id="type" name="type" value="게시글">
         			<input type="hidden" id="postId" name="postTitle" value="${post.title}">
@@ -147,7 +152,7 @@
 		    	<a class="btn btn-danger" href='<c:url value='/post/delete'>
 		    		<c:param name="postId" value="${post.id}"/> </c:url>'> 삭제</a>
 		    	<a class="btn btn-warning" href='<c:url value='/post/update'> 
-		    		<c:param name="postId" value="${post.id}"/> </c:url>' onclick="deletePost()"> 수정</a>
+			    	<c:param name="postId" value="${post.id}"/> </c:url>'> 수정</a>
 		    </c:if>
 	    </div>
 

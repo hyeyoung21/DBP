@@ -32,7 +32,7 @@ public class ListUserController implements Controller {
 		UserManager manager = UserManager.getInstance();
 		List<User> userList = manager.findUserList();
 		// List<User> userList = manager.findUserList(currentPage, countPerPage);
-		userList.forEach(user -> System.out.println(user));
+//		userList.forEach(user -> System.out.println(user));
 		// userList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
 		request.setAttribute("userList", userList);				
 //		request.setAttribute("curUserId", 
