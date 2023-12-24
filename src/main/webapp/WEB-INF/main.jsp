@@ -111,7 +111,19 @@
 	<section>
 	    <h2>최신글</h2>
 	    <ul class="recruitment-list" id="localRecruitments">
-	  	  <c:forEach var="post" items="${postList}" >
+	  	  <c:forEach var="post" items="${recentList}" >
+		 	   <li class="recruitment-item">
+		        	<h3>${post.title}</h3>
+                    <p>${fn:substring(post.content, 0, 15)}...</p>
+		        </li>
+	        </c:forEach>
+	    </ul>
+	    <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
+	</section>
+	<section>
+	    <h2>지역 최신글</h2>
+	    <ul class="recruitment-list" id="localRecruitments">
+	  	  <c:forEach var="post" items="${locList}" >
 		 	   <li class="recruitment-item">
 		        	<h3>${post.title}</h3>
                     <p>${fn:substring(post.content, 0, 15)}...</p>

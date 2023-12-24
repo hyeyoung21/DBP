@@ -26,6 +26,12 @@ public class PostDAO {
         return executeQueryAndMapPosts(sql, null);
     }
     
+    public List<Post> getTop3PostsFromLoc(String loc) {
+        String sql = "SELECT * FROM post WHERE post_loc = ? "
+                + "ORDER BY post_ID DESC OFFSET 0 ROWS FETCH FIRST 3 ROWS ONLY";
+        return executeQueryAndMapPosts(sql, new Object[] {loc});
+    }
+    
     public Post getPost(int postId) {
         String sql = "SELECT * FROM post WHERE post_id = ?";
         jdbcUtil.setSqlAndParameters(sql, new Object[] {postId});   // JDBCUtil에 query문과 매개 변수 설정
