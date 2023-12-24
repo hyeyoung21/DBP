@@ -81,6 +81,16 @@
                     <a href="<c:url value='/user/loginForm'/>">로그인</a>
                 </c:otherwise>
             </c:choose>
+            <c:choose>
+			    <c:when test="${userId ne null}">
+			        <c:choose>
+			            <c:when test="${userId eq 'admin'}">
+			                <!-- 'admin'일 때 보여줄 링크 또는 내용 -->
+			                <a href="<c:url value='/user/list'/>">회원관리</a>
+			            </c:when>
+			        </c:choose>
+			    </c:when>
+			</c:choose>
             <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
         <h1>Hobby Friends</h1>

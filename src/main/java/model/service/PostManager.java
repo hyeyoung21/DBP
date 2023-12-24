@@ -101,5 +101,9 @@ public class PostManager {
     public List<Comment> findCommentListByUser(String userid) throws SQLException {
         return postDAO.findCommentListByUser(userid);
     }
+    
+    public List<Post> findAppliedPostByUser(String userid) throws SQLException{
+    	return postDAO.findAppliedPostByUser(userid);
+    }
 
 }

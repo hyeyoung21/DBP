@@ -9,9 +9,16 @@ import model.*;
 public class test {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
-		ApplyManager am = new ApplyManager();
-		System.out.println(am.findListByUser("user1"));
+		PostManager m = PostManager.getInstance();
+		
+		List<Post> list = (List<Post>)m.findAppliedPostByUser("user1");
+		
+		for (Post post : list) {
+		    System.out.println("ID: " + post.getId());
+		    System.out.println("Title: " + post.getTitle());
+		    System.out.println("Location: " + post.getLocation());
+		    System.out.println("DateTime: " + post.getDateTime());
+		    // 기타 필요한 정보들을 가져와 출력하는 방식으로 추가 가능
+		}
 	}
-
 }

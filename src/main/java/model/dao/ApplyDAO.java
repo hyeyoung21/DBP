@@ -53,6 +53,24 @@ public class ApplyDAO {
         return 0;
     }
     
+    public int deleteById(String userId, int postId) throws SQLException {
+        String sql = "DELETE FROM apply WHERE userid=? and postid=?";       
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, postId});   // JDBCUtil에 delete문과 매개 변수 설정
+
+        try {               
+            int result = jdbcUtil.executeUpdate();  // delete 문 실행
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        }
+        finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();   // resource 반환
+        }       
+        return 0;
+    }
+    
     public int update(int applyID) throws SQLException {
         String sql = "UPDATE APPLY "
                     + "SET status= '신청완료' "
@@ -148,6 +166,7 @@ public class ApplyDAO {
         }
         return null;
     }
+    
     
     public List<Apply> findSendedApply(String userId) throws SQLException {
         String sql = "SELECT a.applyid, a.userId, a.status, a.description, p.post_title "

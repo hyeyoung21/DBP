@@ -76,6 +76,7 @@
 			 		 </c:url>">수정
 			  </a>
 		  </td>
+		  
 	    </tr>
 	    
     </c:forEach> 

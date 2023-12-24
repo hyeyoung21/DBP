@@ -76,16 +76,16 @@ public class UserDAO {
 	 * 사용자 ID에 해당하는 사용자를 삭제.
 	 */
 	public int delete(String userId) throws SQLException {
-		String sql1 = "DELETE FROM USER_INFO WHERE USER_ID=?";	
-		String sql2 = "DELETE FROM APPLY WHERE USERID=?";
+		String sql = "delete user_info where user_id = ?";	
 		
-		jdbcUtil.setSqlAndParameters(sql1, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
-		jdbcUtil.setSqlAndParameters(sql2, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
-
+		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
+		
 		try {				
 			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			System.out.println("result:" + "delete");
 			return result;
 		} catch (Exception ex) {
+			
 			jdbcUtil.rollback();
 			ex.printStackTrace();
 		}
@@ -201,35 +201,6 @@ public class UserDAO {
 		return null;
 	}
 
-	/**
-	 * 특정 meeting에 속한 사용자들을 검색하여 List에 저장 및 반환
-	 */
-//	public List<User> findUsersInCommunity(int communityId) throws SQLException {
-//        String sql = "SELECT userId, name, email, phone FROM UserInfo "
-//     				+ "WHERE commId = ?";                         
-//		jdbcUtil.setSqlAndParameters(sql, new Object[] {communityId});	// JDBCUtil에 query문과 매개 변수 설정
-//		
-//		try {
-//			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-//			List<User> memList = new ArrayList<User>();	// member들의 리스트 생성
-//			while (rs.next()) {
-//				User member = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
-//					rs.getString("userId"),
-//					rs.getString("name"),
-//					rs.getString("email"),
-//					rs.getString("phone"));
-//				memList.add(member);			// List에 Community 객체 저장
-//			}		
-//			return memList;					
-//				
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		} finally {
-//			jdbcUtil.close();		// resource 반환
-//		}
-//		return null;
-//	}
-	
 	/**
 	 * 특정 커뮤니티에 속한 사용자들의 수를 count하여 반환
 	 */

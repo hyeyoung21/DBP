@@ -8,35 +8,31 @@ import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.user.UserSessionUtils;
-import model.User;
-import model.Apply;
 import model.Post;
 import model.service.ApplyManager;
-import model.service.PostManager;
 import model.service.UserManager;
 
-public class CalendarController  implements Controller {
+public class CalendarDeleteController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
+		String userId = UserSessionUtils.getLoginUserId(session);
 		
 		if(!UserSessionUtils.hasLogined(session)) {
 			request.setAttribute("popupmsg", "로그인 후 이용해주세요.");
 			return "redirect:/user/loginForm";
 		}
 		try {
-			String userId = UserSessionUtils.getLoginUserId(session);
-			PostManager m = PostManager.getInstance();
-			List<Post> list = (List<Post>)m.findAppliedPostByUser("user1");
+			int postId = Integer.parseInt(request.getParameter("postid"));
 			
-			request.setAttribute("postList", list);
+			ApplyManager applyManager = ApplyManager.getInstance();
+			applyManager.deleteById(userId, postId);
 			
-			return "/mypage/calendar.jsp";
+			return "redirect:/mypage/calendar";
 		}	catch(Exception e) {
 			return "redirect:/main";
 		}
 	}
-
 }

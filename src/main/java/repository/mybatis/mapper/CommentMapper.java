@@ -20,6 +20,4 @@ public interface CommentMapper {
 	@Delete("DELETE POST_COMMENT WHERE COMMENT_ID = #{commentNo}")
 	int deleteComment(long commentNo);
 	
-	@Update("UPDATE post_comment SET content = #{content} WHERE comment_id = #{commentID}")
-	int updateComment(Comment comment);
 }
