@@ -49,7 +49,15 @@
             display: flex;
             justify-content: flex-end;
         }
-
+        
+		.main-link {
+		    text-decoration: none;
+		    color: #333;
+		}
+		
+		.main-link:hover {
+		    text-decoration: none; /* 호버 시에 밑줄 추가 */
+		}
         input[type="text"] {
             padding: 8px;
             border: none; /* Remove border */
@@ -93,7 +101,9 @@
 			</c:choose>
             <a href="<c:url value='/user/joinForm' />">회원가입</a>
         </div>
-        <h1>Hobby Friends</h1>
+        <a class="main-link" href="<c:url value='/main'/>">
+		    <h1>Hobby Friends</h1>
+		</a>
         <form id="form" method="post" action="<c:url value='/post/search' />" >
 	      <div class="search-bar">
 	          <input type="text" placeholder="검색어를 입력하세요" name="keyword">
