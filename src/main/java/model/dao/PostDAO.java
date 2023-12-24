@@ -225,15 +225,6 @@ public class PostDAO {
     }
 
 
-    private void executeUpdate() throws Exception {
-        try {
-            jdbcUtil.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-    }
 
     private Post mapResultSetToPost(ResultSet resultSet) throws SQLException {
         Post post = new Post();

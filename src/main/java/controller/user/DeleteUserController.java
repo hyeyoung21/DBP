@@ -18,6 +18,8 @@ public class DeleteUserController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		String deleteId = request.getParameter("userId");
     	log.debug("Delete User : {}", deleteId);
+    	
+    	System.out.println("delete");
 
 		UserManager manager = UserManager.getInstance();
 		
