@@ -18,10 +18,14 @@ public class MainController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         String userId = UserSessionUtils.getLoginUserId(session);
-        UserManager um = UserManager.getInstance();
-        User user = um.findUser(userId);
-        String loc = user.getLocation();
-        
+        String loc = null;
+        if (userId == null )
+            loc = "서울";
+        else {
+            UserManager um = UserManager.getInstance();
+            User user = um.findUser(userId);
+            loc = user.getLocation();
+        }
         PostManager pm = PostManager.getInstance();
         List<Post> recentList = pm.getTop3Posts();
         List<Post> locList = pm.getTop3PostsFromLoc(loc);
