@@ -42,9 +42,9 @@
             <c:forEach var="post" items="${postList}">
                 <li>
                     <a href="<c:url value='/apply/view'>
-                            <c:param name='id' value='${post.id}'/>
+                            <c:param name='id' value='${post.postID}'/>
                         </c:url>">
-                        ${post.id} : ${post.title}
+                        ${post.postID} : ${post.postTitle}
                     </a>
                 </li>
             </c:forEach>

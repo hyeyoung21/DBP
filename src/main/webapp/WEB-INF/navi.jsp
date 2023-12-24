@@ -116,9 +116,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value='/post/add' />">모집하기</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/mypage/mypage' />">프로필</a>
-                </li>
             </ul>
         </div>
     </nav>
