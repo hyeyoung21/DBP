@@ -66,11 +66,11 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <p><strong>일정명:</strong> <span id="eventTitle"></span></p>
-      <p><strong>내용:</strong> <span id="eventContent"></span></p>
       <p><strong>장소:</strong> <span id="eventLocation"></span></p>
       <p><strong>성별:</strong> <span id="eventGender"></span></p>
       <p><strong>나이:</strong> <span id="eventAge"></span></p>
       <!-- 여기에 원하는 일정 정보 추가 -->
+      <button id="deleteButton">삭제</button>
     </div>
   <script>
   $(function(){
@@ -82,7 +82,6 @@
           location: '${post.location}',
           age: '${post.age}',
           gender: '${post.gender}',
-          content: '${post.content}',
           start: '${post.dateTime}', // 여기서 'dateTime'는 'Post' 객체의 날짜/시간 속성일 것입니다.
         }<c:if test="${!status.last}">,</c:if>
       </c:forEach>
@@ -102,11 +101,14 @@
     });
     
     calendar.on('eventClick', function(info) {
+
+        $('#eventId').text(info.event.extendedProps.id);
         $('#eventTitle').text(info.event.title);
         $('#eventLocation').text(info.event.extendedProps.location);
         $('#eventAge').text(info.event.extendedProps.age);
         $('#eventGender').text(info.event.extendedProps.gender);
-        $('#eventContent').text(info.event.extendedProps.content);
+        
+        $('#deleteButton').attr('data-postid', info.event.id);
         // 모달 표시
         $('#eventModal').css('display', 'block');
       });
@@ -122,7 +124,14 @@
           $('#eventModal').css('display', 'none');
         }
       });
-
+      
+      $('#deleteButton').click(function () {
+          var postid = $(this).attr('data-postid');
+          if (postid) {
+            window.location.href = '<c:url value="/mypage/calendar/delete"/>' + '?postid=' + postid;
+          }
+        });
+      
     calendar.render();
     
     

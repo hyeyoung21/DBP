@@ -43,7 +43,8 @@ public class UserManager {
 		return userDAO.update(user);
 	}	
 	
-	public int remove(String userId) throws SQLException, UserNotFoundException {
+	public int delete(String userId) throws SQLException, UserNotFoundException {
+		System.out.println("result:" + "manager");
 	    return userDAO.delete(userId);
 	}
 	

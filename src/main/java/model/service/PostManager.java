@@ -99,6 +99,9 @@ public class PostManager {
     
     public PostDAO getPostDAO() {
         return this.postDAO;
+}
+    public List<Post> findAppliedPostByUser(String userid) throws SQLException{
+    	return postDAO.findAppliedPostByUser(userid);
     }
 
 }

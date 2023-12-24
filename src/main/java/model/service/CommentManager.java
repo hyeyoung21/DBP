@@ -33,15 +33,6 @@ public class CommentManager {
         }
     }
 	
-	public void updateComment(Comment comment) throws SQLException {
-        try {
-        	commentDAO.updateComment(comment);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-	
 	public void deleteComment(long commentNo) throws SQLException {
         try {
         	commentDAO.deleteComment(commentNo);

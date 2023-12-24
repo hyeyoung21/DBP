@@ -31,6 +31,10 @@ public class ApplyManager {
         return applyDAO.delete(applyId);
     }
     
+    public int deleteById(String userId, int postId) throws SQLException {
+        return applyDAO.deleteById(userId, postId);
+    }
+    
     public int update(int applyID) throws SQLException {
         return applyDAO.update(applyID);
     }

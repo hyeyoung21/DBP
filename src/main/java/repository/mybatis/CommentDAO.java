@@ -34,16 +34,6 @@ public class CommentDAO {
         }
     }
 
-    public int updateComment(Comment comment) {
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            int result = sqlSession.getMapper(CommentMapper.class).updateComment(comment);
-            if (result > 0) {
-                sqlSession.commit();
-            }
-            return result;
-        }
-    }
-
     public int deleteComment(long commentNo) {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             int result = sqlSession.getMapper(CommentMapper.class).deleteComment(commentNo);

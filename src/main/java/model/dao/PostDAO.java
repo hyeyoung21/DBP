@@ -253,6 +253,41 @@ public class PostDAO {
 
         return posts;
     }
+    
+    public List<Post> findAppliedPostByUser(String userid){
+    	String sql = "SELECT post_ID, post_title, post_content, post_gender, post_age, post_loc, post_participants, meetingType, post_date "
+                + "FROM post "
+                + "JOIN apply a ON post.post_id = a.postid "
+                + "WHERE a.userid = ?";
+
+
+    	jdbcUtil.setSqlAndParameters(sql, new Object[] {userid});  
+        List<Post> posts = new ArrayList<>();
+
+        try {
+            ResultSet resultSet = jdbcUtil.executeQuery();
+            
+            while (resultSet.next()) {
+                Post post = new Post();
+                post.setId(resultSet.getInt("post_ID"));
+                post.setTitle(resultSet.getString("post_title"));
+                post.setContent(resultSet.getString("post_content"));
+                post.setLocation(resultSet.getString("post_loc"));
+                post.setDateTime(resultSet.getString("post_date"));
+                post.setGender(resultSet.getString("post_gender"));
+                post.setAge(resultSet.getString("post_age"));
+                post.setMaxParticipants(resultSet.getInt("post_participants"));
+                post.setMeetingType(resultSet.getString("meetingType"));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+
+        return posts;
+    }
 
     public List<Comment> findCommentListByUser(String userid) {
         String sql = "SELECT * FROM post_comment Where userid = ? ";
