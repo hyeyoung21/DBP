@@ -39,6 +39,11 @@
         .navbar-nav .nav-link:hover {
             color: #333;
         }
+        
+        .nav-item a.active{
+        	color: #fff;
+        	font-weight: bold;
+        }
 
         .user-links a {
             color: #fff; /* Set color to white */
@@ -52,11 +57,12 @@
         
 		.main-link {
 		    text-decoration: none;
-		    color: #333;
+		    color: #fff;
 		}
 		
 		.main-link:hover {
-		    text-decoration: none; /* 호버 시에 밑줄 추가 */
+		    color: #fff; /* 호버 시에도 색상을 동일하게 유지 */
+		    text-decoration: none; /* 호버 시에도 밑줄 없음 */
 		}
         input[type="text"] {
             padding: 8px;
@@ -114,17 +120,19 @@
 
     <!-- Bootstrap Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="<c:url value='/main' />">홈</a>
+    <a class="nav-item" href="<c:url value='/main' />" <c:if test="${currentPage eq '/main'}">class="active"</c:if>>홈</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/mypage/mypage' />">마이페이지</a>
+                   <a class="nav-link" href="<c:url value='/mypage/mypage' />" <c:if test="${currentPage eq '/mypage/mypage'}">class="active"</c:if>>마이페이지</a>
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='/post/add' />">모집하기</a>
+                    <a class="nav-link" href="<c:url value='/post/add' />" <c:if test="${currentPage eq '/post/add'}">class="active"</c:if>>모집하기</a>
+
                 </li>
             </ul>
         </div>
@@ -139,6 +147,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    	<script>
+   		var url = window.location.pathname; // 현재 페이지의 경로 이름 반환
+   		
+   		$('.nav-item').find('a').each(function(){
+   			$(this).toggleClass('active', $(this).attr('href') == url);
+   		});
+   	
    		function search() {
    			form.submit();
    		}
