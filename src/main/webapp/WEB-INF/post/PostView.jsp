@@ -132,7 +132,7 @@
 	    <div class="btn-container">
 			<c:if test="${userId ne post.creator }">
     			<button class="btn btn-primary" onclick="showInput()">신청하기</button>
-    			<a class="btn btn-primary" href="<c:url value='/msg/view'>
+    			<a class="btn btn-info" href="<c:url value='/msg/view'>
                             <c:param name='yourId' value='${post.creator}'/>
                             <c:param name='myId' value='${userId}'/>
                         </c:url>">
