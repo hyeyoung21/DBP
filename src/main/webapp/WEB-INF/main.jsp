@@ -1,5 +1,6 @@
 <%@page import="model.*" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html; charset=utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,38 +108,17 @@
 <body>
     <%@include file="/WEB-INF/navi.jsp" %>
 
-    <section>
-        <h2>인기 모집글</h2>
-        <ul class="recruitment-list" id="popularRecruitments">
-            <!-- 여기에 인기 모집글 보여주기 -->
-            <li class="recruitment-item">
-                <h3>모집글 제목 1</h3>
-                <p>모집글 내용 1</p>
-            </li>
-            <li class="recruitment-item">
-                <h3>모집글 제목 2</h3>
-                <p>모집글 내용 2</p>
-            </li>
-            <!-- 기타 모집글들 -->
-        </ul>
-        <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
-    </section>
-
-    <section>
-        <h2>지역 최신글</h2>
-        <ul class="recruitment-list" id="localRecruitments">
-            <!-- 여기에 지역 최신글 보여주기 -->
-            <li class="recruitment-item">
-                <h4>모집글 제목 3</h4>
-                <p>모집글 내용 3</p>
-            </li>
-            <li class="recruitment-item">
-                <h4>모집글 제목 4</h4>
-                <p>모집글 내용 4</p>
-            </li>
-            <!-- 기타 모집글들 -->
-        </ul>
-        <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
-    </section>
+	<section>
+	    <h2>최신글</h2>
+	    <ul class="recruitment-list" id="localRecruitments">
+	  	  <c:forEach var="post" items="${postList}" >
+		 	   <li class="recruitment-item">
+		        	<h3>${post.title}</h3>
+                    <p>${fn:substring(post.content, 0, 15)}...</p>
+		        </li>
+	        </c:forEach>
+	    </ul>
+	    <a href="<c:url value='/post/list' />" class="more-link">더보기 ...</a>
+	</section>
 </body>
 </html>

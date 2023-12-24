@@ -91,42 +91,56 @@ public class ApplyDAO {
         return 0;
     }
     
-    public List<Post> findAllList() throws SQLException {
+    public List<Apply> findAllList() throws SQLException {
         String sql = "SELECT * "
                 + " FROM post"
                 + " WHERE post_id IN (SELECT DISTINCT postid FROM apply)";
-        return findList(sql, null);
+        try {
+            jdbcUtil.setSqlAndParameters(sql, null);  
+            ResultSet rs = jdbcUtil.executeQuery(); 
+            List<Apply> applyList = new ArrayList<Apply>();
+            while (rs.next()) {
+                Apply apply = new Apply();
+                apply.setPostID(rs.getInt("post_id"));
+                apply.setPostTitle(rs.getString("post_title"));
+                applyList.add(apply);
+            }
+            return applyList;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();       // resource 반환
+        }
+        return null;
     }
     
-    public List<Post> findListByPost(int postId) throws SQLException {
-        String sql = "SELECT * "
-                + "FROM post "
-                + "WHERE post_id = ?";
+    public List<Apply> findListByPost(int postId) throws SQLException {
+        String sql = "SELECT a.applyid, a.userId, a.status, a.description, p.post_title "
+                + "FROM apply a "
+                + "JOIN post p ON a.POSTID = p.post_id "
+                + "WHERE p.post_Id = ?"; 
         Object[] obj = new Object[] {postId};
         return findList(sql, obj);
     }
     
     
-    public List<Post> findList(String sql, Object[] obj) throws SQLException {
+    public List<Apply> findList(String sql, Object[] obj) throws SQLException {
         jdbcUtil.setSqlAndParameters(sql, obj);  
 
         try {
-            ResultSet resultSet = jdbcUtil.executeQuery(); 
-            List<Post> postList = new ArrayList<Post>();
-            while (resultSet.next()) {
-                Post post = new Post();
-                post.setId(resultSet.getInt("post_ID"));
-                post.setTitle(resultSet.getString("post_title"));
-                post.setContent(resultSet.getString("post_content"));
-                post.setLocation(resultSet.getString("post_loc"));
-                post.setDateTime(resultSet.getString("post_date"));
-                post.setGender(resultSet.getString("post_gender"));
-                post.setAge(resultSet.getString("post_age"));
-                post.setMaxParticipants(resultSet.getInt("post_participants"));
-                post.setMeetingType(resultSet.getString("meetingType"));
-                postList.add(post);
+            ResultSet rs = jdbcUtil.executeQuery(); 
+            List<Apply> applyList = new ArrayList<Apply>();
+            while (rs.next()) {
+                Apply apply = new Apply();
+                apply.setApplyID(rs.getInt("applyid"));
+                apply.setUserID(rs.getString("userId"));
+                apply.setPostTitle(rs.getString("post_title"));
+                apply.setDescription(rs.getString("description"));
+                apply.setStatus(rs.getString("status"));
+                applyList.add(apply);
             }
-            return postList;
+            return applyList;
             
         } catch (Exception ex) {
             ex.printStackTrace();

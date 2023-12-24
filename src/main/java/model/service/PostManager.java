@@ -62,6 +62,10 @@ public class PostManager {
             return postDAO.getAllPosts();
     }
     
+    public List<Post> getTop3Posts() throws SQLException {
+        return postDAO.getTop3Posts();
+}
+    
     public List<Comment> getAllComments(int postId) throws SQLException {
         return postDAO.getAllComments(postId);
     }

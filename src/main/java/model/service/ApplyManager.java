@@ -39,11 +39,11 @@ public class ApplyManager {
         return applyDAO.update(applyID);
     }
     
-    public List<Post> findAllList() throws SQLException {
+    public List<Apply> findAllList() throws SQLException {
         return applyDAO.findAllList();
     }
     
-    public List<Post> findListByPost(int postId) throws SQLException {
+    public List<Apply> findListByPost(int postId) throws SQLException {
         return applyDAO.findListByPost(postId);
     }
     

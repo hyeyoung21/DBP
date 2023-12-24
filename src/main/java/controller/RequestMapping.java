@@ -22,7 +22,7 @@ public class RequestMapping {
     public void initMapping() {
         // 각 uri에 대응되는 controller 객체를 생성 및 저장
         // 기존 폼 입력 처리 개선을 위해 폼 jsp는 컨트롤러에서 redirect함.
-        mappings.put("/main", new ForwardController("/main.jsp"));
+        mappings.put("/main", new MainController());
       
         // 로그인 & 회원가입
         mappings.put("/user/loginForm", new LoginController());  
