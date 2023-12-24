@@ -71,6 +71,23 @@ public class ApplyDAO {
         return 0;
     }
     
+    public int checkForDuplicate(String userId, int postId) throws SQLException{
+    	String sql = "SELECT COUNT(*) AS count from apply WHERE userid=? and postid=?";
+    	jdbcUtil.setSqlAndParameters(sql, new Object[] {userId, postId});   // JDBCUtil에 delete문과 매개 변수 설정
+
+    	try {
+            ResultSet rs = jdbcUtil.executeQuery(); 
+            if(rs.next()) return 1;
+            return 0;
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();
+        }
+        return 0;
+    }
+    
     public int update(int applyID) throws SQLException {
         String sql = "UPDATE APPLY "
                     + "SET status= '신청완료' "

@@ -82,9 +82,8 @@ public class UserDAO {
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
 		
 		try {	
-			System.out.println("result:" + 0);
-			int result = jdbcUtil.executeUpdate();	// delete 문 실행
-			System.out.println("result:" + result);
+			int result = jdbcUtil.executeUpdate();
+			
 			return result;
 		} catch (Exception e) {
 	        // SQLException이 발생했을 때의 예외 처리

@@ -39,6 +39,10 @@ public class ApplyManager {
         return applyDAO.update(applyID);
     }
     
+    public int checkForDuplicate(String userId, int postId) throws SQLException{
+    	return applyDAO.checkForDuplicate(userId, postId);
+    }
+    
     public List<Post> findAllList() throws SQLException {
         return applyDAO.findAllList();
     }

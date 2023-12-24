@@ -50,9 +50,13 @@
             inputContainer.style.display = "block";
         }
         function sendApply() {
-            var msg = document.getElementsByClassName('ApplyMessage');
-            msg.value = "";
-            apply-form.submit();
+        	if (<c:if test="${not empty isDuplicate and isDuplicate eq true}">true</c:if>) {
+                alert("중복된 신청입니다.");
+            }
+            	var msg = document.getElementsByClassName('ApplyMessage');
+                msg.value = "";
+                apply-form.submit();
+            
         }
         function updatePost(commentID) {
         	update-form.submit();

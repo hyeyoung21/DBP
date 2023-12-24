@@ -9,8 +9,8 @@ import model.*;
 public class test {
 
 	public static void main(String[] args) throws Exception {
-		UserManager userman = UserManager.getInstance();
-		int result = userman.delete("user12");
+		ApplyManager m = ApplyManager.getInstance();
+		int result = m.checkForDuplicate("user1", 39);
 		
 		System.out.println(result);
 	}
