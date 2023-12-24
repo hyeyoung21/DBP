@@ -77,10 +77,9 @@ public class UserDAO {
 	 */
 	public int delete(String userId) throws SQLException {
 		
-		String sql = "delete from user_info where user_id = ?";	
-		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 delete문과 매개 변수 설정
-		
+		String sql = "delete from user_info where user_id = ?";
+	    
+	    jdbcUtil.setSqlAndParameters(sql, new Object[]{userId});
 		try {	
 			int result = jdbcUtil.executeUpdate();
 			
