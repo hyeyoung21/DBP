@@ -23,12 +23,14 @@ public class DeleteUserController implements Controller {
 
 		UserManager manager = UserManager.getInstance();
 		
-		
 		HttpSession session = request.getSession();	
-	
+		
+		System.out.println("야삭제해!!!!! 11");
 		if ((UserSessionUtils.isLoginUser("admin", session) && 	// 로그인한 사용자가 관리자이고 	
 			 !deleteId.equals("admin"))){
-			manager.delete(deleteId);				// 사용자 정보 삭제
+			System.out.println("뭘삭제함?" + deleteId);
+			int result = manager.delete(deleteId);				// 사용자 정보 삭제
+			System.out.println("삭제됨? " + result);
 			if (UserSessionUtils.isLoginUser("admin", session))	// 로그인한 사용자가 관리자 	
 				return "redirect:/user/list";		// 사용자 리스트로 이동
 			else 									// 로그인한 사용자는 이미 삭제됨
