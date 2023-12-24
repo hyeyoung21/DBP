@@ -113,7 +113,7 @@
 	    <ul class="recruitment-list" id="localRecruitments">
 	  	  <c:forEach var="post" items="${recentList}" >
 		 	   <li class="recruitment-item">
-		        	<h3>${post.title}</h3>
+		        	<h4>${post.title}</h4>
                     <p>${fn:substring(post.content, 0, 15)}...</p>
 		        </li>
 	        </c:forEach>
@@ -125,7 +125,7 @@
 	    <ul class="recruitment-list" id="localRecruitments">
 	  	  <c:forEach var="post" items="${locList}" >
 		 	   <li class="recruitment-item">
-		        	<h3>${post.title}</h3>
+		        	<h4>${post.title}</h4>
                     <p>${fn:substring(post.content, 0, 15)}...</p>
 		        </li>
 	        </c:forEach>

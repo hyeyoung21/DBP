@@ -62,6 +62,7 @@
 </head>
 
 <body>
+    <%@include file="/WEB-INF/navi.jsp" %>
     <div class="container">
         <h1>모집 정보</h1>
         <c:if test="${post.id == null}">    	

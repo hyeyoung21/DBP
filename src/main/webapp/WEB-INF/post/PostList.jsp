@@ -27,6 +27,7 @@
 <body>
 <%@include file="/WEB-INF/navi.jsp" %>
 
+<!--  
 <div id="search-options" class="mt-3">
     <form id="search-form" class="mb-3">
         <label for="search-input">Search:</label>
@@ -79,6 +80,7 @@
         </div>
     </div>
 </div>
+-->
 
 <ul id="blog-list" class="list-group">
     <c:forEach var="post" items="${postList}">
