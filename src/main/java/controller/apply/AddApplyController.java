@@ -11,12 +11,13 @@ public class AddApplyController implements Controller{
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             ApplyManager manager = ApplyManager.getInstance();
+            
             String userId = request.getParameter("userId");
             int postId = Integer.parseInt(request.getParameter("postId"));
             String description = request.getParameter("ApplyMessage");
-            
+          
             manager.add(userId, postId, description);
-            return "redirect:/main"; 
+            return "redirect:/post/view?id=" + postId;
             
         } catch (Exception e) { // 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);
