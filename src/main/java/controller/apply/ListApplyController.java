@@ -9,7 +9,7 @@ import controller.Controller;
 import model.Post;
 import model.service.ApplyManager;
 
-public class ApplyListController implements Controller {
+public class ListApplyController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         // TODO Auto-generated method stub

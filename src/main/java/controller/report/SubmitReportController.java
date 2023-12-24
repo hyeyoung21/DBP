@@ -7,7 +7,7 @@ import controller.Controller;
 import model.User;
 import model.service.UserManager;
 
-public class ReportSubmitController implements Controller {
+public class SubmitReportController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

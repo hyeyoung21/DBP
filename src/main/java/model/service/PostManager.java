@@ -43,7 +43,7 @@ public class PostManager {
         }
     }
     
-    public void remove(int postId) throws SQLException {
+    public void delete(int postId) throws SQLException {
         try {
             postDAO.deletePost(postId);
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class PostManager {
         return postDAO.getAllComments(postId);
     }
     
-    public void createComment(Comment comment) throws SQLException {
+    public void addComment(Comment comment) throws SQLException {
         try {
             postDAO.createComment(comment);
         } catch (Exception e) {
@@ -89,17 +89,16 @@ public class PostManager {
             return postDAO.searchPostsByTitle(searchString);
     }
     
-    
-    public PostDAO getPostDAO() {
-        return this.postDAO;
-    }
-    
     public List<Post> findListByUser(String userid) throws SQLException {
         return postDAO.findListByUser(userid);
     }
     
     public List<Comment> findCommentListByUser(String userid) throws SQLException {
         return postDAO.findCommentListByUser(userid);
+    }
+    
+    public PostDAO getPostDAO() {
+        return this.postDAO;
     }
 
 }

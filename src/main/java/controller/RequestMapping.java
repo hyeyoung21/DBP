@@ -52,8 +52,8 @@ public class RequestMapping {
         mappings.put("/post/update", new UpdatePostController()); // 작성글 수정
         
         // 신청글 조회
-        mappings.put("/apply/view", new PostViewApplyController()); // 신청글 보기
-        mappings.put("/apply/list", new ApplyListController()); // 신청글 목록
+        mappings.put("/apply/view", new ViewPostApplyController()); // 신청글 보기
+        mappings.put("/apply/list", new ListApplyController()); // 신청글 목록
         mappings.put("/apply/add", new AddApplyController()); // 신청
         mappings.put("/apply/modify", new ModifyApplyController()); // 신청글 삭제
         
@@ -67,7 +67,7 @@ public class RequestMapping {
                 
         //신고
         mappings.put("/report/report", new ReportController());
-        mappings.put("/report/submit", new ReportSubmitController());
+        mappings.put("/report/submit", new SubmitReportController());
         
         logger.info("Initialized Request Mapping!");
     }

@@ -7,7 +7,7 @@ import controller.Controller;
 import model.Post;
 import model.service.ApplyManager;
 
-public class PostViewApplyController implements Controller {
+public class ViewPostApplyController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {

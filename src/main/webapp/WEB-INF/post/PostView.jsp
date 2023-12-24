@@ -142,7 +142,6 @@
 		    		<c:param name="postId" value="${post.id}"/> </c:url>'> 삭제</a>
 		    	<a class="btn btn-warning" href='<c:url value='/post/update'> 
 		    		<c:param name="postId" value="${post.id}"/> </c:url>' onclick="deletePost()"> 수정</a>
-      </a>
 		    </c:if>
 	    </div>
 

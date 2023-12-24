@@ -2,7 +2,6 @@ package model.service;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ArrayList;
 
 import model.User;
 import model.Post;

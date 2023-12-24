@@ -14,7 +14,7 @@ public class DeletePostController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
         PostManager manager = PostManager.getInstance();
         int postId = Integer.parseInt(request.getParameter("postId"));
-        manager.remove(postId);
+        manager.delete(postId);
         return "redirect:/post/list"; 
     }
 

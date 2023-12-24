@@ -223,20 +223,6 @@ public class PostDAO {
         post.setMeetingType(resultSet.getString("meetingType"));
         return post;
     }
-    
-    //DB결과 User객체로
-    private User mapResultSetToUser(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        user.setUserId(resultSet.getString("user_id"));
-        user.setName(resultSet.getString("user_name"));
-        user.setGender(resultSet.getString("user_gender"));
-        user.setAge(resultSet.getInt("user_age"));
-        user.setEmail(resultSet.getString("user_email"));
-        user.setPassword(resultSet.getString("user_password"));
-        user.setLocation(resultSet.getString("user_loc"));
-        
-        return user;
-    }
 
     public List<Post> findListByUser(String userId) throws SQLException {
         String sql = "SELECT * FROM post WHERE user_Id = ?";
